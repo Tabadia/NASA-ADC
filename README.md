@@ -1,2 +1,2 @@
 # NASA-ADC
-NASA App development challenge repository
+NASA App Development Challenge repository
