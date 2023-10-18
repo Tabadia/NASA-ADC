@@ -12,7 +12,8 @@ Material:
   m_ValidKeywords:
   - _DISABLE_DECALS
   - _TERRAIN_INSTANCED_PERPIXEL_NORMAL
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _NORMALMAP_TANGENT_SPACE
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
