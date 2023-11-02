@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -17,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
-
+    
     [Header("Ground Check")]
     public float playerHeight;
     public LayerMask whatIsGround;
@@ -32,7 +33,8 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody rb;
 
-
+    KeyCode changeCamKey = KeyCode.L;
+    Boolean camIsOnScene = false;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -43,9 +45,13 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //Check is grounded
+        //Check is grounded\
+        if(Input.GetKeyDown(changeCamKey)) {
+            camIsOnScene = !camIsOnScene;
+        }
+        if (!camIsOnScene) return;
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-
+       
         Inputs();
         ControlSpeed();
 
@@ -80,7 +86,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (grounded)
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-        else if (!grounded)
+        else
             rb.AddForce(moveDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
 
     }
