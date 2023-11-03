@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,7 @@ public class playerCam : MonoBehaviour
 
     float xRotation;
     float yRotation;
-
+    Boolean camIsOnScene = false;
     void Start()
     {
         //make it so that mouse cant kleave the screen as well as making it invisible
@@ -24,7 +25,9 @@ public class playerCam : MonoBehaviour
 
     void Update()
     {
-        //get mouse input
+        
+        
+
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 

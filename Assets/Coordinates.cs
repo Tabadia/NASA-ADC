@@ -19,6 +19,6 @@ public class Coordinates : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        coordText.text = p1.transform.position.ToString() + ',' + p2.transform.position.ToString(); 
+        coordText.text = "Astronaut 1 Position:" + p1.transform.position.ToString() + '\n' + "Astronaut 2 Position:"+ p2.transform.position.ToString(); 
     }
 }
