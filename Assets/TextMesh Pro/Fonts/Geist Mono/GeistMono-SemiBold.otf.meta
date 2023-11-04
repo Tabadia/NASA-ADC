@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: eba9f83e0c212e44aa94ed37015718a8
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Geist Mono
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 7acaa25ad0d2b434299b8990f1736be5, type: 3}
+  - {fileID: 12800000, guid: da2144a1b897a284d83428bc378d0cf8, type: 3}
+  - {fileID: 12800000, guid: 552b2104bb876204cb1bb9bfe4d76836, type: 3}
+  - {fileID: 12800000, guid: b6b1ed9ea3bf20148a405500ea06f33b, type: 3}
+  - {fileID: 12800000, guid: a8f09cbcf1ae6e7478c93b7a058e1c99, type: 3}
+  - {fileID: 12800000, guid: 62dcfd5e467843b4b908d4ab7e8b70f5, type: 3}
+  - {fileID: 12800000, guid: 8a46db5ffb90d934eb6917e1e514874a, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
