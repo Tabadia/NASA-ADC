@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class playerCam : MonoBehaviour
-
+    
 {
     public float sensY;
     public float sensX;
@@ -24,20 +24,23 @@ public class playerCam : MonoBehaviour
 
     void Update()
     {
-        //get mouse input
-        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
-        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
-        yRotation += mouseX;
-        yRotation = Mathf.Clamp(yRotation, -70f, 70f);
-        xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -80f, 30f);
-
-        //rotate camera orientation
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         Vector3 pos = player.position;
         pos.Set(pos.x, pos.y + 1, pos.z);
         transform.position = pos;
+        //camera not enabled or is a minimap camera
+        if (!GetComponent<Camera>().enabled || name.IndexOf("MinimapCam") != -1) return;
+        //get mouse input
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+        Debug.Log(name + "rotation changing");
+        yRotation += mouseX;
+        //yRotation = Mathf.Clamp(yRotation, -90f, 90f);
+        xRotation -= mouseY;
+        //xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        //rotate camera orientation
+        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
     }
 }

@@ -20,9 +20,7 @@ public class minimapDotController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(size.x + " " + size.y);
         float xRatio = transform.position.x / size.x;
         float yRatio = transform.position.y / size.y;
-        Debug.Log(xRatio + ' ' + yRatio);
     }
 }

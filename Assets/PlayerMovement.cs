@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public Camera camera;
     [Header("Movement")]
     public float moveSpeed;
 
@@ -34,7 +35,6 @@ public class PlayerMovement : MonoBehaviour
     Rigidbody rb;
 
     KeyCode changeCamKey = KeyCode.L;
-    Boolean camIsOnScene = false;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -45,20 +45,17 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        //Check is grounded\
-        if(Input.GetKeyDown(changeCamKey)) {
-            camIsOnScene = !camIsOnScene;
-        }
-        if (!camIsOnScene) return;
-        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
-       
-        Inputs();
-        ControlSpeed();
 
         if (grounded)
             rb.drag = groundDrag;
         else
             rb.drag = 5;
+        ControlSpeed();
+        if (!camera.enabled) return;
+        grounded = Physics.Raycast(transform.position, Vector3.down, playerHeight * 0.5f + 0.2f, whatIsGround);
+       
+        Inputs();
+
     }
 
     private void FixedUpdate()
@@ -73,7 +70,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(jumpKey) && readyToJump && grounded)
         {
-            Debug.Log("cliff");
             readyToJump = false;
             Jump();
             Invoke(nameof(ResetJump), jumpCooldown);

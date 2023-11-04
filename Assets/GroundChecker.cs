@@ -5,8 +5,9 @@ using TMPro;
 public class GroundChecker : MonoBehaviour
 {
     public GameObject slopeText;
+    public Camera camera;
     [Header("Results")]
-    public float groundSlopeAngle = 5f;            // Angle of the slope in degrees
+    public float groundSlopeAngle = 0f;            // Angle of the slope in degrees
     public Vector3 groundSlopeDir = Vector3.zero;  // The calculated slope as a vector
 
     [Header("Settings")]
@@ -40,8 +41,9 @@ public class GroundChecker : MonoBehaviour
     {
         // Check ground, with an origin point defaulting to the bottom middle
         // of the char controller's collider. Plus a little higher 
-        
+        if (!camera.enabled) return;
         CheckGround(new Vector3(transform.position.x, transform.position.y - (controller.height / 2) + startDistanceFromBottom, transform.position.z));
+        
         TMProSlopeEle.text = "Slope:" + groundSlopeAngle + ", \n" + "Slope Vector:" + groundSlopeDir.ToString();
     }
 
@@ -53,7 +55,6 @@ public class GroundChecker : MonoBehaviour
     {
         // Out hit point from our cast(s)
 
-        Debug.Log("hello!");
         RaycastHit hit;
 
         // SPHERECAST
