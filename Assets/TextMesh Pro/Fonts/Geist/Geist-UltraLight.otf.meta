@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: 4f0337f78101689449d278d18e2f7c1c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - 'Geist '
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: ce8ef956fce1fc640a33c2b95948976f, type: 3}
+  - {fileID: 12800000, guid: d2fc74054eb4c854a9bd1ac202eb41ce, type: 3}
+  - {fileID: 12800000, guid: 8477dfd0117a162429d52725373f2088, type: 3}
+  - {fileID: 12800000, guid: d07d04f487bc5cd4c93b9c7b469d73d4, type: 3}
+  - {fileID: 12800000, guid: 5c935acf82b8b9248bc82225a422134c, type: 3}
+  - {fileID: 12800000, guid: 8e7458d0e563b5346b8f8b60f90f0f8f, type: 3}
+  - {fileID: 12800000, guid: 64f58c44edc38b24fbbb16cfe1e7d230, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

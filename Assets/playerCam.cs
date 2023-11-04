@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,10 +13,10 @@ public class playerCam : MonoBehaviour
 
     float xRotation;
     float yRotation;
-    Boolean camIsOnScene = false;
+
     void Start()
     {
-        //make it so that mouse cant kleave the screen as well as making it invisible
+        //make it so that mouse cant leave the screen as well as making it invisible
         //this makes it so that the camera can rotate
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -25,15 +24,14 @@ public class playerCam : MonoBehaviour
 
     void Update()
     {
-        
-        
-
+        //get mouse input
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
 
         yRotation += mouseX;
+        yRotation = Mathf.Clamp(yRotation, -70f, 70f);
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        xRotation = Mathf.Clamp(xRotation, -80f, 30f);
 
         //rotate camera orientation
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
