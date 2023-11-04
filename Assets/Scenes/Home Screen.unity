@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 262.3369, g: 325.0498, b: 430.21924, a: 1}
+  m_IndirectSpecularColor: {r: 261.89948, g: 324.4541, b: 429.4325, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -396,6 +396,74 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &400616165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 400616168}
+  - component: {fileID: 400616167}
+  - component: {fileID: 400616166}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &400616166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400616165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SendPointerHoverToParent: 1
+  m_HorizontalAxis: Horizontal
+  m_VerticalAxis: Vertical
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.5
+  m_ForceModuleActive: 0
+--- !u!114 &400616167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400616165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &400616168
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400616165}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &582384232
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +627,7 @@ RectTransform:
   m_GameObject: {fileID: 733312269}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 3, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1177936203}
@@ -713,11 +781,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Title: The Significance of Keybinds in Gaming: A Serious Discussion
 
-    
+
 
     Introduction
 
-    
+
 
     In
     the realm of video gaming, there is a plethora of factors that contribute to
@@ -727,11 +795,11 @@ MonoBehaviour:
     importance of keybinds in gaming, emphasizing their role in enhancing the player''s
     experience and overall performance.
 
-    
+
 
     Understanding Keybinds
 
-    
+
 
     Keybinds,
     short for keybindings, refer to the configuration of specific actions, abilities,
@@ -740,87 +808,87 @@ MonoBehaviour:
     their controls to suit their preferences and play style. They serve as the bridge
     between the player''s intentions and the in-game actions they wish to perform.
 
-    
+
 
     Enhancing
     Gameplay Efficiency
 
-    
 
-    One of the most apparent reasons why keybinds
-    are important is that they enhance gameplay efficiency. By mapping frequently
-    used commands or abilities to easily accessible keys, players can execute actions
+
+    One of the most apparent reasons why keybinds are
+    important is that they enhance gameplay efficiency. By mapping frequently used
+    commands or abilities to easily accessible keys, players can execute actions
     with minimal delay. This is particularly vital in fast-paced games, where every
     second can make the difference between victory and defeat. Efficient keybinds
     empower gamers to respond swiftly to changing situations and execute their strategies
     flawlessly.
 
-    
+
 
     Customization for Individual Play Styles
 
-    
 
-    Keybinds
-    are not a one-size-fits-all solution. Gamers have diverse play styles, and what
-    works for one may not work for another. Keybinds provide the flexibility to tailor
+
+    Keybinds are
+    not a one-size-fits-all solution. Gamers have diverse play styles, and what works
+    for one may not work for another. Keybinds provide the flexibility to tailor
     controls to suit an individual''s preferences. Whether a player prefers to focus
     on mobility, precision aiming, or rapid spellcasting, keybinds allow them to
     create a control scheme that aligns with their strengths and weaknesses. This
     customization empowers players to play the game in a way that feels most natural
     to them.
 
-    
+
 
     Reducing Cognitive Load
 
-    
 
-    In highly competitive
-    gaming scenarios, where players are under constant pressure, reducing cognitive
-    load is essential. Memorizing a multitude of default keybindings can be challenging,
-    especially when dealing with complex games that feature numerous abilities and
-    actions. Custom keybinds simplify the process, as players can set up controls
-    that make sense to them and require less mental effort. This allows players to
-    focus more on strategy and tactics, rather than struggling to remember which
-    key activates a specific ability.
 
-    
+    In highly competitive gaming scenarios,
+    where players are under constant pressure, reducing cognitive load is essential.
+    Memorizing a multitude of default keybindings can be challenging, especially
+    when dealing with complex games that feature numerous abilities and actions.
+    Custom keybinds simplify the process, as players can set up controls that make
+    sense to them and require less mental effort. This allows players to focus more
+    on strategy and tactics, rather than struggling to remember which key activates
+    a specific ability.
+
+
 
     Accessibility and Inclusivity
 
-    
 
-    Keybinds
-    also play a crucial role in making games more accessible and inclusive. They
-    enable players with physical disabilities to modify controls to accommodate their
-    needs, allowing them to enjoy the same gaming experience as their peers. Many
-    games now come with built-in accessibility options and keybind customization
-    features, ensuring that gaming is a hobby that can be enjoyed by a wide range
-    of individuals, regardless of their physical limitations.
 
-    
+    Keybinds also
+    play a crucial role in making games more accessible and inclusive. They enable
+    players with physical disabilities to modify controls to accommodate their needs,
+    allowing them to enjoy the same gaming experience as their peers. Many games
+    now come with built-in accessibility options and keybind customization features,
+    ensuring that gaming is a hobby that can be enjoyed by a wide range of individuals,
+    regardless of their physical limitations.
+
+
 
     Conclusion
 
-    
 
-    In
-    conclusion, keybinds are a vital component of the gaming experience, contributing
-    significantly to a player''s performance and enjoyment of the game. They enhance
-    gameplay efficiency, enable customization to individual play styles, reduce cognitive
-    load, and promote accessibility and inclusivity within the gaming community.
-    As technology continues to advance, and the gaming industry evolves, keybinds
-    will remain a crucial element in providing a seamless and enjoyable gaming experience
-    for all.
 
-    Title: The Significance of Keybinds in Gaming: A Serious Discussion
+    In conclusion,
+    keybinds are a vital component of the gaming experience, contributing significantly
+    to a player''s performance and enjoyment of the game. They enhance gameplay efficiency,
+    enable customization to individual play styles, reduce cognitive load, and promote
+    accessibility and inclusivity within the gaming community. As technology continues
+    to advance, and the gaming industry evolves, keybinds will remain a crucial element
+    in providing a seamless and enjoyable gaming experience for all.
 
-    
+    Title:
+    The Significance of Keybinds in Gaming: A Serious Discussion
+
+
 
     Introduction
 
-    
+
 
     In
     the realm of video gaming, there is a plethora of factors that contribute to
@@ -830,11 +898,11 @@ MonoBehaviour:
     importance of keybinds in gaming, emphasizing their role in enhancing the player''s
     experience and overall performance.
 
-    
+
 
     Understanding Keybinds
 
-    
+
 
     Keybinds,
     short for keybindings, refer to the configuration of specific actions, abilities,
@@ -843,87 +911,87 @@ MonoBehaviour:
     their controls to suit their preferences and play style. They serve as the bridge
     between the player''s intentions and the in-game actions they wish to perform.
 
-    
+
 
     Enhancing
     Gameplay Efficiency
 
-    
 
-    One of the most apparent reasons why keybinds
-    are important is that they enhance gameplay efficiency. By mapping frequently
-    used commands or abilities to easily accessible keys, players can execute actions
+
+    One of the most apparent reasons why keybinds are
+    important is that they enhance gameplay efficiency. By mapping frequently used
+    commands or abilities to easily accessible keys, players can execute actions
     with minimal delay. This is particularly vital in fast-paced games, where every
     second can make the difference between victory and defeat. Efficient keybinds
     empower gamers to respond swiftly to changing situations and execute their strategies
     flawlessly.
 
-    
+
 
     Customization for Individual Play Styles
 
-    
 
-    Keybinds
-    are not a one-size-fits-all solution. Gamers have diverse play styles, and what
-    works for one may not work for another. Keybinds provide the flexibility to tailor
+
+    Keybinds are
+    not a one-size-fits-all solution. Gamers have diverse play styles, and what works
+    for one may not work for another. Keybinds provide the flexibility to tailor
     controls to suit an individual''s preferences. Whether a player prefers to focus
     on mobility, precision aiming, or rapid spellcasting, keybinds allow them to
     create a control scheme that aligns with their strengths and weaknesses. This
     customization empowers players to play the game in a way that feels most natural
     to them.
 
-    
+
 
     Reducing Cognitive Load
 
-    
 
-    In highly competitive
-    gaming scenarios, where players are under constant pressure, reducing cognitive
-    load is essential. Memorizing a multitude of default keybindings can be challenging,
-    especially when dealing with complex games that feature numerous abilities and
-    actions. Custom keybinds simplify the process, as players can set up controls
-    that make sense to them and require less mental effort. This allows players to
-    focus more on strategy and tactics, rather than struggling to remember which
-    key activates a specific ability.
 
-    
+    In highly competitive gaming scenarios,
+    where players are under constant pressure, reducing cognitive load is essential.
+    Memorizing a multitude of default keybindings can be challenging, especially
+    when dealing with complex games that feature numerous abilities and actions.
+    Custom keybinds simplify the process, as players can set up controls that make
+    sense to them and require less mental effort. This allows players to focus more
+    on strategy and tactics, rather than struggling to remember which key activates
+    a specific ability.
+
+
 
     Accessibility and Inclusivity
 
-    
 
-    Keybinds
-    also play a crucial role in making games more accessible and inclusive. They
-    enable players with physical disabilities to modify controls to accommodate their
-    needs, allowing them to enjoy the same gaming experience as their peers. Many
-    games now come with built-in accessibility options and keybind customization
-    features, ensuring that gaming is a hobby that can be enjoyed by a wide range
-    of individuals, regardless of their physical limitations.
 
-    
+    Keybinds also
+    play a crucial role in making games more accessible and inclusive. They enable
+    players with physical disabilities to modify controls to accommodate their needs,
+    allowing them to enjoy the same gaming experience as their peers. Many games
+    now come with built-in accessibility options and keybind customization features,
+    ensuring that gaming is a hobby that can be enjoyed by a wide range of individuals,
+    regardless of their physical limitations.
+
+
 
     Conclusion
 
-    
 
-    In
-    conclusion, keybinds are a vital component of the gaming experience, contributing
-    significantly to a player''s performance and enjoyment of the game. They enhance
-    gameplay efficiency, enable customization to individual play styles, reduce cognitive
-    load, and promote accessibility and inclusivity within the gaming community.
-    As technology continues to advance, and the gaming industry evolves, keybinds
-    will remain a crucial element in providing a seamless and enjoyable gaming experience
-    for all.
 
-    Title: The Significance of Keybinds in Gaming: A Serious Discussion
+    In conclusion,
+    keybinds are a vital component of the gaming experience, contributing significantly
+    to a player''s performance and enjoyment of the game. They enhance gameplay efficiency,
+    enable customization to individual play styles, reduce cognitive load, and promote
+    accessibility and inclusivity within the gaming community. As technology continues
+    to advance, and the gaming industry evolves, keybinds will remain a crucial element
+    in providing a seamless and enjoyable gaming experience for all.
 
-    
+    Title:
+    The Significance of Keybinds in Gaming: A Serious Discussion
+
+
 
     Introduction
 
-    
+
 
     In
     the realm of video gaming, there is a plethora of factors that contribute to
@@ -933,11 +1001,11 @@ MonoBehaviour:
     importance of keybinds in gaming, emphasizing their role in enhancing the player''s
     experience and overall performance.
 
-    
+
 
     Understanding Keybinds
 
-    
+
 
     Keybinds,
     short for keybindings, refer to the configuration of specific actions, abilities,
@@ -946,87 +1014,87 @@ MonoBehaviour:
     their controls to suit their preferences and play style. They serve as the bridge
     between the player''s intentions and the in-game actions they wish to perform.
 
-    
+
 
     Enhancing
     Gameplay Efficiency
 
-    
 
-    One of the most apparent reasons why keybinds
-    are important is that they enhance gameplay efficiency. By mapping frequently
-    used commands or abilities to easily accessible keys, players can execute actions
+
+    One of the most apparent reasons why keybinds are
+    important is that they enhance gameplay efficiency. By mapping frequently used
+    commands or abilities to easily accessible keys, players can execute actions
     with minimal delay. This is particularly vital in fast-paced games, where every
     second can make the difference between victory and defeat. Efficient keybinds
     empower gamers to respond swiftly to changing situations and execute their strategies
     flawlessly.
 
-    
+
 
     Customization for Individual Play Styles
 
-    
 
-    Keybinds
-    are not a one-size-fits-all solution. Gamers have diverse play styles, and what
-    works for one may not work for another. Keybinds provide the flexibility to tailor
+
+    Keybinds are
+    not a one-size-fits-all solution. Gamers have diverse play styles, and what works
+    for one may not work for another. Keybinds provide the flexibility to tailor
     controls to suit an individual''s preferences. Whether a player prefers to focus
     on mobility, precision aiming, or rapid spellcasting, keybinds allow them to
     create a control scheme that aligns with their strengths and weaknesses. This
     customization empowers players to play the game in a way that feels most natural
     to them.
 
-    
+
 
     Reducing Cognitive Load
 
-    
 
-    In highly competitive
-    gaming scenarios, where players are under constant pressure, reducing cognitive
-    load is essential. Memorizing a multitude of default keybindings can be challenging,
-    especially when dealing with complex games that feature numerous abilities and
-    actions. Custom keybinds simplify the process, as players can set up controls
-    that make sense to them and require less mental effort. This allows players to
-    focus more on strategy and tactics, rather than struggling to remember which
-    key activates a specific ability.
 
-    
+    In highly competitive gaming scenarios,
+    where players are under constant pressure, reducing cognitive load is essential.
+    Memorizing a multitude of default keybindings can be challenging, especially
+    when dealing with complex games that feature numerous abilities and actions.
+    Custom keybinds simplify the process, as players can set up controls that make
+    sense to them and require less mental effort. This allows players to focus more
+    on strategy and tactics, rather than struggling to remember which key activates
+    a specific ability.
+
+
 
     Accessibility and Inclusivity
 
-    
 
-    Keybinds
-    also play a crucial role in making games more accessible and inclusive. They
-    enable players with physical disabilities to modify controls to accommodate their
-    needs, allowing them to enjoy the same gaming experience as their peers. Many
-    games now come with built-in accessibility options and keybind customization
-    features, ensuring that gaming is a hobby that can be enjoyed by a wide range
-    of individuals, regardless of their physical limitations.
 
-    
+    Keybinds also
+    play a crucial role in making games more accessible and inclusive. They enable
+    players with physical disabilities to modify controls to accommodate their needs,
+    allowing them to enjoy the same gaming experience as their peers. Many games
+    now come with built-in accessibility options and keybind customization features,
+    ensuring that gaming is a hobby that can be enjoyed by a wide range of individuals,
+    regardless of their physical limitations.
+
+
 
     Conclusion
 
-    
 
-    In
-    conclusion, keybinds are a vital component of the gaming experience, contributing
-    significantly to a player''s performance and enjoyment of the game. They enhance
-    gameplay efficiency, enable customization to individual play styles, reduce cognitive
-    load, and promote accessibility and inclusivity within the gaming community.
-    As technology continues to advance, and the gaming industry evolves, keybinds
-    will remain a crucial element in providing a seamless and enjoyable gaming experience
-    for all.
 
-    Title: The Significance of Keybinds in Gaming: A Serious Discussion
+    In conclusion,
+    keybinds are a vital component of the gaming experience, contributing significantly
+    to a player''s performance and enjoyment of the game. They enhance gameplay efficiency,
+    enable customization to individual play styles, reduce cognitive load, and promote
+    accessibility and inclusivity within the gaming community. As technology continues
+    to advance, and the gaming industry evolves, keybinds will remain a crucial element
+    in providing a seamless and enjoyable gaming experience for all.
 
-    
+    Title:
+    The Significance of Keybinds in Gaming: A Serious Discussion
+
+
 
     Introduction
 
-    
+
 
     In
     the realm of video gaming, there is a plethora of factors that contribute to
@@ -1036,11 +1104,11 @@ MonoBehaviour:
     importance of keybinds in gaming, emphasizing their role in enhancing the player''s
     experience and overall performance.
 
-    
+
 
     Understanding Keybinds
 
-    
+
 
     Keybinds,
     short for keybindings, refer to the configuration of specific actions, abilities,
@@ -1049,87 +1117,87 @@ MonoBehaviour:
     their controls to suit their preferences and play style. They serve as the bridge
     between the player''s intentions and the in-game actions they wish to perform.
 
-    
+
 
     Enhancing
     Gameplay Efficiency
 
-    
 
-    One of the most apparent reasons why keybinds
-    are important is that they enhance gameplay efficiency. By mapping frequently
-    used commands or abilities to easily accessible keys, players can execute actions
+
+    One of the most apparent reasons why keybinds are
+    important is that they enhance gameplay efficiency. By mapping frequently used
+    commands or abilities to easily accessible keys, players can execute actions
     with minimal delay. This is particularly vital in fast-paced games, where every
     second can make the difference between victory and defeat. Efficient keybinds
     empower gamers to respond swiftly to changing situations and execute their strategies
     flawlessly.
 
-    
+
 
     Customization for Individual Play Styles
 
-    
 
-    Keybinds
-    are not a one-size-fits-all solution. Gamers have diverse play styles, and what
-    works for one may not work for another. Keybinds provide the flexibility to tailor
+
+    Keybinds are
+    not a one-size-fits-all solution. Gamers have diverse play styles, and what works
+    for one may not work for another. Keybinds provide the flexibility to tailor
     controls to suit an individual''s preferences. Whether a player prefers to focus
     on mobility, precision aiming, or rapid spellcasting, keybinds allow them to
     create a control scheme that aligns with their strengths and weaknesses. This
     customization empowers players to play the game in a way that feels most natural
     to them.
 
-    
+
 
     Reducing Cognitive Load
 
-    
 
-    In highly competitive
-    gaming scenarios, where players are under constant pressure, reducing cognitive
-    load is essential. Memorizing a multitude of default keybindings can be challenging,
-    especially when dealing with complex games that feature numerous abilities and
-    actions. Custom keybinds simplify the process, as players can set up controls
-    that make sense to them and require less mental effort. This allows players to
-    focus more on strategy and tactics, rather than struggling to remember which
-    key activates a specific ability.
 
-    
+    In highly competitive gaming scenarios,
+    where players are under constant pressure, reducing cognitive load is essential.
+    Memorizing a multitude of default keybindings can be challenging, especially
+    when dealing with complex games that feature numerous abilities and actions.
+    Custom keybinds simplify the process, as players can set up controls that make
+    sense to them and require less mental effort. This allows players to focus more
+    on strategy and tactics, rather than struggling to remember which key activates
+    a specific ability.
+
+
 
     Accessibility and Inclusivity
 
-    
 
-    Keybinds
-    also play a crucial role in making games more accessible and inclusive. They
-    enable players with physical disabilities to modify controls to accommodate their
-    needs, allowing them to enjoy the same gaming experience as their peers. Many
-    games now come with built-in accessibility options and keybind customization
-    features, ensuring that gaming is a hobby that can be enjoyed by a wide range
-    of individuals, regardless of their physical limitations.
 
-    
+    Keybinds also
+    play a crucial role in making games more accessible and inclusive. They enable
+    players with physical disabilities to modify controls to accommodate their needs,
+    allowing them to enjoy the same gaming experience as their peers. Many games
+    now come with built-in accessibility options and keybind customization features,
+    ensuring that gaming is a hobby that can be enjoyed by a wide range of individuals,
+    regardless of their physical limitations.
+
+
 
     Conclusion
 
-    
 
-    In
-    conclusion, keybinds are a vital component of the gaming experience, contributing
-    significantly to a player''s performance and enjoyment of the game. They enhance
-    gameplay efficiency, enable customization to individual play styles, reduce cognitive
-    load, and promote accessibility and inclusivity within the gaming community.
-    As technology continues to advance, and the gaming industry evolves, keybinds
-    will remain a crucial element in providing a seamless and enjoyable gaming experience
-    for all.
 
-    Title: The Significance of Keybinds in Gaming: A Serious Discussion
+    In conclusion,
+    keybinds are a vital component of the gaming experience, contributing significantly
+    to a player''s performance and enjoyment of the game. They enhance gameplay efficiency,
+    enable customization to individual play styles, reduce cognitive load, and promote
+    accessibility and inclusivity within the gaming community. As technology continues
+    to advance, and the gaming industry evolves, keybinds will remain a crucial element
+    in providing a seamless and enjoyable gaming experience for all.
 
-    
+    Title:
+    The Significance of Keybinds in Gaming: A Serious Discussion
+
+
 
     Introduction
 
-    
+
 
     In
     the realm of video gaming, there is a plethora of factors that contribute to
@@ -1139,11 +1207,11 @@ MonoBehaviour:
     importance of keybinds in gaming, emphasizing their role in enhancing the player''s
     experience and overall performance.
 
-    
+
 
     Understanding Keybinds
 
-    
+
 
     Keybinds,
     short for keybindings, refer to the configuration of specific actions, abilities,
@@ -1152,79 +1220,78 @@ MonoBehaviour:
     their controls to suit their preferences and play style. They serve as the bridge
     between the player''s intentions and the in-game actions they wish to perform.
 
-    
+
 
     Enhancing
     Gameplay Efficiency
 
-    
 
-    One of the most apparent reasons why keybinds
-    are important is that they enhance gameplay efficiency. By mapping frequently
-    used commands or abilities to easily accessible keys, players can execute actions
+
+    One of the most apparent reasons why keybinds are
+    important is that they enhance gameplay efficiency. By mapping frequently used
+    commands or abilities to easily accessible keys, players can execute actions
     with minimal delay. This is particularly vital in fast-paced games, where every
     second can make the difference between victory and defeat. Efficient keybinds
     empower gamers to respond swiftly to changing situations and execute their strategies
     flawlessly.
 
-    
+
 
     Customization for Individual Play Styles
 
-    
 
-    Keybinds
-    are not a one-size-fits-all solution. Gamers have diverse play styles, and what
-    works for one may not work for another. Keybinds provide the flexibility to tailor
+
+    Keybinds are
+    not a one-size-fits-all solution. Gamers have diverse play styles, and what works
+    for one may not work for another. Keybinds provide the flexibility to tailor
     controls to suit an individual''s preferences. Whether a player prefers to focus
     on mobility, precision aiming, or rapid spellcasting, keybinds allow them to
     create a control scheme that aligns with their strengths and weaknesses. This
     customization empowers players to play the game in a way that feels most natural
     to them.
 
-    
+
 
     Reducing Cognitive Load
 
-    
 
-    In highly competitive
-    gaming scenarios, where players are under constant pressure, reducing cognitive
-    load is essential. Memorizing a multitude of default keybindings can be challenging,
-    especially when dealing with complex games that feature numerous abilities and
-    actions. Custom keybinds simplify the process, as players can set up controls
-    that make sense to them and require less mental effort. This allows players to
-    focus more on strategy and tactics, rather than struggling to remember which
-    key activates a specific ability.
 
-    
+    In highly competitive gaming scenarios,
+    where players are under constant pressure, reducing cognitive load is essential.
+    Memorizing a multitude of default keybindings can be challenging, especially
+    when dealing with complex games that feature numerous abilities and actions.
+    Custom keybinds simplify the process, as players can set up controls that make
+    sense to them and require less mental effort. This allows players to focus more
+    on strategy and tactics, rather than struggling to remember which key activates
+    a specific ability.
+
+
 
     Accessibility and Inclusivity
 
-    
 
-    Keybinds
-    also play a crucial role in making games more accessible and inclusive. They
-    enable players with physical disabilities to modify controls to accommodate their
-    needs, allowing them to enjoy the same gaming experience as their peers. Many
-    games now come with built-in accessibility options and keybind customization
-    features, ensuring that gaming is a hobby that can be enjoyed by a wide range
-    of individuals, regardless of their physical limitations.
 
-    
+    Keybinds also
+    play a crucial role in making games more accessible and inclusive. They enable
+    players with physical disabilities to modify controls to accommodate their needs,
+    allowing them to enjoy the same gaming experience as their peers. Many games
+    now come with built-in accessibility options and keybind customization features,
+    ensuring that gaming is a hobby that can be enjoyed by a wide range of individuals,
+    regardless of their physical limitations.
+
+
 
     Conclusion
 
-    
 
-    In
-    conclusion, keybinds are a vital component of the gaming experience, contributing
-    significantly to a player''s performance and enjoyment of the game. They enhance
-    gameplay efficiency, enable customization to individual play styles, reduce cognitive
-    load, and promote accessibility and inclusivity within the gaming community.
-    As technology continues to advance, and the gaming industry evolves, keybinds
-    will remain a crucial element in providing a seamless and enjoyable gaming experience
-    for all.'
+
+    In conclusion,
+    keybinds are a vital component of the gaming experience, contributing significantly
+    to a player''s performance and enjoyment of the game. They enhance gameplay efficiency,
+    enable customization to individual play styles, reduce cognitive load, and promote
+    accessibility and inclusivity within the gaming community. As technology continues
+    to advance, and the gaming industry evolves, keybinds will remain a crucial element
+    in providing a seamless and enjoyable gaming experience for all.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1413,7 +1480,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: -20, y: -880}
+  m_SizeDelta: {x: -20, y: -528}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1051679250
 MonoBehaviour:
@@ -1554,7 +1621,7 @@ RectTransform:
   m_GameObject: {fileID: 1062288155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 3, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1677770405}
@@ -1563,7 +1630,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -210}
   m_SizeDelta: {x: 300, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1062288157
@@ -2570,7 +2637,7 @@ RectTransform:
   m_GameObject: {fileID: 1705827886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.8, y: 2.2, z: 1.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 350308192}
@@ -2578,8 +2645,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0, y: -325}
-  m_SizeDelta: {x: 1651.8, y: 50}
+  m_AnchoredPosition: {x: 0, y: -110}
+  m_SizeDelta: {x: 900, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1705827888
 MonoBehaviour:
@@ -2901,7 +2968,6 @@ GameObject:
   - component: {fileID: 1952806071}
   - component: {fileID: 1952806070}
   - component: {fileID: 1952806073}
-  - component: {fileID: 1952806074}
   m_Layer: 5
   m_Name: Keybinds Button
   m_TagString: Untagged
@@ -2918,7 +2984,7 @@ RectTransform:
   m_GameObject: {fileID: 1952806068}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 3, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1397339865}
@@ -2927,7 +2993,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -80}
   m_SizeDelta: {x: 300, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1952806070
@@ -2985,7 +3051,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &1952806071
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3037,19 +3103,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   keybindsPanel: {fileID: 1982062185}
---- !u!114 &1952806074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1952806068}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ac5245bc72acc14b88460c7878d4d3d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keybindsPanel: {fileID: 0}
 --- !u!1 &1982062185
 GameObject:
   m_ObjectHideFlags: 0
@@ -3061,8 +3114,6 @@ GameObject:
   - component: {fileID: 1982062186}
   - component: {fileID: 1982062188}
   - component: {fileID: 1982062187}
-  - component: {fileID: 1982062189}
-  - component: {fileID: 1982062191}
   - component: {fileID: 1982062190}
   m_Layer: 5
   m_Name: Keybinds Panel
@@ -3130,21 +3181,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1982062185}
   m_CullTransparentMesh: 1
---- !u!114 &1982062189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982062185}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 1982062185}
-  m_sendNavigationEvents: 1
-  m_DragThreshold: 10
 --- !u!114 &1982062190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3189,17 +3225,3 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1982062191
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1982062185}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d49b7c1bcd2e07499844da127be038d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SendPointerHoverToParent: 1
-  m_ForceModuleActive: 0

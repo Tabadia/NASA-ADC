@@ -11,8 +11,7 @@ public class ButtonEventsManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (keybindsPanel.activeInHierarchy == true)
-            keybindsPanel.SetActive(false);
+        keybindsPanel.SetActive(false);
     }
 
     // Update is called once per frame
