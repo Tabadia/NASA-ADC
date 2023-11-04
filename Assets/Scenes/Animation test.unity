@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 261.89948, g: 324.4541, b: 429.4325, a: 1}
+  m_IndirectSpecularColor: {r: 261.9017, g: 324.45706, b: 429.4361, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!20 &122638107 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3865793213659012565, guid: 71429da9c596a1b45bd6a62d51bd834f, type: 3}
+  m_PrefabInstance: {fileID: 3865793214747977055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1149133189
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,6 +345,11 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
+--- !u!4 &1411349323 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3615465877416368092, guid: 71429da9c596a1b45bd6a62d51bd834f, type: 3}
+  m_PrefabInstance: {fileID: 3865793214747977055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1599794321
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +455,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3865793213659012562, guid: 71429da9c596a1b45bd6a62d51bd834f, type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1411349323}
+    - target: {fileID: 3865793213659012562, guid: 71429da9c596a1b45bd6a62d51bd834f, type: 3}
+      propertyPath: offset.y
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3865793213704325527, guid: 71429da9c596a1b45bd6a62d51bd834f, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -493,5 +511,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7263351667659050405, guid: 71429da9c596a1b45bd6a62d51bd834f, type: 3}
+      propertyPath: camera
+      value: 
+      objectReference: {fileID: 122638107}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 71429da9c596a1b45bd6a62d51bd834f, type: 3}

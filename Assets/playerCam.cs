@@ -5,6 +5,7 @@ using UnityEngine;
 public class playerCam : MonoBehaviour
     
 {
+    public Vector3 offset = Vector3.zero;
     public float sensY;
     public float sensX;
 
@@ -26,7 +27,7 @@ public class playerCam : MonoBehaviour
     {
 
         Vector3 pos = player.position;
-        pos.Set(pos.x, pos.y + 1, pos.z);
+        pos.Set(pos.x + offset.x, pos.y + offset.y, pos.z + offset.z);
         transform.position = pos;
         //camera not enabled or is a minimap camera
         if (!GetComponent<Camera>().enabled || name.IndexOf("MinimapCam") != -1) return;
