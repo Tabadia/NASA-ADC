@@ -17,7 +17,10 @@ public class ButtonEventsManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown("escape") && keybindsPanel.activeInHierarchy == true)
+        {
+            keybindsPanel.SetActive(false);
+        }
     }
 
     public void whenKeybindsButtonClicked()
