@@ -1,0 +1,40 @@
+[33m5be56b1[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m uhh lost 4 hours of work, life goes on, added slope indicator, brushed up terrain
+[33m63e6707[m lost 4 hours of work but life goes on slope changes, terrain changes
+[33mf0f6e4a[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Merge branch 'main' of https://github.com/Tabadia/NASA-ADC
+[33mc087257[m animations plus new player controller
+[33m84e5e34[m Brushed up the terrain a bit
+[33mc2b38ad[m winston forced me sry
+[33m6195258[m working on animations
+[33m990ddf1[m Merge branch 'main' of https://github.com/Tabadia/NASA-ADC # Please enter a commit message to explain why this merge is necessary, # especially if it merges an updated upstream into a topic branch. # # Lines starting with '#' will be ignored, and an empty message aborts # the commit.
+[33md5596bb[m removed the amogus and replaced with first person view, slope fixes, minimap fixes, etcetc
+[33meb6828b[m Main menu fixes
+[33mebdf293[m Merge branch 'main' of https://github.com/Tabadia/NASA-ADC
+[33ma68a7c5[m Fixing sid's main menu
+[33md5bab01[m Merge branch 'main' of https://github.com/Tabadia/NASA-ADC
+[33m3fbb4ec[m Merge branch 'main' of https://github.com/Tabadia/NASA-ADC
+[33m516d398[m Added Animated player (movement is broken edwin pls fix for me) and also animation transisions are autistic)
+[33me73d8f7[m slopes
+[33m551382a[m Main page/main menu, new font, hooray
+[33ma84472e[m Merge branch 'main' of https://github.com/Tabadia/NASA-ADC
+[33m7cb9125[m 2 player minimap in progress, path markers complete
+[33m3083ef7[m Merge branch 'main' of https://github.com/Tabadia/NASA-ADC
+[33ma48db61[m Animation test everything inside of animation test folder
+[33ma903888[m hehe v2
+[33me9ec6b0[m Fixed minimap and coords yay 6969696969
+[33mf1c8d65[m yeah 2 player, some coords that dont work, other changes
+[33mf6cb1c9[m hehe
+[33m536559a[m Made a player prefab with about moon gravity
+[33m59a7c13[m Minimap follows player
+[33m381dc13[m Update README.md
+[33m043408b[m MiniMap progress
+[33mff13d44[m Update README.md
+[33mc1c5e66[m Update README.md
+[33m9879749[m Update README.md
+[33m240ecc1[m lighting changes!
+[33md0261eb[m made moon white! + among us
+[33m3c324a4[m Lighting updates (WIP)
+[33mb440a62[m Fixed Terrain Data
+[33m437c0ff[m Fixed Blurriness of Middle Render
+[33m870033c[m Rendering Landing Site
+[33m4194883[m Update README.md
+[33m234df7a[m Initial commit

@@ -4,6 +4,7 @@ using TMPro;
 // Finds the slope/grade/incline angle of ground underneath a CharacterController
 public class GroundChecker : MonoBehaviour
 {
+    public float maxSlopeAngle = 15f;
     public GameObject slopeText;
     public Camera camera;
     [Header("Results")]
@@ -26,6 +27,9 @@ public class GroundChecker : MonoBehaviour
 
     //text reference
     private TextMeshProUGUI TMProSlopeEle;
+
+    float r = 1f, g = 0.3f, b = 0.7f, a = 1f;
+
     void Start()
     {
         TMProSlopeEle = slopeText.GetComponent<TextMeshProUGUI>();
@@ -43,8 +47,12 @@ public class GroundChecker : MonoBehaviour
         // of the char controller's collider. Plus a little higher 
         if (!camera.enabled) return;
         CheckGround(new Vector3(transform.position.x, transform.position.y - (controller.height / 2) + startDistanceFromBottom, transform.position.z));
-        
-        TMProSlopeEle.text = "Slope:" + groundSlopeAngle + ", \n" + "Slope Vector:" + groundSlopeDir.ToString();
+        String slopeRes = groundSlopeAngle > maxSlopeAngle ? (groundSlopeAngle + "(too steep)") : ("" + groundSlopeAngle);
+        TMProSlopeEle.text = "Slope:" + slopeRes + ", \n" + "Slope Vector:" + groundSlopeDir.ToString();
+        //red
+        if (groundSlopeAngle > maxSlopeAngle) TMProSlopeEle.color = new Color(r, g, b, a);
+        //white
+        else TMProSlopeEle.color = new Color(1, 1, 1, 1);
     }
 
     /// <summary>
