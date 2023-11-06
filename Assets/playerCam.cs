@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class playerCam : MonoBehaviour
     
 {
     public Vector3 offset = Vector3.zero;
+    public float topDownCameraHeight = 15f;
     public float sensY;
     public float sensX;
 
@@ -15,8 +17,11 @@ public class playerCam : MonoBehaviour
     float xRotation;
     float yRotation;
 
+    bool isInF5Mode = false;
+    float offsetY;
     void Start()
     {
+        offsetY = offset.y;
         //make it so that mouse cant leave the screen as well as making it invisible
         //this makes it so that the camera can rotate
         Cursor.lockState = CursorLockMode.Locked;
@@ -30,7 +35,21 @@ public class playerCam : MonoBehaviour
         pos.Set(pos.x + offset.x, pos.y + offset.y, pos.z + offset.z);
         transform.position = pos;
         //camera not enabled or is a minimap camera
-        if (!GetComponent<Camera>().enabled || name.IndexOf("MinimapCam") != -1) return;
+        if (!GetComponent<Camera>().enabled) return;
+        if (Input.GetKeyDown(KeyCode.F5))
+        {
+            if(isInF5Mode)
+            {
+                offset.y = offsetY;
+            } else
+            { 
+                offset.y = topDownCameraHeight;
+
+                transform.rotation = Quaternion.Euler(new Vector3(90, 0, 0));
+            }
+            isInF5Mode = !isInF5Mode;
+        }
+        if (isInF5Mode) return; //lock mouse movement 
         //get mouse input
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;

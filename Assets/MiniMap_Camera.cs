@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class MiniMap_Camera : MonoBehaviour
 {
-    public Transform cameraPosition;
+    public GameObject mainCam;
 
     void Update()
     {
-        transform.position = cameraPosition.position;
+        transform.position = mainCam.transform.position;
+        transform.rotation = mainCam.transform.rotation;
     }
 }
