@@ -14,6 +14,8 @@ public class playerCam : MonoBehaviour
     public Transform orientation;
     public Transform player;
 
+    public GameObject escPanel;
+
     float xRotation;
     float yRotation;
 
@@ -30,7 +32,24 @@ public class playerCam : MonoBehaviour
 
     void Update()
     {
+        // only execute the following if the esc panel (the panel that shows up when hitting "esc" is NOT visible
+        if (!escPanel.activeInHierarchy)
+        {
+            Vector3 pos = player.position;
+            pos.Set(pos.x + offset.x, pos.y + offset.y, pos.z + offset.z);
+            transform.position = pos;
+            //camera not enabled or is a minimap camera
+            if (!GetComponent<Camera>().enabled || name.IndexOf("MinimapCam") != -1) return;
+            //get mouse input
+            float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
+            float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
+            Debug.Log(name + "rotation changing");
+            yRotation += mouseX;
+            //yRotation = Mathf.Clamp(yRotation, -90f, 90f);
+            xRotation -= mouseY;
+            //xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
+<<<<<<< Updated upstream
         Vector3 pos = player.position;
         pos.Set(pos.x + offset.x, pos.y + offset.y, pos.z + offset.z);
         transform.position = pos;
@@ -58,9 +77,13 @@ public class playerCam : MonoBehaviour
         //yRotation = Mathf.Clamp(yRotation, -90f, 90f);
         xRotation -= mouseY;
         //xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+=======
+            //rotate camera orientation
+            transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
+            orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        }
+>>>>>>> Stashed changes
 
-        //rotate camera orientation
-        transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
-        orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        
     }
 }
