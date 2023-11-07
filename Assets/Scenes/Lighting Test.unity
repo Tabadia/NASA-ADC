@@ -305,8 +305,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Exit :(
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
+  m_sharedMaterial: {fileID: 9139985933622498525, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -641,8 +641,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Resume
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
+  m_sharedMaterial: {fileID: 9139985933622498525, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -801,6 +801,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 1.5, z: 0}
+  topDownCameraHeight: 15
   sensY: 200
   sensX: 200
   orientation: {fileID: 542629106}
@@ -1150,6 +1151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 1.5, z: 0}
+  topDownCameraHeight: 15
   sensY: 200
   sensX: 200
   orientation: {fileID: 6578352109723451366}
@@ -2030,8 +2032,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Coords go here
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 033bc9c8da0a1cd43a567f16dae54914, type: 2}
-  m_sharedMaterial: {fileID: -4443934867029378989, guid: 033bc9c8da0a1cd43a567f16dae54914, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
+  m_sharedMaterial: {fileID: 9139985933622498525, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2820,6 +2822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 1.5, z: 0}
+  topDownCameraHeight: 15
   sensY: 200
   sensX: 200
   orientation: {fileID: 542629106}
@@ -3126,8 +3129,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Settings
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
+  m_sharedMaterial: {fileID: 9139985933622498525, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -3470,15 +3473,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Simulation Paused
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 033bc9c8da0a1cd43a567f16dae54914, type: 2}
-  m_sharedMaterial: {fileID: -4443934867029378989, guid: 033bc9c8da0a1cd43a567f16dae54914, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 07ee36b6d61c64243b27f2d7d1beac8d, type: 2}
+  m_sharedMaterial: {fileID: 5583339924650633072, guid: 07ee36b6d61c64243b27f2d7d1beac8d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4286707518
-  m_fontColor: {r: 0.24313727, g: 0.9686275, b: 0.5058824, a: 1}
+    rgba: 4294934592
+  m_fontColor: {r: 0.2509804, g: 0.5019608, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3490,7 +3493,7 @@ MonoBehaviour:
   m_spriteAsset: {fileID: 0}
   m_tintAllSprites: 0
   m_StyleSheet: {fileID: 0}
-  m_TextStyleHashCode: 2426
+  m_TextStyleHashCode: -1183493901
   m_overrideHtmlColors: 0
   m_faceColor:
     serializedVersion: 2
@@ -3779,8 +3782,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Slope Data goes here
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
+  m_sharedMaterial: {fileID: 9139985933622498525, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5973,6 +5976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 1.5, z: 0}
+  topDownCameraHeight: 15
   sensY: 200
   sensX: 200
   orientation: {fileID: 6578352109723451366}
