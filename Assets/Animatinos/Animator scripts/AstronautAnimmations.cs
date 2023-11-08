@@ -24,36 +24,54 @@ public class AstronautAnimmations : MonoBehaviour
                 animator.SetBool("isWalking", true);
                 animator.SetBool("isIdle", false);
                 animator.SetBool("isJumping", false);
+                animator.SetBool("isWalkingLeft", false);
+                animator.SetBool("isWalkingRight", false);
+                animator.SetBool("isWalkingBack", false);
             }
             else if (Input.GetKey(KeyCode.A))
             {
-                animator.SetBool("isWalking", true);
+                animator.SetBool("isWalking", false);
                 animator.SetBool("isIdle", false);
                 animator.SetBool("isJumping", false);
+                animator.SetBool("isWalkingLeft", true);
+                animator.SetBool("isWalkingRight", false);
+                animator.SetBool("isWalkingBack", false);
             }
             else if (Input.GetKey(KeyCode.S))
             {
-                animator.SetBool("isWalking", true);
+                animator.SetBool("isWalking", false);
                 animator.SetBool("isIdle", false);
                 animator.SetBool("isJumping", false);
+                animator.SetBool("isWalkingLeft", false);
+                animator.SetBool("isWalkingRight", false);
+                animator.SetBool("isWalkingBack", true);
             }
             else if (Input.GetKey(KeyCode.D))
             {
-                animator.SetBool("isWalking", true);
+                animator.SetBool("isWalking", false);
                 animator.SetBool("isIdle", false);
                 animator.SetBool("isJumping", false);
+                animator.SetBool("isWalkingLeft", false);
+                animator.SetBool("isWalkingRight", true);
+                animator.SetBool("isWalkingBack", false);
             }
             else if (Input.GetKeyDown(KeyCode.Space))
             {
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isIdle", false);
                 animator.SetBool("isJumping", true);
+                animator.SetBool("isWalkingRight", false);
+                animator.SetBool("isWalkingLeft", false);
+                animator.SetBool("isWalkingBack", false);
             }
             else
             {
                 animator.SetBool("isWalking", false);
                 animator.SetBool("isIdle", true);
                 animator.SetBool("isJumping", false);
+                animator.SetBool("isWalkingLeft", false);
+                animator.SetBool("isWalkingRight", false);
+                animator.SetBool("isWalkingBack", false);
             }
         }
     }

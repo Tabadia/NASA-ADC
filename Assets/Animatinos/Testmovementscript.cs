@@ -11,6 +11,7 @@ public class Testmovementscript : MonoBehaviour
     public float runSpeed = 12f;
     public float jumpPower = 7f;
     public float gravity = 10f;
+    public float JumpDelay = 1.3f;
 
     [Header("Camera Movement")]
     public float lookSpeed = 2f;
@@ -79,7 +80,7 @@ public class Testmovementscript : MonoBehaviour
     }
     IEnumerator Timer()
     {
-        yield return new WaitForSeconds(1.2f);
+        yield return new WaitForSeconds(JumpDelay);
         moveDirection.y = jumpPower;
     }
 
