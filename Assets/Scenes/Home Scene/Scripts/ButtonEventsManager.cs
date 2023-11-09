@@ -9,6 +9,7 @@ public class ButtonEventsManager : MonoBehaviour
 {
     public GameObject keybindsPanel;
     public GameObject quitPanel;
+    public GameObject informationAndCreditsPanel;
 
     // Start is called before the first frame update
     void Start()
@@ -28,6 +29,11 @@ public class ButtonEventsManager : MonoBehaviour
         if (Input.GetKeyDown("escape") && quitPanel.activeInHierarchy == true)
         {
             quitPanel.SetActive(false);
+        }
+
+        if (Input.GetKeyDown("escape") && informationAndCreditsPanel.activeInHierarchy == true)
+        {
+            informationAndCreditsPanel.SetActive(false);
         }
     }
 
@@ -50,6 +56,18 @@ public class ButtonEventsManager : MonoBehaviour
     public void whenQuitButtonClick()
     {
         quitPanel.SetActive(true);
+    }
+
+    public void whenCreditsAndInfoButtonClick()
+    {
+        if (informationAndCreditsPanel.activeInHierarchy == true)
+        {
+            informationAndCreditsPanel.SetActive(false);
+        }
+        else
+        {
+            informationAndCreditsPanel.SetActive(true);
+        }
     }
 
     public void quitGame(bool value)
