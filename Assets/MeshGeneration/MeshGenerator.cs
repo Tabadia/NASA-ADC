@@ -14,8 +14,8 @@ public class MeshGenerator : MonoBehaviour
 	int[] triangles;
 
     // set the size of the mesh base
-	public int xSize = 100;
-	public int zSize = 100;
+	private int xSize = 100;
+	private int zSize = 100;
     
 	public float strength = 0.3f;
 
@@ -24,9 +24,9 @@ public class MeshGenerator : MonoBehaviour
 		mesh = new Mesh();
 		GetComponent<MeshFilter>().mesh = mesh;
 
-        ReadCSV();
-		//CreateShape();
-		// UpdateMesh();
+        //ReadCSV();
+		CreateShape();
+		UpdateMesh();
 	}
 
     void ReadCSV(){
@@ -45,7 +45,7 @@ public class MeshGenerator : MonoBehaviour
                 while ((line = reader.ReadLine()) != null){
 					var values = line.Split(',');
 		            foreach (var value in values){
-						float y = float.Parse(value, CultureInfo.InvariantCulture.NumberFormat);
+						float y = float.Parse(value, CultureInfo.InvariantCulture.NumberFormat) - 532f;
 						print(i + " " + x + " " + z);
 						vertices[i] = new Vector3(x, y, z);
 						print(vertices[i]);
@@ -53,6 +53,7 @@ public class MeshGenerator : MonoBehaviour
 						i++;
 		            }
 					z++;
+					x = 0;
                 }
             }
         //}
