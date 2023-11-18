@@ -27,9 +27,10 @@ public class MeshGenerator : MonoBehaviour
         //ReadCSV();
 		CreateShape();
 		UpdateMesh();
+		ColorMesh();
 	}
 
-    void ReadCSV(){
+	void ReadCSV(){
 		print("starting to read");
 		vertices = new Vector3[(xSize + 1) * (zSize + 1)];
 		string fileName = @".\Assets\MeshGeneration\test.csv";
@@ -143,5 +144,29 @@ public class MeshGenerator : MonoBehaviour
 
 		mesh.RecalculateNormals();
 	}
+	float normalize(float num, float min, float max)
+	{
+		return (num - min) / (max - min);
+	}
+    void ColorMesh()
+    { 
+        Vector3[] vertices = mesh.vertices;
+
+        // create new colors array where the colors will be created.
+        Color[] colors = new Color[vertices.Length];
+		int i = 0;
+		float high = 0f;
+		float low = 0f;
+		foreach(Vector3 point in vertices)
+		{
+			if (point.y > high) high = point.y;
+			if (point.y < low) low = point.y;
+			Debug.Log(Color.Lerp(Color.white, Color.black, normalize(point.y, low, high)));
+
+            colors[i] = Color.Lerp(Color.white, Color.black, normalize(point.y, low, high));
+			i++;
+		}
+        mesh.colors = colors;
+    }
 }
 
