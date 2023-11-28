@@ -4,6 +4,9 @@ using System.IO;
 using System.Globalization;
 using System;
 using UnityEngine;
+using Unity.Mathematics;
+using Unity.VisualScripting;
+
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))] //ensure object has mesh components
 
 public class MeshGenerator : MonoBehaviour
@@ -27,8 +30,9 @@ public class MeshGenerator : MonoBehaviour
         //ReadCSV();
 		CreateShape();
 		UpdateMesh();
-		ColorMesh();
-	}
+		ColorMeshBasedOnAngle();
+
+    }
 
 	void ReadCSV(){
 		print("starting to read");
@@ -148,7 +152,7 @@ public class MeshGenerator : MonoBehaviour
 	{
 		return (num - min) / (max - min);
 	}
-    void ColorMesh()
+    void ColorMeshBasedOnHeight()
     { 
         Vector3[] vertices = mesh.vertices;
 
@@ -156,16 +160,66 @@ public class MeshGenerator : MonoBehaviour
         Color[] colors = new Color[vertices.Length];
 		int i = 0;
 		float high = 0f;
-		float low = 0f;
+		float low = 0f;	
 		foreach(Vector3 point in vertices)
 		{
 			if (point.y > high) high = point.y;
 			if (point.y < low) low = point.y;
-			Debug.Log(Color.Lerp(Color.white, Color.black, normalize(point.y, low, high)));
 
             colors[i] = Color.Lerp(Color.white, Color.black, normalize(point.y, low, high));
 			i++;
 		}
+        mesh.colors = colors;
+    }
+	int FindMax(Vector3[] nums)
+	{
+		int maxIdx = 0;
+		float max = -9999999;
+		for (var i = 0; i < nums.Length; i++)
+		{
+			if (nums[i].y > max) max = nums[i].y; maxIdx = i;
+		}
+		return maxIdx;
+	}
+	int FindMin(Vector3[] nums)
+	{
+        int minIdx = 0;
+        float min = 9999999;
+        for (var i = 0; i < nums.Length; i++)
+        {
+            if (nums[i].y < min) min = nums[i].y; minIdx = i;
+        }
+        return minIdx;
+    }
+	void ColorMeshBasedOnAngle()
+	{
+        Vector3[] vertices = mesh.vertices;
+		int[] tris = mesh.triangles;
+        // create new colors array where the colors will be created.
+        Color[] colors = new Color[vertices.Length];
+		for (var i = 0; i < tris.Length; i += 3)
+		{
+			int idx1 = tris[i], idx2 = tris[i + 1], idx3 = tris[i + 2];
+			Vector3[] yCoords = new Vector3[]
+			{
+				vertices[idx1],
+				vertices[idx2],
+				vertices[idx3]
+			};
+            int max = 0;
+			int min = 2;
+			float distance = Vector3.Distance(yCoords[min], yCoords[max]);
+			double angle = Math.Atan((yCoords[max].y - yCoords[min].y) / distance) * 180;
+			if (angle < 0) angle *= -1; 
+			Debug.Log("Distance:" + distance);
+			Debug.Log("");
+			Debug.Log(angle);
+			var color = Color.Lerp(Color.black, Color.white, normalize((float)angle, -90, 90)) ;
+			colors[idx1] = color;
+			colors[idx2] = color;
+			colors[idx3] = color;
+		}
+		
         mesh.colors = colors;
     }
 }
