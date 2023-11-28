@@ -1665,7 +1665,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 943673980}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.66201144
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1742,7 +1742,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 0.66201144}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1893,8 +1893,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 10, y: 0.00079345703}
-  m_SizeDelta: {x: -20, y: -394.52}
+  m_AnchoredPosition: {x: 10, y: 0}
+  m_SizeDelta: {x: -20, y: -42.650024}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1027020110
 MonoBehaviour:
@@ -1916,61 +1916,31 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "This project is very cool. This project is very cool. This project is
-    very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. This project is very cool. This project
-    is very cool. This project is very cool. y cool. This project is very cool. This
-    project is very cool. This project is very cool. This project is very cool. This
-    project is very cool. This project is very cool. This project is very cool. This
-    project is very cool. This project is very cool. This project is very cool. This
-    project is very cool. This project is very cool. This project is very cool. This
-    project is very cool. This project is very cool. This project is very cool. This
-    project is very cool. This project is very cool. This project is very cool. This
-    project is very cool. This project is very cool. This project is very cool. This
-    project is very cool. This project is very cool. This project is very cool. This
-    project is very cool. This project is very cool. This project is very cool. This
-    project is very cool. This project is very cool. This project is very cool. This
-    project is very cool. This project is very cool. y cool. This project is very
-    cool. This project is very cool. This project is very cool. This project is very
-    cool. This project is very cool. This project is very cool. This project is very
-    cool. This project is very cool. This project is very cool. This project is very
-    cool. This project is very cool. This project is very cool. This project is very
-    cool. This project is very cool. This project is very cool. This project is very
-    cool. This project is very cool. This project is very cool. This project is very
-    cool. This project is very cool. This project is very cool. This project is very
-    cool. This project is very cool. This project is very cool. This project is very
-    cool. This project is very cool. This project is very cool. This project is very
-    cool. This project is very cool. Thiss very cool. This project is very cool.
-    This project is very cool. This project is very cool. This project is very cool.
-    This project is very cool. This project is very cool. This project is very cool.
-    This project is very cool. This project is very cool. This project is very cool.
-    This project is very cool. This project is very cool. This project is very cool.
-    This project is very cool. This project is very cool. This project is very cool.
-    This project is very cool. This project is very cool. This project is very cool.
-    This project is very cool. This project is very cool. This project is very cool.
-    This project is very cool. This project is very cool. This project is very cool.
-    This project is very cool. \n\nIt was made by:\n\nThalen Abadia (Unity helpdesk/terrain
-    wizard), Tanush Sistla (terrain wizard/team lead), Phoenix Jones (video editing/sounds
-    and sfx artist), Alexander Vassilev (pathfinding algorithm/video editor), Siddharth
-    Modha (UI/UX designer), Edwin Chen (camera lead/slope and coordinates), and Winston
-    Chen (player animator/movement stuffs)"
+  m_text: "This project aims to show that the peak near Shackleton is the best landing
+    site for the Artemis III mission. In addition to having a funny name, here are
+    reasons why:\n\r\n- It is located near the lunar South Pole, which is an area
+    that contains permanently shadowed regions rich in resources and in terrain unexplored
+    by humans.\r\n\n- It has continuous sunlight for most of the year, which is beneficial
+    for power generation and thermal control.\r\n\n- It has a clear line of sight
+    to Earth, which enables direct communication with mission control and avoids
+    the need for relay satellites.\n\r\n- It is close to the Shackleton Crater (as
+    the name implies), which is a scientifically interesting target for exploration
+    and sample collection. The crater may contain water/ice and other volatiles that
+    could be used for in-situ resource utilization.\r\n\n- It is also near the Slater
+    Crater, which has a diameter of 15.6 miles and may have different geologic features
+    than Shackleton Crater.\n\r\n\rMore information:\n\nThe Moon\u2019s Rugged, Intriguing
+    South Pole | APPEL Knowledge Services\nhttps://appel.nasa.gov/2023/08/25/the-moons-rugged-intriguing-south-pole/\n\nNASA
+    Identifies Candidate Regions for Landing Next Americans on Moon\nhttps://www.nasa.gov/news-release/nasa-identifies-candidate-regions-for-landing-next-americans-on-moon/\n\nNASA
+    Moon Mission: Here's Where Artemis III Could Land\nhttps://www.cnet.com/science/space/nasa-moon-mission-heres-where-artemis-iii-could-land-lunar/\n\nNASA\u2019s
+    Gorgeous New Moon Image Paints Shackleton Crater in Light and Shadow\r\nhttps://www.scientificamerican.com/article/new-nasa-image-of-the-moons-shackleton-crater/\n\nResearch
+    provides details of possible NASA moon landing sites \nhttps://www.gi.alaska.edu/news/research-provides-details-possible-nasa-moon-landing-sites\n\nNASA
+    selects potential lunar landing sites for Artemis 3\r \nhttps://spacenews.com/nasa-selects-potential-lunar-landing-sites-for-artemis-3/\n\nArtemis
+    III Landing Region Candidates\n\rhttps://svs.gsfc.nasa.gov/5013\n\nIt was made
+    by:\n\nThalen Abadia (Unity helpdesk/terrain wizard), Tanush Sistla (terrain
+    wizard/team lead), Phoenix Jones (video editing/sounds and sfx artist), Alexander
+    Vassilev (pathfinding algorithm/video editor), Siddharth Modha (UI/UX designer),
+    Edwin Chen (camera lead/slope and coordinates), and Winston Chen (player animator/movement
+    stuffs)"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2027,7 +1997,7 @@ MonoBehaviour:
   m_isCullingEnabled: 0
   m_horizontalMapping: 0
   m_verticalMapping: 0
-  m_uvLineOffset: 0
+  m_uvLineOffset: 1000
   m_geometrySortingOrder: 0
   m_IsTextObjectScaleStatic: 0
   m_VertexBufferAutoSizeReduction: 0
