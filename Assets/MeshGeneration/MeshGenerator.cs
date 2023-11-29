@@ -16,6 +16,7 @@ public class MeshGenerator : MonoBehaviour
 	Vector3[] vertices;
 	int[] triangles;
 
+
     // set the size of the mesh base
 	private int xSize = 100;
 	private int zSize = 100;
@@ -30,11 +31,21 @@ public class MeshGenerator : MonoBehaviour
         //ReadCSV();
 		CreateShape();
 		UpdateMesh();
-		ColorMeshBasedOnAngle();
+
+        ColorMeshBasedOnAngle();
 
     }
-
-	void ReadCSV(){
+	public void changeMode(string mode)
+	{
+		if(mode == "angle")
+		{
+			ColorMeshBasedOnAngle();
+		} else if(mode == "height")
+		{
+			ColorMeshBasedOnHeight();
+		}
+	}
+    void ReadCSV(){
 		print("starting to read");
 		vertices = new Vector3[(xSize + 1) * (zSize + 1)];
 		string fileName = @".\Assets\MeshGeneration\test.csv";
@@ -211,9 +222,6 @@ public class MeshGenerator : MonoBehaviour
 			float distance = Vector3.Distance(yCoords[min], yCoords[max]);
 			double angle = Math.Atan((yCoords[max].y - yCoords[min].y) / distance) * 180;
 			if (angle < 0) angle *= -1; 
-			Debug.Log("Distance:" + distance);
-			Debug.Log("");
-			Debug.Log(angle);
 			var color = Color.Lerp(Color.black, Color.white, normalize((float)angle, -90, 90)) ;
 			colors[idx1] = color;
 			colors[idx2] = color;
@@ -223,4 +231,3 @@ public class MeshGenerator : MonoBehaviour
         mesh.colors = colors;
     }
 }
-
