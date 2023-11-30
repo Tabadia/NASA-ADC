@@ -12,15 +12,15 @@ public class MeshGen2 : MonoBehaviour
 
     void Start()
     {
-        GenerateMeshFromCSV();
+        StartCoroutine(GenerateMeshFromCSVAsync());
     }
 
-    void GenerateMeshFromCSV()
+    IEnumerator<WaitForSeconds> GenerateMeshFromCSVAsync()
     {
         if (!File.Exists(csvFilePath))
         {
             Debug.LogError("CSV file not found.");
-            return;
+            yield break;
         }
 
         string[] fileData = File.ReadAllLines(csvFilePath);
@@ -30,9 +30,9 @@ public class MeshGen2 : MonoBehaviour
 
         Material sharedMaterial = Instantiate(chunkMaterial); // Instantiate the shared material
 
-        for (int y = 0; y < height; y += chunkSize)
+        for (int y = 0; y < height - chunkSize; y += chunkSize - 1) // Adjusted loop condition
         {
-            for (int x = 0; x < width; x += chunkSize)
+            for (int x = 0; x < width - chunkSize; x += chunkSize - 1) // Adjusted loop condition
             {
                 List<Vector3> vertices = new List<Vector3>();
                 List<int> triangles = new List<int>();
@@ -54,10 +54,10 @@ public class MeshGen2 : MonoBehaviour
                 {
                     for (int xChunk = 0; xChunk < chunkSize - 1; xChunk++)
                     {
-                        int topLeft = xChunk + yChunk * chunkSize;
-                        int topRight = (xChunk + 1) + yChunk * chunkSize;
-                        int bottomLeft = xChunk + (yChunk + 1) * chunkSize;
-                        int bottomRight = (xChunk + 1) + (yChunk + 1) * chunkSize;
+                        int topLeft = xChunk + yChunk * (chunkSize);
+                        int topRight = (xChunk + 1) + yChunk * (chunkSize);
+                        int bottomLeft = xChunk + (yChunk + 1) * (chunkSize);
+                        int bottomRight = (xChunk + 1) + (yChunk + 1) * (chunkSize);
 
                         triangles.Add(topLeft);
                         triangles.Add(bottomLeft);
@@ -82,6 +82,8 @@ public class MeshGen2 : MonoBehaviour
 
                 meshFilter.mesh = mesh;
                 meshRenderer.material = sharedMaterial; // Apply the shared material
+
+                yield return new WaitForSeconds(0.001f); // Yield for a moment to prevent freezing the main thread
             }
         }
     }
