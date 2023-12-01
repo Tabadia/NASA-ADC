@@ -28,11 +28,10 @@ public class MeshGenerator : MonoBehaviour
 		mesh = new Mesh();
 		GetComponent<MeshFilter>().mesh = mesh;
 
-        //ReadCSV();
-		CreateShape();
+        ReadCSV();
+		//CreateShape();
 		UpdateMesh();
-
-        ColorMeshBasedOnAngle();
+		//colorGray();
 
     }
 	public void changeMode(string mode)
@@ -48,7 +47,7 @@ public class MeshGenerator : MonoBehaviour
     void ReadCSV(){
 		print("starting to read");
 		vertices = new Vector3[(xSize + 1) * (zSize + 1)];
-		string fileName = @".\Assets\MeshGeneration\test.csv";
+		string fileName = @".\Assets\MeshGeneration\HeightMapPart3.csv";
         //try {
             // Create a StreamReader
             using (StreamReader reader = new StreamReader(fileName))
@@ -228,6 +227,19 @@ public class MeshGenerator : MonoBehaviour
 			colors[idx3] = color;
 		}
 		
+        mesh.colors = colors;
+    }
+	void colorGray()
+	{
+        Vector3[] vertices = mesh.vertices;
+        Color[] colors = new Color[vertices.Length];
+        int i = 0;
+        foreach (Vector3 point in vertices)
+        {
+
+			colors[i] = Color.gray;
+            i++;
+        }
         mesh.colors = colors;
     }
 }
