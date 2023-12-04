@@ -1,4 +1,4 @@
-using Microsoft.VisualBasic.FileIO;
+using System.IO;
 using System;
 using System.Collections;
 using System.Globalization;
@@ -238,7 +238,21 @@ class MoonMapper {
 
         return count;
     }
-
+    public static double[,] CSVToArray(string filePath) {
+        string[] fileData = File.ReadAllLines(filePath);
+        
+        int width = fileData[0].Split(',').Length;
+        int height = fileData.Length;
+        
+        double[,] map = new double[width, height];
+        
+        for(var i = 0; i < height; i++) {
+            var line = fileData[i].Split(',')
+            map[i] = line;
+        }
+        return map;
+    }
+    /*
     public static double[,] CSVToArray(string filePath) {
         var path = @filePath;
 
@@ -277,7 +291,7 @@ class MoonMapper {
             return map;
         }
     }
-
+    */
     public double GetDistanceBetweenPoints(GridCoordinates point1, GridCoordinates point2) {
         int xDistance = Math.Abs(point2.xCoord - point1.xCoord);
         int yDistance = Math.Abs(point2.yCoord - point1.yCoord);
@@ -436,4 +450,3 @@ class MoonMapper {
         return FindPath(startPosGrid, targetPosGrid, prioritisation);
     }
 }
-
