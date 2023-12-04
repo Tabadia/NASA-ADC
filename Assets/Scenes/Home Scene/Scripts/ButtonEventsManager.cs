@@ -84,8 +84,5 @@ public class ButtonEventsManager : MonoBehaviour
             quitPanel.SetActive(false);
         }
     }
-    public void backToHomeScene()
-    {
-        SceneManager.LoadScene(sceneName: "Home Screen");
-    }
+    
 }

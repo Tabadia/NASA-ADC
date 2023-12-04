@@ -2,7 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
+using static Unity.VisualScripting.Member;
 
 
 public class MeshColoring : MonoBehaviour
@@ -72,33 +74,50 @@ public class MeshColoring : MonoBehaviour
     }
     int FindMax(Vector3[] nums)
     {
-        int maxIdx = 0;
-        float max = -9999999;
-        for (var i = 0; i < nums.Length; i++)
+
+        float maxValue = int.MinValue;
+        int maxIndex = -1;
+        int index = -1;
+
+        foreach (var num in nums)
         {
-            if (nums[i] == null) continue;
-            if (nums[i].y > max) max = nums[i].y; maxIdx = i;
+            index++;
+
+            if (num.y >= maxValue)
+            {
+                maxValue = num.y;
+                maxIndex = index;
+            }
         }
-        return maxIdx;
+
+        return maxIndex;
     }
     int FindMin(Vector3[] nums)
     {
-        int minIdx = 0;
-        float min = 9999999;
-        for (var i = 0; i < nums.Length; i++)
+        float minValue = int.MaxValue;
+        int minIndex = -1;
+        int index = -1;
+
+        foreach (var num in nums)
         {
-            if (nums[i] == null) continue;
-            if (nums[i].y < min) min = nums[i].y; minIdx = i;
+            index++;
+
+            if (num.y <= minValue)
+            {
+                minValue = num.y;
+                minIndex = index;
+            }
         }
-        return minIdx;
+
+        return minIndex;
     }
-    Vector3[] getCoords(int triangleIdx, int[] tris, Vector3[] vertices)
+    Vector3[] getCoords(int triangleIdx, int[] tris, Vector3[] vertices, int radius)
     {
         Vector3[] coords = new Vector3[36];
         //get vertices in a square
-        for(var i = 0; i < 6; i++)
+        for(var i = 0; i < radius; i++)
         {
-            for(var j = 0; j < 6; j++)
+            for(var j = 0; j < radius; j++)
             {
                 if (vertices.Length <= i + triangleIdx + j * 100) continue;
                 coords[i] = vertices[i + triangleIdx + j*100];
@@ -112,6 +131,10 @@ public class MeshColoring : MonoBehaviour
          * Edwin's Note:
          * DO NOT put Debug.Log things here. There are insane amount of calculations being made, even a small slowdown can fuck your pc.
          */
+
+        //trust me.
+
+        var radius = 3; 
         var area = chunkSize * chunkSize;
         for(var child = 0; child < area; child++) { 
             Mesh mesh = children[child].mesh;
@@ -119,26 +142,28 @@ public class MeshColoring : MonoBehaviour
             int[] tris = mesh.triangles;
             // create new colors array where the colors will be created.
             Color[] colors = new Color[vertices.Length];
-
-            for (var i = 0; i < chunkSize; i += 6)
+            for (var i = 0; i < chunkSize; i += radius)
             {
-                for(var x = 0; x < chunkSize; x += 6)
+                for(var x = 0; x < chunkSize; x += radius)
                 {
                     int idx = i + x * 100;
-                    Vector3[] coords = getCoords(idx, tris, vertices);
-                    int max = 0;
-                    int min = 35;
-                    while (coords[min] == null)
+                    Vector3[] coords = getCoords(idx, tris, vertices, radius);
+                    int max = FindMax(coords);
+                    int min = FindMin(coords);
+                    float distance;
+                    double angle;
+                    if (min == max)
                     {
-                        min--;
+                        angle = 0;
                     }
-                    float distance = Vector3.Distance(coords[min], coords[max]);
-                    double angle = Math.Atan((coords[max].y - coords[min].y) / distance) * 180;
+                    distance = Vector3.Distance(coords[min], coords[max]);
+                    angle = Math.Atan((coords[max].y - coords[min].y) / distance) * 180;
+                    
                     if (angle < 0) angle *= -1;
                     var color = coloringGradient.Evaluate(normalize((float)angle, -90, 90));
-                    for (var y = 0; y < 6; y++)
+                    for (var y = 0; y < radius; y++)
                     {
-                        for (var z = 0; z < 6; z++)
+                        for (var z = 0; z < radius; z++)
                         {
 
                             if (colors.Length <= y + idx + z * 100) continue;
@@ -150,5 +175,9 @@ public class MeshColoring : MonoBehaviour
             //dont blow up pc PLS
             mesh.colors = colors;
        }
+    }
+    public void backToHomeScene()
+    {
+        SceneManager.LoadScene(sceneName: "Home Screen");
     }
 }
