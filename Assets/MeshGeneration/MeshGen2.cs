@@ -10,6 +10,9 @@ public class MeshGen2 : MonoBehaviour
     public float heightMultiplier = 1f; // Multiplier for height values
     public Material chunkMaterial; // Material to apply to chunks
 
+    public bool isFinished = false;
+
+    public int chunksGenerated;
     void Start()
     {
         StartCoroutine(GenerateMeshFromCSVAsync());
@@ -83,8 +86,10 @@ public class MeshGen2 : MonoBehaviour
                 meshFilter.mesh = mesh;
                 meshRenderer.material = sharedMaterial; // Apply the shared material
 
+                chunksGenerated++;
                 yield return new WaitForSeconds(0.001f); // Yield for a moment to prevent freezing the main thread
             }
         }
+        isFinished = true;
     }
 }

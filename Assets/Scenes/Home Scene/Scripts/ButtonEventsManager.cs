@@ -69,9 +69,13 @@ public class ButtonEventsManager : MonoBehaviour
             informationAndCreditsPanel.SetActive(true);
         }
     }
-
+    public void switchToMeshScene()
+    {
+        SceneManager.LoadScene(sceneName: "ProMesh 2");
+    }
     public void quitGame(bool value)
     {
+              
         if (value == true)
         {
             Debug.Log("Quit");
@@ -79,5 +83,9 @@ public class ButtonEventsManager : MonoBehaviour
         {
             quitPanel.SetActive(false);
         }
+    }
+    public void backToHomeScene()
+    {
+        SceneManager.LoadScene(sceneName: "Home Screen");
     }
 }
