@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Globalization;
 using System.Net.Http.Headers;
-
+using UnityEngine;
 class GridCoordinates {
     public int xCoord;
     public int yCoord;
@@ -23,7 +23,12 @@ class CartesianCoordinates {
         this.yCoord = yCoord;
         this.zCoord = zCoord;
     }
+    public Vector3 vector3() {
+        //miniscule precision loss.
+        return new Vector3((float)xCoord, (float)yCoord, (float)zCoord);
+    }
 }
+
 
 class PolarCoordinates {
     public double longitude;
