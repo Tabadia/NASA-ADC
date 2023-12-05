@@ -164,7 +164,7 @@ public class MeshColoring : MonoBehaviour
                         angle = 0;
                     }
                     distance = Vector3.Distance(coords[min], coords[max]);
-                    angle = Math.Atan((coords[max].y - coords[min].y) / distance) * 180;
+                    angle = Math.Atan((coords[max].y - coords[min].y) / distance) * 180/Math.PI;
                     
                     if (angle < 0) angle *= -1;
                     var color = getColor(normalize((float)angle, -90, 90));
@@ -187,19 +187,35 @@ public class MeshColoring : MonoBehaviour
         var area = chunkSize * chunkSize;
         for(var child = 0; child < 10; child++) { 
             Mesh mesh = children[child].mesh;
-            Vector3[] vertices = mesh.vertices;
+            Vector3[] vertices = mesh.vertices; 
             int[] tris = mesh.triangles;
             // create new colors array where the colors will be created.
             Color[] colors = new Color[vertices.Length];
             
-            for (var i = 0; i < chunkSize; i++)
+            for (var i = 0; i < chunkSize; i += radius)
             {
-                for(var x = 0; x < chunkSize; x++)
+                for(var x = 0; x < chunkSize; x += radius)
                 {
                     int idx = i + x*chunkSize;
-                    Vector3 vertice = mesh.vertices[idx];
-                    float azimuth = Mathf.Atan((vertice.x - EARTH_LOCATION.x) / (vertice.y - EARTH_LOCATION.y));
-                    colors[idx] = getColor(normalize(azimuth, -1.56f, -1.57f));
+                    float xVal = yVal = -999999;
+
+                    for(var y = 0; y < radius;  y++) {
+                        for(var z = 0; z < radius; z++) {
+                            int newIdx = idx + y + z*100;
+
+                            Vector3 vertice = vertices[newIdx];
+                            xVal = Math.Max(vertice.x, xVal);
+                            yVal = Math.Max(vertice.y, yVal)
+                        }
+                    }
+                    float azimuth = Mathf.Atan((xVal - EARTH_LOCATION.x) / (yVal - EARTH_LOCATION.y)) * 180/Math.PI;
+                    
+                    for(var y = 0; y < radius;  y++) {
+                        for(var z = 0; z < radius; z++) {
+                            int newIdx = idx + y + z*100;
+                            colors[newIdx] = getColor(normalize(azimuth, -90, -90));
+                        }
+                    }
                 }
             }
             mesh.colors = colors;
