@@ -12,7 +12,9 @@ public class MeshColoring : MonoBehaviour
     public Gradient coloringGradient;
     GameObject meshGameObject;
     MeshFilter[] children;
-    public int radius;
+    public int angleRadius;
+
+    public int azimuthRadius;
 
     public Vector3 EARTH_LOCATION = new Vector3(361000, 0, -42100);
     public int chunkSize = 100;
@@ -44,10 +46,10 @@ public class MeshColoring : MonoBehaviour
     {
         return (num - min) / (max - min);
     }
-    Color getColor(float num) {
+    public Color getColor(float num) {
         return coloringGradient.Evaluate(num);
     }
-    public void ColorMeshBasedOnHeight()
+    private void ColorMeshBasedOnHeight()
     {
 
         float high = 0f;
@@ -133,13 +135,15 @@ public class MeshColoring : MonoBehaviour
         }
         return coords;
     }
-    public void ColorMeshBasedOnAngle()
+    private void ColorMeshBasedOnAngle()
     {
         /*
          * Edwin's Note:
          * DO NOT put Debug.Log things here. There are insane amount of calculations being made, even a small slowdown can fuck your pc.
          */
-
+        /*
+        PERFORMANCE BENCHMARK: On my pc(1024 chunks): 1.78s
+        */
         //trust me.
 
         var area = chunkSize * chunkSize;
@@ -149,12 +153,12 @@ public class MeshColoring : MonoBehaviour
             int[] tris = mesh.triangles;
             // create new colors array where the colors will be created.
             Color[] colors = new Color[vertices.Length];
-            for (var i = 0; i < chunkSize; i += radius)
+            for (var i = 0; i < chunkSize; i += azimuthRadius)
             {
-                for(var x = 0; x < chunkSize; x += radius)
+                for(var x = 0; x < chunkSize; x += azimuthRadius)
                 {
                     int idx = i + x * 100;
-                    Vector3[] coords = getCoords(idx, tris, vertices, radius);
+                    Vector3[] coords = getCoords(idx, tris, vertices, azimuthRadius);
                     int max = FindMax(coords);
                     int min = FindMin(coords);
                     float distance;
@@ -168,9 +172,9 @@ public class MeshColoring : MonoBehaviour
                     
                     if (angle < 0) angle *= -1;
                     var color = getColor(normalize((float)angle, -90, 90));
-                    for (var y = 0; y < radius; y++)
+                    for (var y = 0; y < azimuthRadius; y++)
                     {
-                        for (var z = 0; z < radius; z++)
+                        for (var z = 0; z < azimuthRadius; z++)
                         {
 
                             if (colors.Length <= y + idx + z * 100) continue;
@@ -183,7 +187,11 @@ public class MeshColoring : MonoBehaviour
             mesh.colors = colors;
        }
     }
-    public void colorMeshBasedOnAzimuth() {
+    private void colorMeshBasedOnAzimuth() {
+        /*
+        Again, if you wanna Debug.Log, set area to something smaller.
+        PERFORMANCE NOT DOCUMENTED
+        */
         var area = chunkSize * chunkSize;
         for(var child = 0; child < 10; child++) { 
             Mesh mesh = children[child].mesh;
@@ -192,15 +200,15 @@ public class MeshColoring : MonoBehaviour
             // create new colors array where the colors will be created.
             Color[] colors = new Color[vertices.Length];
             
-            for (var i = 0; i < chunkSize; i += radius)
+            for (var i = 0; i < chunkSize; i += azimuthRadius)
             {
-                for(var x = 0; x < chunkSize; x += radius)
+                for(var x = 0; x < chunkSize; x += azimuthRadius)
                 {
                     int idx = i + x*chunkSize;
                     float xVal = yVal = -999999;
 
-                    for(var y = 0; y < radius;  y++) {
-                        for(var z = 0; z < radius; z++) {
+                    for(var y = 0; y < azimuthRadius;  y++) {
+                        for(var z = 0; z < azimuthRadius; z++) {
                             int newIdx = idx + y + z*100;
 
                             Vector3 vertice = vertices[newIdx];
