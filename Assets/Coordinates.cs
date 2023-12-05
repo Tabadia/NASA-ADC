@@ -18,17 +18,17 @@ public class Coordinates : MonoBehaviour
         coordText = coordinates.GetComponent<TextMeshProUGUI>();
     }
     float getDistFromEarth(Vector3 pos) {
-        return Vector3.distance(p1Pos, new Vector3(361000, 0, -42100));
+        return Vector3.Distance(pos, new Vector3(361000, 0, -42100));
     }
     double getAngleFromEarth(float height, float distance) {
-        return Math.Atan(height / distance) * 180;
+        return Mathf.Atan(height / distance) * 180;
     }
     // Update is called once per frame
     void Update()
     {
-        Vector3 p1Pos = new Vector3(p1.position);
+        Vector3 p1Pos = p1.transform.position;
         p1Pos.y -= peakNearShackletonCoords.y;
-        Vector3 p2Pos = new Vector3(p2.position);
+        Vector3 p2Pos = p2.transform.position;
         p2Pos.y -= peakNearShackletonCoords.y;
 
         // Waiting for Alex's util file.

@@ -194,7 +194,7 @@ public class MeshColoring : MonoBehaviour
                 for(var x = 0; x < chunkSize; x ++)
                 {
                     int idx = i + x*chunkSize;
-                    Vector3 vertice = mesh[idx]
+                    Vector3 vertice = mesh.vertices[idx];
                     float azimuth = Mathf.Atan((vertice.x - EARTH_LOCATION.x) / (vertice.y - EARTH_LOCATION.y));   
                     colors[idx] = getColor(normalize(azimuth, -180, 180));
                 }
