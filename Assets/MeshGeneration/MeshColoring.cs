@@ -35,6 +35,9 @@ public class MeshColoring : MonoBehaviour
         else if (mode == "height")
         {
             ColorMeshBasedOnHeight();
+        } else if(mode == "azimuth")
+        {
+            colorMeshBasedOnAzimuth();
         }
     }
     float normalize(float num, float min, float max)
@@ -182,21 +185,21 @@ public class MeshColoring : MonoBehaviour
     }
     public void colorMeshBasedOnAzimuth() {
         var area = chunkSize * chunkSize;
-        for(var child = 0; child < area; child++) { 
+        for(var child = 0; child < 10; child++) { 
             Mesh mesh = children[child].mesh;
             Vector3[] vertices = mesh.vertices;
             int[] tris = mesh.triangles;
             // create new colors array where the colors will be created.
             Color[] colors = new Color[vertices.Length];
             
-            for (var i = 0; i < chunkSize; i ++)
+            for (var i = 0; i < chunkSize; i++)
             {
-                for(var x = 0; x < chunkSize; x ++)
+                for(var x = 0; x < chunkSize; x++)
                 {
                     int idx = i + x*chunkSize;
                     Vector3 vertice = mesh.vertices[idx];
-                    float azimuth = Mathf.Atan((vertice.x - EARTH_LOCATION.x) / (vertice.y - EARTH_LOCATION.y));   
-                    colors[idx] = getColor(normalize(azimuth, -180, 180));
+                    float azimuth = Mathf.Atan((vertice.x - EARTH_LOCATION.x) / (vertice.y - EARTH_LOCATION.y));
+                    colors[idx] = getColor(normalize(azimuth, -1.56f, -1.57f));
                 }
             }
             mesh.colors = colors;
