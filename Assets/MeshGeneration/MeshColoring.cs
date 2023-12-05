@@ -12,7 +12,9 @@ public class MeshColoring : MonoBehaviour
     public Gradient coloringGradient;
     GameObject meshGameObject;
     MeshFilter[] children;
+    public int radius;
 
+    public Vector3 EARTH_LOCATION = new Vector3(361000, 0, -42100);
     public int chunkSize = 100;
     // Start is called before the first frame update
     void Start()
@@ -38,6 +40,9 @@ public class MeshColoring : MonoBehaviour
     float normalize(float num, float min, float max)
     {
         return (num - min) / (max - min);
+    }
+    Color getColor(float num) {
+        return coloringGradient.Evaluate(num);
     }
     public void ColorMeshBasedOnHeight()
     {
@@ -66,7 +71,7 @@ public class MeshColoring : MonoBehaviour
             foreach (Vector3 point in vertices)
             {
 
-                colors[i] = coloringGradient.Evaluate(normalize(point.y, low, high));
+                colors[i] = getColor(normalize(point.y, low, high));
                 i++;
             }
             mesh.colors = colors;
@@ -134,7 +139,6 @@ public class MeshColoring : MonoBehaviour
 
         //trust me.
 
-        var radius = 3; 
         var area = chunkSize * chunkSize;
         for(var child = 0; child < area; child++) { 
             Mesh mesh = children[child].mesh;
@@ -160,7 +164,7 @@ public class MeshColoring : MonoBehaviour
                     angle = Math.Atan((coords[max].y - coords[min].y) / distance) * 180;
                     
                     if (angle < 0) angle *= -1;
-                    var color = coloringGradient.Evaluate(normalize((float)angle, -90, 90));
+                    var color = getColor(normalize((float)angle, -90, 90));
                     for (var y = 0; y < radius; y++)
                     {
                         for (var z = 0; z < radius; z++)
@@ -173,6 +177,28 @@ public class MeshColoring : MonoBehaviour
                 }
             }
             //dont blow up pc PLS
+            mesh.colors = colors;
+       }
+    }
+    public void colorMeshBasedOnAzimuth() {
+        var area = chunkSize * chunkSize;
+        for(var child = 0; child < area; child++) { 
+            Mesh mesh = children[child].mesh;
+            Vector3[] vertices = mesh.vertices;
+            int[] tris = mesh.triangles;
+            // create new colors array where the colors will be created.
+            Color[] colors = new Color[vertices.Length];
+            
+            for (var i = 0; i < chunkSize; i ++)
+            {
+                for(var x = 0; x < chunkSize; x ++)
+                {
+                    int idx = i + x*chunkSize;
+                    Vector3 vertice = mesh[idx]
+                    float azimuth = Mathf.Atan((vertice.x - EARTH_LOCATION.x) / (vertice.y - EARTH_LOCATION.y));   
+                    colors[idx] = getColor(normalize(azimuth, -180, 180));
+                }
+            }
             mesh.colors = colors;
        }
     }

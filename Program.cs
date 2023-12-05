@@ -228,6 +228,7 @@ class MoonMapper {
         return gridLocation;
     }
 
+    
     public int CountElementsInLine(string source, char toFind) {
         int count = 1;
 
@@ -239,7 +240,7 @@ class MoonMapper {
         return count;
     }
     public static double[,] CSVToArray(string filePath) {
-        string[] fileData = File.ReadAllLines(filePath);
+        string[,] fileData = File.ReadAllLines(filePath);
         
         int width = fileData[0].Split(',').Length;
         int height = fileData.Length;
@@ -248,6 +249,9 @@ class MoonMapper {
         
         for(var i = 0; i < height; i++) {
             var line = fileData[i].Split(',')
+            for(var j = 0; j < line.Length; j++) {
+                line[j] = double.Parse(line[j], System.Globalization.CultureInfo.InvariantCulture);
+            }
             map[i] = line;
         }
         return map;
@@ -316,7 +320,7 @@ class MoonMapper {
 
         return EightDirectionsList;
     }
-
+    //what???? Math.Max pls
     public int GetBiggerNumber(int num1, int num2) {
         if (num1 >= num2) {
             return num1;
