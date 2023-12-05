@@ -213,7 +213,7 @@ public class MeshColoring : MonoBehaviour
 
                             Vector3 vertice = vertices[newIdx];
                             xVal = Math.Max(vertice.x, xVal);
-                            yVal = Math.Max(vertice.y, yVal)
+                            yVal = Math.Max(vertice.y, yVal);
                         }
                     }
                     float azimuth = Mathf.Atan((xVal - EARTH_LOCATION.x) / (yVal - EARTH_LOCATION.y)) * 180/Math.PI;
