@@ -18,8 +18,8 @@ public class FPS : MonoBehaviour
     IEnumerator counter()
     {
         yield return new WaitForSeconds(1);
-        text.text = frames.ToString();
+        text.text = "FPS: " + frames.ToString();
         frames = 0;
-        StartCoroutine(d());
+        StartCoroutine(counter());
     }
 }

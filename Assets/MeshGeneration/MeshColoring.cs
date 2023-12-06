@@ -12,9 +12,9 @@ public class MeshColoring : MonoBehaviour
     public Gradient coloringGradient;
     GameObject meshGameObject;
     MeshFilter[] children;
-    public int angleRadius;
+    public int angleRadius = 3;
 
-    public int azimuthRadius;
+    public int azimuthRadius = 3;
 
     public Vector3 EARTH_LOCATION = new Vector3(361000, 0, -42100);
     public int chunkSize = 100;
@@ -193,7 +193,7 @@ public class MeshColoring : MonoBehaviour
         PERFORMANCE NOT DOCUMENTED
         */
         var area = chunkSize * chunkSize;
-        for(var child = 0; child < 10; child++) { 
+        for(var child = 0; child < area; child++) { 
             Mesh mesh = children[child].mesh;
             Vector3[] vertices = mesh.vertices; 
             int[] tris = mesh.triangles;
@@ -205,23 +205,28 @@ public class MeshColoring : MonoBehaviour
                 for(var x = 0; x < chunkSize; x += azimuthRadius)
                 {
                     int idx = i + x*chunkSize;
-                    float xVal = yVal = -999999;
+
+                    float xVal = -999999; 
+                    float yVal = -999999;
 
                     for(var y = 0; y < azimuthRadius;  y++) {
                         for(var z = 0; z < azimuthRadius; z++) {
                             int newIdx = idx + y + z*100;
+                            if (newIdx >= colors.Length) continue;
 
                             Vector3 vertice = vertices[newIdx];
                             xVal = Math.Max(vertice.x, xVal);
                             yVal = Math.Max(vertice.y, yVal);
                         }
                     }
-                    float azimuth = Mathf.Atan((xVal - EARTH_LOCATION.x) / (yVal - EARTH_LOCATION.y)) * 180/Math.PI;
-                    
-                    for(var y = 0; y < radius;  y++) {
-                        for(var z = 0; z < radius; z++) {
+                    double azimuth = Math.Atan((xVal - EARTH_LOCATION.x) / (yVal - EARTH_LOCATION.y)) * 180/Math.PI;
+                    var normalized = normalize((float)azimuth, -90, -89.9f);
+                    for (var y = 0; y < azimuthRadius;  y++) {
+                        for(var z = 0; z < azimuthRadius; z++) {
                             int newIdx = idx + y + z*100;
-                            colors[newIdx] = getColor(normalize(azimuth, -90, -90));
+
+                            if (newIdx >= colors.Length) continue;
+                            colors[newIdx] = getColor(normalized);
                         }
                     }
                 }
