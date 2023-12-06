@@ -25,7 +25,7 @@ public class Coordinates : MonoBehaviour
         return Mathf.Atan(height / distance) * 180;
     }
     float getAzimuthToEarth(Vector3 pos) {
-        return Mathf.Atan((pos.x - EARTH_COORDS.x) / (pos.y - EARTH_COORDS.y)) * 180/Math.PI;
+        return Mathf.Atan((pos.x - EARTH_COORDS.x) / (pos.y - EARTH_COORDS.y)) * 180/Mathf.PI;
 
     }
     // Update is called once per frame
