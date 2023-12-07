@@ -812,6 +812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99253062d2a35a4ea46217b3e064dc1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  overlay: {fileID: 1452496870}
 --- !u!114 &90585392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6758,7 +6759,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2133107623}
   - component: {fileID: 2133107624}
-  - component: {fileID: 2133107625}
   m_Layer: 5
   m_Name: Chunks Slider
   m_TagString: Untagged
@@ -6839,18 +6839,6 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2133107625
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2133107622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d99253062d2a35a4ea46217b3e064dc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &115655124405729114
 PrefabInstance:
   m_ObjectHideFlags: 0

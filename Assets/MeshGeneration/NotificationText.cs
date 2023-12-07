@@ -4,9 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class NotificationText : MonoBehaviour
 {
+    public GameObject overlay;
+    
     MeshGen2 mesh;
 
     TMP_Text text;
@@ -25,10 +28,16 @@ public class NotificationText : MonoBehaviour
     {
         if(mesh.isFinished)
         {
-            text.text = "";
+            text.text = "Finalizing...";
+            overlay.SetActive(false);
             return;
         }
         text.text = mesh.chunksGenerated + " / 1024";
         slider.value = mesh.chunksGenerated;
+    }
+
+    public void CancelButtonClick()
+    {
+        SceneManager.LoadScene(sceneName: "Home Screen");
     }
 }
