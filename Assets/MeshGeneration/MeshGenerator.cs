@@ -42,7 +42,10 @@ public class MeshGenerator : MonoBehaviour
 		} else if(mode == "height")
 		{
 			ColorMeshBasedOnHeight();
-		}
+		} else if (mode == "azimuth")
+        {
+			// hmmmm
+        }
 	}
     void ReadCSV(){
 		print("starting to read");
