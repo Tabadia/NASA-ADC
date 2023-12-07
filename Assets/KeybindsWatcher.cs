@@ -23,6 +23,18 @@ public class KeybindsWatcher : MonoBehaviour
     }
     bool coloringOptionsOpen = false;
     // Update is called once per frame
+
+    void lockMouse()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    void unlockMouse()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
     void Update()
     {
         if (Input.GetKeyDown("escape"))
@@ -55,8 +67,7 @@ public class KeybindsWatcher : MonoBehaviour
                 {
                     // enable cursor lock
                     // see playerCam.cs (20:0) for info
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
+                    lockMouse();
 
                     meshEditor.SetActive(false);
                 }
@@ -64,8 +75,7 @@ public class KeybindsWatcher : MonoBehaviour
                 {
                     // remove cursor lock
                     // see playerCam.cs (20:0) for info
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
+                    unlockMouse();
 
                     meshEditor.SetActive(true);
                 }
