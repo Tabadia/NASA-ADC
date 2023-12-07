@@ -86,3 +86,97 @@ Using prefabs, we set up communication link checkpoints so that they would be un
 
 TBD hobbes
 
+
+# Challenges
+
+## Incompatibility
+
+As the project grew bigger, there were some commits from members of our team the could not be easily integrated into our project. For example, the package ```Microsoft.VisualBasic.FileIO``` was not accessible from our development environment, causing us to need to use a replacement of the ```TextFieldParser``` class.
+
+## Performance
+
+### Terrain Coloring - Azimuth
+
+This line of code
+```    
+float azimuth = Mathf.Atan((xVal - EARTH_LOCATION.x) / (yVal - EARTH_LOCATION.y)) * 180/Math.PI;
+```
+
+was extremely performance intensive, especially because it was being called 10 million times. To solve this problem, we tried to call the function as few times as possible. We first split it into mini-chunks
+
+```
+for(var y = 0; y < azimuthRadius;  y++) {
+    for(var z = 0; z < azimuthRadius; z++) {
+        int newIdx = idx + y + z*100;
+
+        Vector3 vertice = vertices[newIdx];
+        xVal = Math.Max(vertice.x, xVal);
+        yVal = Math.Max(vertice.y, yVal);
+    }
+}
+```
+
+And then ran the calculation. This led to that line of code being run 100x less, leading to an 80x performance increase.
+
+### Mesh Generation
+
+Since the raw mesh was too large to be shared, we had to generate it dynamically at runtime. To solve this, we ran the mesh code on a different thread, letting us compute other things while the mesh generated.
+
+## Bugs 
+
+
+### Player
+
+#### Trail
+
+We added a trail to the player, and this let the player jump on it, which was not an intended feature. In the end, we assigned a new layer to the trail, and added code to the player to detect whether it was touching that layer and ignore it.
+
+### Terrain
+
+#### Generation
+
+The CSV file was too big to parse into one big piece, so we had to split it into many smaller chunks to process. Additionally, we would sometimes mess up and cause the terrain to be extremely deformed. There were also many cases where it would crash our computers and we would have to restart it.
+
+#### Coloring
+
+##### Angle
+
+Writing code to color by angle was difficult, because there were small pockets where the slope was extremely high in relatively flat areas, and vice versa. To solve this, we sampled many vertices at once and averaged it out to get a better picture.
+
+##### Azimuth
+
+Azimuth does not vary much on the scale of Peak Near Shackleton, so when we tried to normalize between -90 and 90, everything was colored the same. To solve this, we massively amped up the contrast, normalizing from a much smaller range.
+
+
+# Student Aquired Skills
+
+## Edwin
+
+Started out knowing nothing about Unity and C#, Learned:
+> C#, Unity Meshes, Trigonometry applications in space engineering, Raycasting, Game Deployment, Chunk Rendering, Anchors, GameObject Hierarchy
+
+## Thalen
+
+> etc
+
+## Alex
+
+> etc
+
+## Winston
+
+> etc
+
+## Sidd
+
+> etc
+
+## Tanush
+
+> etc
+
+
+
+
+
+
