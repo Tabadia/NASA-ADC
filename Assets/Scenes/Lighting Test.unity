@@ -1034,7 +1034,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &90585393
@@ -1249,7 +1249,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1793754136}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2764,8 +2764,9 @@ RectTransform:
   - {fileID: 1528270612}
   - {fileID: 1239734782}
   - {fileID: 1830543605}
+  - {fileID: 2103445390}
   m_Father: {fileID: 1793754136}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -7720,7 +7721,6 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 2103445390}
   - {fileID: 232975792}
   - {fileID: 713587633}
   m_Father: {fileID: 860308408}
@@ -8298,7 +8298,7 @@ GameObject:
   - component: {fileID: 2103445394}
   - component: {fileID: 2103445393}
   - component: {fileID: 2103445392}
-  - component: {fileID: 2103445391}
+  - component: {fileID: 2103445395}
   m_Layer: 5
   m_Name: Exit Button
   m_TagString: Untagged
@@ -8319,27 +8319,14 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 934579769}
-  m_Father: {fileID: 1793754136}
-  m_RootOrder: 0
+  m_Father: {fileID: 713587633}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -75, y: -75}
+  m_AnchoredPosition: {x: 921, y: 594.5}
   m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2103445391
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2103445389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b56b2e534af94cf47b2523befbd4e613, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  escPanel: {fileID: 0}
 --- !u!114 &2103445392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8362,7 +8349,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -8384,9 +8371,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2103445391}
-        m_TargetAssemblyTypeName: ButtonWatcher, Assembly-CSharp
-        m_MethodName: whenExitButtonClicked
+      - m_Target: {fileID: 2103445395}
+        m_TargetAssemblyTypeName: KeybindsWatcher, Assembly-CSharp
+        m_MethodName: closeMeshEditor
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8434,6 +8421,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103445389}
   m_CullTransparentMesh: 1
+--- !u!114 &2103445395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103445389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13440e299a2013140bd2f355b6bed236, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  escPanel: {fileID: 1587823667}
+  meshEditor: {fileID: 1793754135}
+  orientation: {fileID: 6578352109723451366}
 --- !u!1 &2133107622
 GameObject:
   m_ObjectHideFlags: 0

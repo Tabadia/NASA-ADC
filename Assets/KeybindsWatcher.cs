@@ -73,4 +73,9 @@ public class KeybindsWatcher : MonoBehaviour
             }
         }
         }
+
+    public void closeMeshEditor()
+    {
+        meshEditor.SetActive(false);
+    }
 }
