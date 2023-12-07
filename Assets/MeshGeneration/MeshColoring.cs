@@ -219,7 +219,9 @@ public class MeshColoring : MonoBehaviour
                             yVal = Math.Max(vertice.y, yVal);
                         }
                     }
+
                     double azimuth = Math.Atan((xVal - EARTH_LOCATION.x) / (yVal - EARTH_LOCATION.y)) * 180/Math.PI;
+
                     var normalized = normalize((float)azimuth, -90, -89.9f);
                     for (var y = 0; y < azimuthRadius;  y++) {
                         for(var z = 0; z < azimuthRadius; z++) {

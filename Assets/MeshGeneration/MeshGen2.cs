@@ -82,6 +82,7 @@ public class MeshGen2 : MonoBehaviour
 
                 MeshFilter meshFilter = chunkObject.AddComponent<MeshFilter>();
                 MeshRenderer meshRenderer = chunkObject.AddComponent<MeshRenderer>();
+                MeshCollider meshCollider = chunkObject.AddComponent<MeshCollider>();
 
                 meshFilter.mesh = mesh;
                 meshRenderer.material = sharedMaterial; // Apply the shared material

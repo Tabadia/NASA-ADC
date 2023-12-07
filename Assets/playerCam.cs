@@ -16,6 +16,7 @@ public class playerCam : MonoBehaviour
 
     public GameObject escPanel;
 
+    public bool canMove = true;
     float xRotation;
     float yRotation;
 
@@ -33,7 +34,8 @@ public class playerCam : MonoBehaviour
     void Update()
     {
         // only execute the following if the esc panel (the panel that shows up when hitting "esc" is NOT visible
-        if (!escPanel.activeInHierarchy)
+
+        if (!escPanel.activeInHierarchy && canMove)
         {
             
         Vector3 pos = player.position;
@@ -58,11 +60,10 @@ public class playerCam : MonoBehaviour
         //get mouse input
         float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * sensX;
         float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * sensY;
-        Debug.Log(name + "rotation changing");
         yRotation += mouseX;
         //yRotation = Mathf.Clamp(yRotation, -90f, 90f);
         xRotation -= mouseY;
-        //xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
             //rotate camera orientation
             transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
             orientation.rotation = Quaternion.Euler(0, yRotation, 0);

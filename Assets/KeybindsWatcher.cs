@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 
 public class KeybindsWatcher : MonoBehaviour
@@ -12,7 +13,7 @@ public class KeybindsWatcher : MonoBehaviour
 
     // used to remove the screen rotation
     public Transform orientation;
-
+    public GameObject meshOptions;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,7 @@ public class KeybindsWatcher : MonoBehaviour
         escPanel.SetActive(false);
         meshEditor.SetActive(false);
     }
-
+    bool coloringOptionsOpen = false;
     // Update is called once per frame
     void Update()
     {
@@ -32,16 +33,14 @@ public class KeybindsWatcher : MonoBehaviour
             {
                 // enable cursor lock
                 // see playerCam.cs (20:0) for info
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
+                lockMouse();
 
                 escPanel.SetActive(false);
             } else
             {
                 // remove cursor lock
                 // see playerCam.cs (20:0) for info
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
+                unlockMouse();
 
                 escPanel.SetActive(true);
             }
