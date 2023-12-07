@@ -615,7 +615,8 @@ MonoBehaviour:
     m_Mode: 0
     m_NumColorKeys: 5
     m_NumAlphaKeys: 2
-  radius: 0
+  angleRadius: 3
+  azimuthRadius: 10
   EARTH_LOCATION: {x: 361000, y: 0, z: -42100}
   chunkSize: 100
 --- !u!4 &500971310

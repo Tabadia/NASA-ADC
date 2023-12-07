@@ -15,6 +15,7 @@ public class NotificationText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
         text = GetComponent<TMP_Text>();
         mesh = GameObject.Find("Mesh").GetComponent<MeshGen2>();
         slider = GameObject.Find("Chunks Slider").GetComponent<Slider>();
