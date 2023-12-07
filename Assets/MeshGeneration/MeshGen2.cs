@@ -13,6 +13,8 @@ public class MeshGen2 : MonoBehaviour
     public bool isFinished = false;
 
     public int chunksGenerated;
+
+    public string[] fileData;
     void Start()
     {
         StartCoroutine(GenerateMeshFromCSVAsync());
@@ -26,7 +28,7 @@ public class MeshGen2 : MonoBehaviour
             yield break;
         }
 
-        string[] fileData = File.ReadAllLines(csvFilePath);
+        fileData = File.ReadAllLines(csvFilePath);
 
         int width = fileData[0].Split(',').Length;
         int height = fileData.Length;
