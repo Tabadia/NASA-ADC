@@ -24,7 +24,7 @@ class Pathfinding : MonoBehaviour {
         heightMap = new float[width, height];
         
         for(var i = 0; i < height; i++) {
-            var line = fileData[i].Split(',')
+            var line = fileData[i].Split(',');
             for(var j = 0; j < line.Length; j++) {
                 line[j] = float.Parse(line[j], System.Globalization.CultureInfo.InvariantCulture);
             }
@@ -69,7 +69,7 @@ class Pathfinding : MonoBehaviour {
             float newY = heightMap[playerPos.x, playerPos.z] + 1;
 
             lineVertexes[idx] = new Vector3(direction.x, newY, direction.y);
-            idx++
+            idx++;
         }
         GameObject line = new GameObject();
         LineRenderer lineRenderer = line.AddComponent<LineRenderer>();
