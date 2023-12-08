@@ -13,6 +13,8 @@ public class MeshGen2 : MonoBehaviour
     public bool isFinished = false;
 
     public int chunksGenerated;
+
+    public string[] fileData;
     void Start()
     {
         StartCoroutine(GenerateMeshFromCSVAsync());
@@ -26,7 +28,7 @@ public class MeshGen2 : MonoBehaviour
             yield break;
         }
 
-        string[] fileData = File.ReadAllLines(csvFilePath);
+        fileData = File.ReadAllLines(csvFilePath);
 
         int width = fileData[0].Split(',').Length;
         int height = fileData.Length;
@@ -77,13 +79,13 @@ public class MeshGen2 : MonoBehaviour
                 mesh.triangles = triangles.ToArray();
                 mesh.RecalculateNormals();
 
-                GameObject chunkObject = new GameObject("Chunk_" + x + "_" + y);    
+                GameObject chunkObject = new GameObject("Chunk_" + x + "_" + y);
                 chunkObject.transform.parent = transform;
 
                 MeshFilter meshFilter = chunkObject.AddComponent<MeshFilter>();
                 MeshRenderer meshRenderer = chunkObject.AddComponent<MeshRenderer>();
                 MeshCollider meshCollider = chunkObject.AddComponent<MeshCollider>();
-
+                meshCollider.sharedMesh = mesh;
                 meshFilter.mesh = mesh;
                 meshRenderer.material = sharedMaterial; // Apply the shared material
 
