@@ -40,7 +40,8 @@ public class MeshColoring : MonoBehaviour
         } else if(mode == "azimuth")
         {
             colorMeshBasedOnAzimuth();
-        } else if(mode == "shade") {
+        } else if(mode == "shade") 
+        {
             shadeMesh();
         }
     }
@@ -48,9 +49,11 @@ public class MeshColoring : MonoBehaviour
     {
         return (num - min) / (max - min);
     }
+
     public Color getColor(float num) {
         return coloringGradient.Evaluate(num);
     }
+
     private void ColorMeshBasedOnHeight()
     {
 
@@ -266,7 +269,7 @@ public class MeshColoring : MonoBehaviour
                     distance = Vector3.Distance(coords[min], coords[max]);
                     angle = Math.Atan((coords[max].y - coords[min].y) / distance) * 180/Math.PI;
 
-                    var color = Color.Lerp(Color.black, Color.white, (float) normalize(angle, -90, 90))
+                    var color = Color.Lerp(Color.black, Color.white, (float)normalize(angle, -90, 90));
                     for (var y = 0; y < shadingRadius; y++)
                     {
                         for (var z = 0; z < shadingRadius; z++)
