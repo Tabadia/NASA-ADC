@@ -247,7 +247,7 @@ public class MeshColoring : MonoBehaviour
             Performance is very similar to ColorMeshBasedOnAngle().
         */
         foreach(MeshFilter meshFilter in children) {
-            MeshColoring mesh = meshFilter.mesh;
+            Mesh mesh = meshFilter.mesh;
             Vector3[] vertices = mesh.vertices; 
             int[] tris = mesh.triangles;
             // create new colors array where the colors will be created.
@@ -267,9 +267,9 @@ public class MeshColoring : MonoBehaviour
                         angle = 0;
                     }
                     distance = Vector3.Distance(coords[min], coords[max]);
-                    angle = Math.Atan((coords[max].y - coords[min].y) / distance) * 180/Math.PI;
+                    angle = Mathf.Atan((coords[max].y - coords[min].y) / distance) * 180/Math.PI;
 
-                    var color = Color.Lerp(Color.black, Color.white, (float)normalize(angle, -90, 90));
+                    var color = Color.Lerp(Color.black, Color.white, normalize(angle, -90, 90));
                     for (var y = 0; y < shadingRadius; y++)
                     {
                         for (var z = 0; z < shadingRadius; z++)
