@@ -165,7 +165,7 @@ Started out knowing nothing about Unity and C#, Learned:
 
 ## Winston
 
-> etc
+> Learned animation rigging and c# fundamentals
 
 ## Sidd
 

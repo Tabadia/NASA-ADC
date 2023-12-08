@@ -17,11 +17,16 @@ class Pathfinding : MonoBehaviour
     string[] fileData;
 
     float[,] heightMap;
-    void Start()
+    async void Start()
     {
         moonMapper = new MoonMapper(heightFilePath, slopeFilePath, latitudeFilePath, longtitudeFilePath);
         meshGenerator = GameObject.Find("Mesh").GetComponent<MeshGen2>();
-        fileData = meshGenerator.fileData;
+
+        do {
+            fileData = meshGenerator.fileData;
+            await Task.Delay(1000); //check every second
+        } while(fileData == null)
+
         int width = fileData[0].Split(',').Length;
         int height = fileData.Length;
 
@@ -79,8 +84,8 @@ class Pathfinding : MonoBehaviour
             idx++;
             idx++;
         }
-        GameObject line = new GameObject();
-        LineRenderer lineRenderer = line.AddComponent<LineRenderer>();
+        LineRenderer lineRenderer = GetComponent<lineRenderer>();
+        if(lineRenderer == null) return Debug.LogError("GET A LIFE. And a line renderer component.");
         lineRenderer.useWorldSpace = true;
         lineRenderer.SetPositions(lineVertexes);
     }
