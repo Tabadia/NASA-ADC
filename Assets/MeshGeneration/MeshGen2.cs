@@ -79,13 +79,13 @@ public class MeshGen2 : MonoBehaviour
                 mesh.triangles = triangles.ToArray();
                 mesh.RecalculateNormals();
 
-                GameObject chunkObject = new GameObject("Chunk_" + x + "_" + y);    
+                GameObject chunkObject = new GameObject("Chunk_" + x + "_" + y);
                 chunkObject.transform.parent = transform;
 
                 MeshFilter meshFilter = chunkObject.AddComponent<MeshFilter>();
                 MeshRenderer meshRenderer = chunkObject.AddComponent<MeshRenderer>();
                 MeshCollider meshCollider = chunkObject.AddComponent<MeshCollider>();
-
+                meshCollider.sharedMesh = mesh;
                 meshFilter.mesh = mesh;
                 meshRenderer.material = sharedMaterial; // Apply the shared material
 
