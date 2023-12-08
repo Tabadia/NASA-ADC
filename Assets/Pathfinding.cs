@@ -1,39 +1,45 @@
+using System.Collections.Generic;
 using UnityEngine;
-class Pathfinding : MonoBehaviour {
+class Pathfinding : MonoBehaviour
+{
     public string heightFilePath;
     public string slopeFilePath;
 
     public string latitudeFilePath;
 
-    public string longitudeFilePath;
+    public string longtitudeFilePath;
     public Gradient lineGradient;
-    MoonMapper moonMapper = new MoonMapper(heightFilePath, slopeFilePath, latitudeFilePath, longtitudeFilePath);
+    MoonMapper moonMapper;
     public GameObject player;
 
     MeshGen2 meshGenerator;
 
-    string[] fileData; 
+    string[] fileData;
 
     float[,] heightMap;
-    void Start() {
+    void Start()
+    {
+        moonMapper = new MoonMapper(heightFilePath, slopeFilePath, latitudeFilePath, longtitudeFilePath);
         meshGenerator = GameObject.Find("Mesh").GetComponent<MeshGen2>();
         fileData = meshGenerator.fileData;
         int width = fileData[0].Split(',').Length;
         int height = fileData.Length;
-        
+
         heightMap = new float[width, height];
-        
-        for(var i = 0; i < height; i++) {
+
+        for (var i = 0; i < height; i++)
+        {
             var line = fileData[i].Split(',');
-            for(var j = 0; j < line.Length; j++) {
-                line[j] = float.Parse(line[j], System.Globalization.CultureInfo.InvariantCulture);
+            for (var j = 0; j < line.Length; j++)
+            {
+                heightMap[i, j] = float.Parse(line[j], System.Globalization.CultureInfo.InvariantCulture);
             }
-            heightMap[i] = line;
         }
     }
-    void Update() {
-        
-        GridCoordinates playerPos = new GridCoordinates(player.x, player.y);
+    void Update()
+    {
+
+        Vector2 playerPos = new Vector2(player.transform.position.x, player.transform.position.y);
         GridCoordinates endPos = new GridCoordinates(50, 50);
         /*Index Mapping Notes
             0 = Bottom Left
@@ -45,30 +51,32 @@ class Pathfinding : MonoBehaviour {
             6 = Top Middle
             7 = Top Right
         */
-        Vector2[] dirs = new Vector2 { 
-            new Vector2(-1, -1),
-            new Vector2(0, -1),
-            new Vector2(1, -1),
-            new Vector2(-1, 0),
-            new Vector2(1, 0),
-            new Vector2(-1, 1),
-            new Vector2(1, 0),
-            new Vector2(1, 1)
-        };
+        Vector2[] dirs = new Vector2[8];
+        dirs[0] = new Vector2(-1, -1);
+        dirs[1] = new Vector2(0, -1);
+        dirs[2] = new Vector2(1, -1);
+        dirs[3] = new Vector2(-1, 0);
+        dirs[4] = new Vector2(1, 0);
+        dirs[5] = new Vector2(-1, 1);
+        dirs[6] = new Vector2(1, 0);
+        dirs[7] = new Vector2(1, 1);
 
-        List<int> path = moonMapper.findPath(playerPos, endPos);
+
+        List<int> path = moonMapper.FindPath(new GridCoordinates((int)playerPos.x, (int)playerPos.y), endPos, 0);
 
         Vector3[] lineVertexes = new Vector3[path.Count];
         int idx = 0;
 
-        foreach(int dir in path) {
+        foreach (int dir in path)
+        {
             Vector2 direction = dirs[dir];
             playerPos.x += direction.x;
-            playerPos.z += direction.y;
+            playerPos.y += direction.y;
             //find the height value from the height CSV.
-            float newY = heightMap[playerPos.x, playerPos.z] + 1;
+            float newY = heightMap[(int)playerPos.x, (int)playerPos.y] + 1;
 
             lineVertexes[idx] = new Vector3(direction.x, newY, direction.y);
+            idx++;
             idx++;
         }
         GameObject line = new GameObject();
@@ -76,6 +84,6 @@ class Pathfinding : MonoBehaviour {
         lineRenderer.useWorldSpace = true;
         lineRenderer.SetPositions(lineVertexes);
     }
-    
+
 
 }

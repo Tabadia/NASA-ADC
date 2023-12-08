@@ -1,74 +1,96 @@
-using Microsoft.VisualBasic.FileIO;
+using System.IO;
 using System;
 using System.Collections;
 using System.Globalization;
 using System.Net.Http.Headers;
+using UnityEngine;
+using System.Collections.Generic;
 
-class GridCoordinates {
+class GridCoordinates
+{
     public int xCoord;
     public int yCoord;
 
-    public GridCoordinates(int xCoord, int yCoord) {
+    public GridCoordinates(int xCoord, int yCoord)
+    {
         this.xCoord = xCoord;
         this.yCoord = yCoord;
     }
 }
-class CartesianCoordinates {
+class CartesianCoordinates
+{
     public double xCoord;
     public double yCoord;
     public double zCoord;
 
-    public CartesianCoordinates(double xCoord, double yCoord, double zCoord) {
+    public CartesianCoordinates(double xCoord, double yCoord, double zCoord)
+    {
         this.xCoord = xCoord;
         this.yCoord = yCoord;
         this.zCoord = zCoord;
     }
+    public Vector3 vector3()
+    {
+        //miniscule precision loss.
+        return new Vector3((float)xCoord, (float)yCoord, (float)zCoord);
+    }
 }
 
-class PolarCoordinates {
+
+class PolarCoordinates
+{
     public double longitude;
     public double latitude;
     public double distanceFromMoonCoreInKilometers;
 
-    public PolarCoordinates(double longitude, double latitude) {
+    public PolarCoordinates(double longitude, double latitude)
+    {
         this.longitude = longitude;
         this.latitude = latitude;
         this.distanceFromMoonCoreInKilometers = 0;
     }
 
-    public PolarCoordinates(double longitude, double latitude, double distanceFromMoonCoreInKilometers) {
+    public PolarCoordinates(double longitude, double latitude, double distanceFromMoonCoreInKilometers)
+    {
         this.longitude = longitude;
         this.latitude = latitude;
         this.distanceFromMoonCoreInKilometers = distanceFromMoonCoreInKilometers;
     }
 }
 
-class MoonCalculator {
+class MoonCalculator
+{
     public CartesianCoordinates EarthCoordinates = new CartesianCoordinates(361000, 0, -42100);
 
     /*public static void EarthTest() {
         Console.WriteLine(EarthCoordinates.xCoord);
     }*/
 
-    public static double DegreesToRadians(double angleInDegrees) {
+    public static double DegreesToRadians(double angleInDegrees)
+    {
         double angleInRadians = angleInDegrees * (Math.PI / 180);
 
         return angleInRadians;
     }
-    public static double RadiansToDegrees(double angleInRadians) {
+    public static double RadiansToDegrees(double angleInRadians)
+    {
         double angleInDegrees = angleInRadians * (180 / Math.PI);
 
         return angleInDegrees;
     }
 
-    public static CartesianCoordinates GetSphericalToCartesianCoordinates(PolarCoordinates polarCoordinates, double height) {
+    public static CartesianCoordinates GetSphericalToCartesianCoordinates(PolarCoordinates polarCoordinates, double height)
+    {
         //Both values in Kilometers
         const double lunarRadius = 1737.4;
         double radius = 0;
 
-        if (polarCoordinates.distanceFromMoonCoreInKilometers == 0) {
+        if (polarCoordinates.distanceFromMoonCoreInKilometers == 0)
+        {
             radius = lunarRadius + 0.001 * height;
-        } else {
+        }
+        else
+        {
             radius = polarCoordinates.distanceFromMoonCoreInKilometers;
         }
 
@@ -86,49 +108,55 @@ class MoonCalculator {
         return CartesianCoordinates;
     }
 
-    public static PolarCoordinates GetCartesianToSphericalCoordinates(CartesianCoordinates cartesianCoordinates) {
+    public static PolarCoordinates GetCartesianToSphericalCoordinates(CartesianCoordinates cartesianCoordinates)
+    {
         double x = cartesianCoordinates.xCoord;
         double y = cartesianCoordinates.yCoord;
         double z = cartesianCoordinates.zCoord;
-        double distanceFromMoonCoreInKilometers = Math.Sqrt(x*x + y*y + z*z);
+        double distanceFromMoonCoreInKilometers = Math.Sqrt(x * x + y * y + z * z);
 
-        double longitude = Asin((y)/(Math.Sqrt(x*x + y*y)));
-        double latitude = Asin((z)/(distanceFromMoonCoreInKilometers));
+        double longitude = Asin((y) / (Math.Sqrt(x * x + y * y)));
+        double latitude = Asin((z) / (distanceFromMoonCoreInKilometers));
 
         return new PolarCoordinates(longitude, latitude, distanceFromMoonCoreInKilometers);
     }
 
     //This method might not be needed????
-    public static double GetDistanceFromMoonCoreInKilometers(CartesianCoordinates cartesianCoordinates) {
+    public static double GetDistanceFromMoonCoreInKilometers(CartesianCoordinates cartesianCoordinates)
+    {
         double x = cartesianCoordinates.xCoord;
         double y = cartesianCoordinates.yCoord;
         double z = cartesianCoordinates.zCoord;
-        double distance = Math.Sqrt(x*x + y*y + z*z);
+        double distance = Math.Sqrt(x * x + y * y + z * z);
 
         return distance;
     }
 
-    public static double Sin(double angleInDegrees) {
+    public static double Sin(double angleInDegrees)
+    {
         double angleInRadians = DegreesToRadians(angleInDegrees);
         double sinOutput = Math.Sin(angleInRadians);
 
         return sinOutput;
     }
 
-    public static double Cos(double angleInDegrees) {
+    public static double Cos(double angleInDegrees)
+    {
         double angleInRadians = DegreesToRadians(angleInDegrees);
         double cosOutput = Math.Cos(angleInRadians);
-        
+
         return cosOutput;
     }
 
-    public static double Asin(double ratio) {
+    public static double Asin(double ratio)
+    {
         double aSinOutput = RadiansToDegrees(Math.Asin(ratio));
 
         return aSinOutput;
     }
 
-    public static double GetAzimuthAnglePolarInputs(PolarCoordinates polarCoordinatesA, PolarCoordinates polarCoordinatesB) {
+    public static double GetAzimuthAnglePolarInputs(PolarCoordinates polarCoordinatesA, PolarCoordinates polarCoordinatesB)
+    {
         double longitudeA = polarCoordinatesA.longitude;
         double latitudeA = polarCoordinatesA.latitude;
         double longitudeB = polarCoordinatesB.longitude;
@@ -146,13 +174,15 @@ class MoonCalculator {
         return azimuthAngleInDegrees;
     }
 
-    public static double GetAzimuthAngleOneCartesianInput(PolarCoordinates polarCoordinatesA, CartesianCoordinates cartesianCoordinates) {
+    public static double GetAzimuthAngleOneCartesianInput(PolarCoordinates polarCoordinatesA, CartesianCoordinates cartesianCoordinates)
+    {
         PolarCoordinates polarCoordinatesB = GetCartesianToSphericalCoordinates(cartesianCoordinates);
 
         return GetAzimuthAnglePolarInputs(polarCoordinatesA, polarCoordinatesB);
     }
 
-    public static double GetElevationAngle(PolarCoordinates polarCoordRef, double heightRef, CartesianCoordinates targetLocation) {
+    public static double GetElevationAngle(PolarCoordinates polarCoordRef, double heightRef, CartesianCoordinates targetLocation)
+    {
         CartesianCoordinates referenceLocation = GetSphericalToCartesianCoordinates(polarCoordRef, heightRef);
 
         double xDif = targetLocation.xCoord - referenceLocation.xCoord;
@@ -175,14 +205,16 @@ class MoonCalculator {
 
 
 
-class MoonMapper {
+class MoonMapper
+{
     public double[,] heightMap;
     public double[,] slopeMap;
     public double[,] latitudeMap;
     public double[,] longitudeMap;
     public CartesianCoordinates EarthCoordinates;
 
-    public MoonMapper(string heightFilePath, string slopeFilePath, string latitudeFilePath, string longitudeFilePath) {
+    public MoonMapper(string heightFilePath, string slopeFilePath, string latitudeFilePath, string longitudeFilePath)
+    {
         this.heightMap = CSVToArray(heightFilePath);
         this.slopeMap = CSVToArray(slopeFilePath);
         this.latitudeMap = CSVToArray(latitudeFilePath);
@@ -191,14 +223,18 @@ class MoonMapper {
     }
 
     //If coordinates not found, returns (0, 0) by default
-    public GridCoordinates GetPolarToGridConversion(PolarCoordinates polarCoords) {
+    public GridCoordinates GetPolarToGridConversion(PolarCoordinates polarCoords)
+    {
         GridCoordinates gridLocation = new GridCoordinates(0, 0);
 
         List<GridCoordinates> candidateLocations = new List<GridCoordinates>();
 
-        for (int i = 0; i < this.longitudeMap.GetLength(0); i++) {
-            for (int j = 0; j < this.longitudeMap.GetLength(1); j++) {
-                if (this.longitudeMap[i, j] == polarCoords.longitude) {
+        for (int i = 0; i < this.longitudeMap.GetLength(0); i++)
+        {
+            for (int j = 0; j < this.longitudeMap.GetLength(1); j++)
+            {
+                if (this.longitudeMap[i, j] == polarCoords.longitude)
+                {
                     //Console.WriteLine(i + ", " + j);
 
                     candidateLocations.Add(new GridCoordinates(i, j));
@@ -206,18 +242,23 @@ class MoonMapper {
             }
         }
 
-        if (candidateLocations.Count > 1) {
-            for (int i = 0; i < candidateLocations.Count; i++) {
-                GridCoordinates testLocation = (GridCoordinates) candidateLocations[i];
+        if (candidateLocations.Count > 1)
+        {
+            for (int i = 0; i < candidateLocations.Count; i++)
+            {
+                GridCoordinates testLocation = (GridCoordinates)candidateLocations[i];
 
-                if (polarCoords.latitude == this.latitudeMap[testLocation.xCoord, testLocation.yCoord]) {
+                if (polarCoords.latitude == this.latitudeMap[testLocation.xCoord, testLocation.yCoord])
+                {
                     gridLocation = testLocation;
                     break;
                 }
             }
 
-        } else if (candidateLocations.Count == 1) {
-            gridLocation = (GridCoordinates) candidateLocations[0];
+        }
+        else if (candidateLocations.Count == 1)
+        {
+            gridLocation = (GridCoordinates)candidateLocations[0];
         }
 
         /*Console.WriteLine();
@@ -228,17 +269,39 @@ class MoonMapper {
         return gridLocation;
     }
 
-    public int CountElementsInLine(string source, char toFind) {
+
+    public int CountElementsInLine(string source, char toFind)
+    {
         int count = 1;
 
-        foreach (var ch in source) {
+        foreach (var ch in source)
+        {
             if (ch == toFind)
                 count++;
         }
 
         return count;
     }
+    public static double[,] CSVToArray(string filePath)
+    {
+        string[] fileData = File.ReadAllLines(filePath);
 
+        int width = fileData[0].Split(',').Length;
+        int height = fileData.Length;
+
+        double[,] map = new double[width, height];
+
+        for (var i = 0; i < height; i++)
+        {
+            var line = fileData[i].Split(',');
+            for (var j = 0; j < line.Length; j++)
+            {
+                map[i, j] = double.Parse(line[j], System.Globalization.CultureInfo.InvariantCulture);
+            }
+        }
+        return map;
+    }
+    /*
     public static double[,] CSVToArray(string filePath) {
         var path = @filePath;
 
@@ -277,23 +340,28 @@ class MoonMapper {
             return map;
         }
     }
-
-    public double GetDistanceBetweenPoints(GridCoordinates point1, GridCoordinates point2) {
+    */
+    public double GetDistanceBetweenPoints(GridCoordinates point1, GridCoordinates point2)
+    {
         int xDistance = Math.Abs(point2.xCoord - point1.xCoord);
         int yDistance = Math.Abs(point2.yCoord - point1.yCoord);
 
-        double distance = Math.Sqrt(xDistance*xDistance + yDistance*yDistance);
+        double distance = Math.Sqrt(xDistance * xDistance + yDistance * yDistance);
 
         return distance;
     }
 
-    public GridCoordinates[] GenerateAllEightDirections() {
+    public GridCoordinates[] GenerateAllEightDirections()
+    {
         GridCoordinates[] EightDirectionsList = new GridCoordinates[8];
         int index = 0;
 
-        for (int yCoord = 1; yCoord > -2; yCoord--) {
-            for (int xCoord = -1; xCoord < 2; xCoord++) {
-                if (yCoord != 0 || xCoord != 0) {
+        for (int yCoord = 1; yCoord > -2; yCoord--)
+        {
+            for (int xCoord = -1; xCoord < 2; xCoord++)
+            {
+                if (yCoord != 0 || xCoord != 0)
+                {
                     EightDirectionsList[index] = new GridCoordinates(xCoord, yCoord);
                     index++;
                 }
@@ -302,16 +370,21 @@ class MoonMapper {
 
         return EightDirectionsList;
     }
-
-    public int GetBiggerNumber(int num1, int num2) {
-        if (num1 >= num2) {
+    //what???? Math.Max pls
+    public int GetBiggerNumber(int num1, int num2)
+    {
+        if (num1 >= num2)
+        {
             return num1;
-        } else {
+        }
+        else
+        {
             return num2;
         }
     }
 
-    public int GetMinimumPathLength(GridCoordinates startPosGrid, GridCoordinates targetPosGrid) {
+    public int GetMinimumPathLength(GridCoordinates startPosGrid, GridCoordinates targetPosGrid)
+    {
         int xDif = Math.Abs(targetPosGrid.xCoord - startPosGrid.xCoord);
         int yDif = Math.Abs(targetPosGrid.yCoord - startPosGrid.yCoord);
 
@@ -320,7 +393,8 @@ class MoonMapper {
         return distance;
     }
 
-    public List<int> FindPath(GridCoordinates startPosGrid, GridCoordinates targetPosGrid, int prioritisation) {
+    public List<int> FindPath(GridCoordinates startPosGrid, GridCoordinates targetPosGrid, int prioritisation)
+    {
         /* 'prioritisastion' argument notes
          * 0 = minimise distance
          * 1 = minimise slope
@@ -335,13 +409,18 @@ class MoonMapper {
         double slopeWeight = 0.3;
         double distanceWeight = 1;
 
-        if (prioritisation == 0) {
+        if (prioritisation == 0)
+        {
             distanceWeight = 1;
             slopeWeight = 0;
-        } else if (prioritisation == 1) {
+        }
+        else if (prioritisation == 1)
+        {
             distanceWeight = 0.5;
             slopeWeight = 1;
-        } else {
+        }
+        else
+        {
             distanceWeight += 1;
             slopeWeight = 0;
         }
@@ -357,7 +436,8 @@ class MoonMapper {
         spent to minimise the slope weight
         */
 
-        while (GetDistanceBetweenPoints(currentPos, targetPosGrid) != 0) {
+        while (GetDistanceBetweenPoints(currentPos, targetPosGrid) != 0)
+        {
             /*Index Mapping Notes
             0 = Bottom Left
             1 = Bottom Middle
@@ -372,25 +452,33 @@ class MoonMapper {
             GridCoordinates[] directionList = GenerateAllEightDirections();
             int directionToChoose = 0;
 
-            for (int i = 0; i < 8; i++) {
+            for (int i = 0; i < 8; i++)
+            {
                 int xCoordToCheck = currentPos.xCoord + directionList[i].xCoord;
                 int yCoordToCheck = currentPos.yCoord + directionList[i].yCoord;
                 GridCoordinates coordToCheck = new GridCoordinates(xCoordToCheck, yCoordToCheck);
 
-                if (xCoordToCheck < 0 || yCoordToCheck < 0 || xCoordToCheck >= 3200 || yCoordToCheck >= 3200) {
+                if (xCoordToCheck < 0 || yCoordToCheck < 0 || xCoordToCheck >= 3200 || yCoordToCheck >= 3200)
+                {
                     directionEvaluation[i] = 1048575;
-                } else {
+                }
+                else
+                {
                     double slopeToCheck = this.slopeMap[xCoordToCheck, yCoordToCheck];
 
-                    if (slopeToCheck >= 15) {
+                    if (slopeToCheck >= 15)
+                    {
                         directionEvaluation[i] = 1048575;
-                    } else {
+                    }
+                    else
+                    {
                         double distanceBetweenPoints = GetDistanceBetweenPoints(coordToCheck, targetPosGrid);
 
                         directionEvaluation[i] = distanceWeight * distanceBetweenPoints;
                         double iterationsThresholdFactor = 1;
 
-                        if (GetMinimumPathLength(startPosGrid, targetPosGrid) < sequenceIndex) {
+                        if (GetMinimumPathLength(startPosGrid, targetPosGrid) < sequenceIndex)
+                        {
                             iterationsThresholdFactor = distanceBetweenPoints / initialDistance;
                         }
 
@@ -398,8 +486,10 @@ class MoonMapper {
                     }
                 }
 
-                if (i > 0) {
-                    if (directionEvaluation[i] < directionEvaluation[directionToChoose]) {
+                if (i > 0)
+                {
+                    if (directionEvaluation[i] < directionEvaluation[directionToChoose])
+                    {
                         directionToChoose = i;
                     }
                 }
@@ -423,7 +513,8 @@ class MoonMapper {
         return directionSequenceReal;
     }
 
-    public List<int> FindPath(PolarCoordinates startingPos, PolarCoordinates targetPos, int prioritisation) {
+    public List<int> FindPath(PolarCoordinates startingPos, PolarCoordinates targetPos, int prioritisation)
+    {
         /* 'prioritisastion' argument notes
          * 0 = minimise distance
          * 1 = minimise slope
@@ -436,4 +527,3 @@ class MoonMapper {
         return FindPath(startPosGrid, targetPosGrid, prioritisation);
     }
 }
-

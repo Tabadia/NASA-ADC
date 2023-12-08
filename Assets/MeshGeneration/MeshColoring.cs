@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 using static Unity.VisualScripting.Member;
-
+using System.Threading.Tasks;
 
 public class MeshColoring : MonoBehaviour
 {
@@ -15,15 +15,15 @@ public class MeshColoring : MonoBehaviour
     public int angleRadius = 3;
 
     public int azimuthRadius = 3;
+    public int shadingRadius;
 
     public Vector3 EARTH_LOCATION = new Vector3(361000, 0, -42100);
     public int chunkSize = 100;
     // Start is called before the first frame update
-    void Start()
+    async void Start()
     {
         meshGameObject = GameObject.Find("Mesh");
-        
-        
+        await Task.Delay(10000);
     }
 
     public void changeMode(string mode)
@@ -40,6 +40,8 @@ public class MeshColoring : MonoBehaviour
         } else if(mode == "azimuth")
         {
             colorMeshBasedOnAzimuth();
+        } else if(mode == "shade") {
+            shadeMesh();
         }
     }
     float normalize(float num, float min, float max)
@@ -71,7 +73,7 @@ public class MeshColoring : MonoBehaviour
             Vector3[] vertices = mesh.vertices;
 
             // create new colors array where the colors will be created.
-            Color[] colors = new Color[vertices.Length];
+            Color32[] colors = new Color32[vertices.Length];
             int i = 0;
             foreach (Vector3 point in vertices)
             {
@@ -79,7 +81,7 @@ public class MeshColoring : MonoBehaviour
                 colors[i] = getColor(normalize(point.y, low, high));
                 i++;
             }
-            mesh.colors = colors;
+            mesh.colors32 = colors;
         }
     }
     int FindMax(Vector3[] nums)
@@ -152,7 +154,7 @@ public class MeshColoring : MonoBehaviour
             Vector3[] vertices = mesh.vertices;
             int[] tris = mesh.triangles;
             // create new colors array where the colors will be created.
-            Color[] colors = new Color[vertices.Length];
+            Color32[] colors = new Color32[vertices.Length];
             for (var i = 0; i < chunkSize; i += azimuthRadius)
             {
                 for(var x = 0; x < chunkSize; x += azimuthRadius)
@@ -184,7 +186,7 @@ public class MeshColoring : MonoBehaviour
                 }
             }
             //dont blow up pc PLS
-            mesh.colors = colors;
+            mesh.colors32 = colors;
        }
     }
     private void colorMeshBasedOnAzimuth() {
@@ -198,7 +200,7 @@ public class MeshColoring : MonoBehaviour
             Vector3[] vertices = mesh.vertices; 
             int[] tris = mesh.triangles;
             // create new colors array where the colors will be created.
-            Color[] colors = new Color[vertices.Length];
+            Color32[] colors = new Color32[vertices.Length];
             
             for (var i = 0; i < chunkSize; i += azimuthRadius)
             {
@@ -233,8 +235,52 @@ public class MeshColoring : MonoBehaviour
                     }
                 }
             }
-            mesh.colors = colors;
+            mesh.colors32 = colors;
        }
+    }
+    private void shadeMesh() {
+        /*
+            This function is very similar to coloring based on angle. It colors vertices based on black and white, making it look like there is light shining on it. 
+            Performance is very similar to ColorMeshBasedOnAngle().
+        */
+        foreach(MeshFilter meshFilter in children) {
+            MeshColoring mesh = meshFilter.mesh;
+            Vector3[] vertices = mesh.vertices; 
+            int[] tris = mesh.triangles;
+            // create new colors array where the colors will be created.
+            Color32[] colors = new Color32[vertices.Length];
+            for (var i = 0; i < chunkSize; i += shadingRadius)
+            {
+                for(var x = 0; x < chunkSize; x += shadingRadius)
+                {
+                    int idx = i + x * 100;
+                    Vector3[] coords = getCoords(idx, tris, vertices, shadingRadius);
+                    int max = FindMax(coords);
+                    int min = FindMin(coords);
+                    float distance;
+                    double angle;
+                    if (min == max)
+                    {
+                        angle = 0;
+                    }
+                    distance = Vector3.Distance(coords[min], coords[max]);
+                    angle = Math.Atan((coords[max].y - coords[min].y) / distance) * 180/Math.PI;
+
+                    var color = Color.Lerp(Color.black, Color.white, (float) normalize(angle, -90, 90))
+                    for (var y = 0; y < shadingRadius; y++)
+                    {
+                        for (var z = 0; z < shadingRadius; z++)
+                        {
+
+                            if (colors.Length <= y + idx + z * 100) continue;
+                            colors[y + idx + z * 100] = color;
+                        }
+                    }
+                }
+            }
+            //dont blow up pc PLS
+            mesh.colors32 = colors;
+        }
     }
     public void backToHomeScene()
     {
