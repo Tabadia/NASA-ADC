@@ -12,7 +12,7 @@ class Pathfinding : MonoBehaviour {
 
     MeshGen2 meshGenerator;
 
-    string[] fileData; 
+    string[] fileData;  
 
     float[,] heightMap;
     void Start() {
@@ -59,6 +59,7 @@ class Pathfinding : MonoBehaviour {
         List<int> path = moonMapper.findPath(playerPos, endPos);
 
         Vector3[] lineVertexes = new Vector3[path.Count];
+         
         int idx = 0;
 
         foreach(int dir in path) {
