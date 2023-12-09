@@ -23,6 +23,7 @@ public class MeshColoring : MonoBehaviour
     {
         meshGameObject = GameObject.Find("Mesh");
         await Task.Delay(10000);
+        ColorMeshBasedOnHeight();
     }
 
     public void changeMode(string mode)
