@@ -284,6 +284,11 @@ class MoonMapper
     }
     public static double[,] CSVToArray(string filePath)
     {
+        Debug.Log(filePath);
+        double[,] map = new double[0, 0];
+        return map;
+        /*
+        
         string[] fileData = File.ReadAllLines(filePath);
 
         int width = fileData[0].Split(',').Length;
@@ -296,10 +301,11 @@ class MoonMapper
             var line = fileData[i].Split(',');
             for (var j = 0; j < line.Length; j++)
             {
-                map[i, j] = double.Parse(line[j], System.Globalization.CultureInfo.InvariantCulture);
+                map[i, j] = double.Parse(line[j], CultureInfo.InvariantCulture);
             }
         }
         return map;
+        */
     }
     /*
     public static double[,] CSVToArray(string filePath) {

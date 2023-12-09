@@ -9,7 +9,9 @@ using System.Threading.Tasks;
 
 public class MeshColoring : MonoBehaviour
 {
-    public Gradient coloringGradient;
+    public Gradient coloringGradientHeight;
+    public Gradient coloringGradientAngle;
+
     GameObject meshGameObject;
     MeshFilter[] children;
     public int angleRadius = 3;
@@ -46,8 +48,11 @@ public class MeshColoring : MonoBehaviour
     {
         return (num - min) / (max - min);
     }
-    public Color getColor(float num) {
-        return coloringGradient.Evaluate(num);
+    public Color getColor(float num, string mode) {
+        if (mode == "height")
+            return coloringGradientHeight.Evaluate(num);
+        else 
+            return coloringGradientAngle.Evaluate(num);
     }
     private void ColorMeshBasedOnHeight()
     {
@@ -76,7 +81,7 @@ public class MeshColoring : MonoBehaviour
             foreach (Vector3 point in vertices)
             {
 
-                colors[i] = getColor(normalize(point.y, low, high));
+                colors[i] = getColor(normalize(point.y, low, high), "height");
                 i++;
             }
             mesh.colors32 = colors;
@@ -135,6 +140,39 @@ public class MeshColoring : MonoBehaviour
         }
         return coords;
     }
+    //void ColorMeshBasedOnAngle()
+    //{
+    //    // create new colors array where the colors will be created.
+    //    for (var child = 0; child < 1024; child++) {
+
+    //        Mesh mesh = children[child].mesh;
+    //        Vector3[] vertices = mesh.vertices;
+    //        int[] tris = mesh.triangles;
+
+    //        Color[] colors = new Color[vertices.Length];
+    //        for (var i = 0; i < tris.Length; i += 3)
+    //        {
+    //            int idx1 = tris[i], idx2 = tris[i + 1], idx3 = tris[i + 2];
+    //            Vector3[] yCoords = new Vector3[]
+    //            {
+    //                vertices[idx1],
+    //                vertices[idx2],
+    //                vertices[idx3]
+    //            };
+    //            int max = 0;
+    //            int min = 2;
+    //            float distance = Vector3.Distance(yCoords[min], yCoords[max]);
+    //            double angle = Math.Atan((yCoords[max].y - yCoords[min].y) / distance) * 180;
+    //            if (angle < 0) angle *= -1;
+    //            var color = getColor(normalize((float)angle, -90, 90), "angle");
+    //            colors[idx1] = color;
+    //            colors[idx2] = color;
+    //            colors[idx3] = color;
+    //        }
+    //        mesh.colors = colors;
+    //    }
+
+    //}
     private void ColorMeshBasedOnAngle()
     {
         /*
@@ -147,20 +185,21 @@ public class MeshColoring : MonoBehaviour
         //trust me.
 
         var area = chunkSize * chunkSize;
-        for(var child = 0; child < area; child++) { 
+        for (var child = 0; child < area; child++)
+        {
             Mesh mesh = children[child].mesh;
             Vector3[] vertices = mesh.vertices;
             int[] tris = mesh.triangles;
             // create new colors array where the colors will be created.
             Color32[] colors = new Color32[vertices.Length];
-            for (var i = 0; i < chunkSize; i += azimuthRadius)
+            for (var i = 0; i < chunkSize; i += angleRadius)
             {
-                for(var x = 0; x < chunkSize; x += azimuthRadius)
+                for (var x = 0; x < chunkSize; x += angleRadius)
                 {
                     int idx = i + x * 100;
-                    Vector3[] coords = getCoords(idx, tris, vertices, azimuthRadius);
-                    int max = FindMax(coords);
-                    int min = FindMin(coords);
+                    Vector3[] coords = getCoords(idx, tris, vertices, angleRadius);
+                    int max = 0;
+                    int min = 2;
                     float distance;
                     double angle;
                     if (min == max)
@@ -168,13 +207,13 @@ public class MeshColoring : MonoBehaviour
                         angle = 0;
                     }
                     distance = Vector3.Distance(coords[min], coords[max]);
-                    angle = Math.Atan((coords[max].y - coords[min].y) / distance) * 180/Math.PI;
-                    
+                    angle = Math.Atan((coords[max].y - coords[min].y) / distance) * 180 / Math.PI;
+
                     if (angle < 0) angle *= -1;
-                    var color = getColor(normalize((float)angle, -90, 90));
-                    for (var y = 0; y < azimuthRadius; y++)
+                    var color = getColor(normalize((float)angle, -90, 90), "angle");
+                    for (var y = 0; y < angleRadius; y++)
                     {
-                        for (var z = 0; z < azimuthRadius; z++)
+                        for (var z = 0; z < angleRadius; z++)
                         {
 
                             if (colors.Length <= y + idx + z * 100) continue;
@@ -185,8 +224,9 @@ public class MeshColoring : MonoBehaviour
             }
             //dont blow up pc PLS
             mesh.colors32 = colors;
-       }
+        }
     }
+
     private void colorMeshBasedOnAzimuth() {
         /*
         Again, if you wanna Debug.Log, set area to something smaller.
@@ -222,13 +262,14 @@ public class MeshColoring : MonoBehaviour
 
                     double azimuth = Math.Atan((xVal - EARTH_LOCATION.x) / (yVal - EARTH_LOCATION.y)) * 180/Math.PI;
 
-                    var normalized = normalize((float)azimuth, -90, -89.9f);
+                    var normalized = normalize((float)azimuth, -90, -89.8f);
+
                     for (var y = 0; y < azimuthRadius;  y++) {
                         for(var z = 0; z < azimuthRadius; z++) {
                             int newIdx = idx + y + z*100;
 
                             if (newIdx >= colors.Length) continue;
-                            colors[newIdx] = getColor(normalized);
+                            colors[newIdx] = getColor(normalized, "height");
                         }
                     }
                 }

@@ -914,7 +914,7 @@ MonoBehaviour:
   csvFilePath: Assets/MeshGeneration/FY23_ADC_Height_PeakNearShackleton.csv
   chunkSize: 100
   scale: 1
-  heightMultiplier: 1
+  heightMultiplier: 0.5
   chunkMaterial: {fileID: 2100000, guid: fc26364f796b1cf4c95c0876d292af97, type: 2}
   isFinished: 0
   chunksGenerated: 0

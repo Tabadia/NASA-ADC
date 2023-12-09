@@ -71,3 +71,7 @@ crashlytics-build.properties
 # Temporary auto-generated Android Assets
 /[Aa]ssets/[Ss]treamingAssets/aa.meta
 /[Aa]ssets/[Ss]treamingAssets/aa/*
+
+Assets/MeshGeneration/FY23_ADC_Latitude_PeakNearShackleton.csv
+Assets/MeshGeneration/FY23_ADC_Longitude_PeakNearShackleton.csv
+Assets/MeshGeneration/FY23_ADC_Slope_PeakNearShackleton.csv
