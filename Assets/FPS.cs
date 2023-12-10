@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+
 public class FPS : MonoBehaviour
 {
     TextMeshProUGUI text;
@@ -18,7 +19,7 @@ public class FPS : MonoBehaviour
     IEnumerator counter()
     {
         yield return new WaitForSeconds(1);
-        text.text = "FPS: " + frames.ToString();
+        text.text = frames.ToString() + "FPS";
         frames = 0;
         StartCoroutine(counter());
     }

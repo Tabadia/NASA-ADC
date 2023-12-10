@@ -11,6 +11,10 @@ public class KeybindsWatcher : MonoBehaviour
     // used to remove the screen rotation
     public Transform orientation;
     public GameObject meshOptions;
+
+    // used to see mesh gen progress
+    public MeshGen2 mesh;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -18,46 +22,61 @@ public class KeybindsWatcher : MonoBehaviour
         escPanel.SetActive(false);
         meshOptions.SetActive(false);
     }
+
     void lockMouse()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
+
     void unlockMouse()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
+
     bool coloringOptionsOpen = false;
+
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("escape"))
+        if (mesh.isFinished == true)
         {
-
-            // toggle panel visibility accordingly
-            if (escPanel.activeInHierarchy == true)
+            if (Input.GetKeyDown("escape"))
             {
-                // enable cursor lock
-                // see playerCam.cs (20:0) for info
-                lockMouse();
 
+                // toggle panel visibility accordingly
+                if (escPanel.activeInHierarchy == true)
+                {
+                    // enable cursor lock
+                    // see playerCam.cs (20:0) for info
+                    lockMouse();
+
+                    escPanel.SetActive(false);
+                }
+                else
+                {
+                    // remove cursor lock
+                    // see playerCam.cs (20:0) for info
+                    unlockMouse();
+
+                    escPanel.SetActive(true);
+                }
+            }
+
+            if (Input.GetKeyDown(KeyCode.M))
+            {
                 escPanel.SetActive(false);
-            } else
-            {
-                // remove cursor lock
-                // see playerCam.cs (20:0) for info
-                unlockMouse();
-
-                escPanel.SetActive(true);
+                OpenSettings();
             }
         }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            if (coloringOptionsOpen) lockMouse(); else unlockMouse();
+    }
 
-            meshOptions.SetActive(!coloringOptionsOpen);
-            coloringOptionsOpen = !coloringOptionsOpen;
-        }
+    public void OpenSettings()
+    {
+        if (coloringOptionsOpen) lockMouse(); else unlockMouse();
+
+        meshOptions.SetActive(!coloringOptionsOpen);
+        coloringOptionsOpen = !coloringOptionsOpen;
     }
 }

@@ -223,6 +223,7 @@ public class MeshColoring : MonoBehaviour
                 }
             }
             //dont blow up pc PLS
+            // nuh uh
             mesh.colors32 = colors;
         }
     }
@@ -276,9 +277,5 @@ public class MeshColoring : MonoBehaviour
             }
             mesh.colors32 = colors;
        }
-    }
-    public void backToHomeScene()
-    {
-        SceneManager.LoadScene(sceneName: "Home Screen");
     }
 }

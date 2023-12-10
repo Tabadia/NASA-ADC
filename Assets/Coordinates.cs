@@ -39,19 +39,21 @@ public class Coordinates : MonoBehaviour
 
         float p1Dist = getDistFromEarth(p1Pos);
         
-        string astronaut1Data = "Astronaut 1 Position:" + p1Pos.ToString() + "\n"
-        + "Distance to Earth: " + p1Dist + "\n" 
-        + "Elevation angle to Earth: " + getAngleFromEarth(p1Pos.y, p1Dist) + "\n" 
+        string astronaut1Data = "Astronaut 1" + "\n\n" 
+        + "Position: " + p1Pos.ToString() + "\n\n"
+        + "Distance to Earth: " + p1Dist + "\n\n" 
+        + "Elevation angle to Earth: " + getAngleFromEarth(p1Pos.y, p1Dist) + "\n\n" 
         + "Azimuth angle: " + getAzimuthToEarth(p1Pos);
 
         float p2Dist = getDistFromEarth(p2Pos);
         
-        string astronaut2Data = "Astronaut 2 Position:" + p2Pos.ToString() + "\n"
-        + "Distance to Earth: " + p2Dist + "\n" 
-        + "Elevation angle to Earth: " + getAngleFromEarth(p2Pos.y, p2Dist) + "\n" 
+        string astronaut2Data = "Astronaut 2" + "\n\n"
+        + "Position: " + p2Pos.ToString() + "\n\n"
+        + "Distance to Earth: " + p2Dist + "\n\n" 
+        + "Elevation angle to Earth: " + getAngleFromEarth(p2Pos.y, p2Dist) + "\n\n" 
         + "Azimuth angle: " + getAzimuthToEarth(p2Pos);
         
-        coordText.text = astronaut1Data + "\n"
+        coordText.text = astronaut1Data + "\n\n\n\n"
         + astronaut2Data;
     }
 }
