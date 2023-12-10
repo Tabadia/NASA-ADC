@@ -26,8 +26,23 @@ public class Coordinates : MonoBehaviour
     }
     float getAzimuthToEarth(Vector3 pos) {
         return Mathf.Atan((pos.x - EARTH_COORDS.x) / (pos.y - EARTH_COORDS.y)) * 180/Mathf.PI;
+    }
+
+    string getActiveAstronaut(float number)
+    {
+        if (Camera.main.name == "playerCam")
+        {
+            if (number == 1) return " (me)";
+            else return "";
+        }
+        else
+        {
+            if (number == 2) return " (me)";
+            else return "";
+        }
 
     }
+
     // Update is called once per frame
     void Update()
     {
@@ -36,10 +51,10 @@ public class Coordinates : MonoBehaviour
         Vector3 p2Pos = p2.transform.position;
         p2Pos.y -= peakNearShackletonCoords.y;
 
-
         float p1Dist = getDistFromEarth(p1Pos);
         
-        string astronaut1Data = "Astronaut 1" + "\n\n" 
+        string astronaut1Data = "Astronaut 1" + getActiveAstronaut(1)
+        + "\n\n" 
         + "Position: " + p1Pos.ToString() + "\n\n"
         + "Distance to Earth: " + p1Dist + "\n\n" 
         + "Elevation angle to Earth: " + getAngleFromEarth(p1Pos.y, p1Dist) + "\n\n" 
