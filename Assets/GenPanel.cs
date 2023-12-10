@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GenPanel : MonoBehaviour
 {
@@ -61,5 +62,10 @@ public class GenPanel : MonoBehaviour
         double percentage = (value / totalValue) * 100;
 
         return percentage;
+    }
+
+    public void cancelGen()
+    {
+        SceneManager.LoadScene(sceneName: "Home Screen");
     }
 }
