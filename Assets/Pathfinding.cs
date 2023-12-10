@@ -15,6 +15,7 @@ class Pathfinding : MonoBehaviour
     private GameObject player;
 
 
+
     double[,] heightMap;
     void Start()
     {
@@ -35,9 +36,9 @@ class Pathfinding : MonoBehaviour
     {
         if (Camera.main.name == "playerCam")
         {
-            player = GameObject.Find("Player");
+            player = GameObject.Find("PlayerObj");
         }
-        else player = GameObject.Find("Player2");
+        else player = GameObject.Find("PlayerObj2");
         GridCoordinates playerPos = new GridCoordinates((int)player.transform.position.x, (int)player.transform.position.y);
         GridCoordinates endPos = new GridCoordinates(50, 50);
         /*Index Mapping Notes
@@ -61,12 +62,12 @@ class Pathfinding : MonoBehaviour
         dirs[7] = new Vector2(1, 1);
 
 
-        //List<int> path = moonMapper.FindPath(new GridCoordinates(playerPos.xCoord, (int)playerPos.yCoord), endPos, 0)
+        List<int> path = moonMapper.FindPath(new GridCoordinates(playerPos.xCoord, (int)playerPos.yCoord), endPos, 0);
 
-        List<int> path = new List<int>
-        {
-            1, 2, 5, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 5, 5, 5, 5, 7, 0, 0, 0, 0, 0, 0, 0, 0
-        };
+        //List<int> path = new List<int>
+        //{
+        //    1, 2, 5, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 5, 5, 5, 5, 7, 0, 0, 0, 0, 0, 0, 0, 0
+        //};
         Vector3[] lineVertexes = new Vector3[path.Count];
         int idx = 0;
 
@@ -78,8 +79,8 @@ class Pathfinding : MonoBehaviour
             //find the height value from the height CSV.
             //Debug.Log(playerPos.xCoord);
             //Debug.Log(heightMap);
-            //double newY = heightMap[playerPos.xCoord, playerPos.yCoord] + 1;
-            lineVertexes[idx] = new Vector3(playerPos.xCoord + direction.x, 0, playerPos.yCoord + direction.y);
+            double newY = heightMap[playerPos.xCoord, playerPos.yCoord] + 1;
+            lineVertexes[idx] = new Vector3(playerPos.xCoord + direction.x, (float)newY, playerPos.yCoord + direction.y);
             idx++;
         }
 
