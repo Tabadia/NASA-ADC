@@ -35,8 +35,6 @@ public class KeybindsWatcher : MonoBehaviour
         Cursor.visible = true;
     }
 
-    bool coloringOptionsOpen = false;
-
     // Update is called once per frame
     void Update()
     {
@@ -54,6 +52,12 @@ public class KeybindsWatcher : MonoBehaviour
 
                     escPanel.SetActive(false);
                 }
+                else if (meshOptions.activeInHierarchy == true)
+                {
+                    lockMouse();
+
+                    meshOptions.SetActive(false);
+                } 
                 else
                 {
                     // remove cursor lock
@@ -66,7 +70,6 @@ public class KeybindsWatcher : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.M))
             {
-                escPanel.SetActive(false);
                 OpenSettings();
             }
         }
@@ -74,9 +77,10 @@ public class KeybindsWatcher : MonoBehaviour
 
     public void OpenSettings()
     {
-        if (coloringOptionsOpen) lockMouse(); else unlockMouse();
+        escPanel.SetActive(false);
 
-        meshOptions.SetActive(!coloringOptionsOpen);
-        coloringOptionsOpen = !coloringOptionsOpen;
+        if (meshOptions.activeInHierarchy) lockMouse(); else unlockMouse();
+
+        meshOptions.SetActive(!meshOptions.activeInHierarchy);
     }
 }
