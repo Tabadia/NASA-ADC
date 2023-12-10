@@ -38,7 +38,7 @@ public class KeybindsWatcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (mesh.isFinished == true)
+        if (mesh.isFinished == true)
         {
             if (Input.GetKeyDown("escape"))
             {
