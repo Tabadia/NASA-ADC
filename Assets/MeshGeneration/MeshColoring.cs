@@ -24,6 +24,7 @@ public class MeshColoring : MonoBehaviour
     async void Start()
     {
         meshGameObject = GameObject.Find("Mesh");
+        children = meshGameObject.GetComponentsInChildren<MeshFilter>();
         await Task.Delay(10000);
         ColorMeshBasedOnHeight();
     }

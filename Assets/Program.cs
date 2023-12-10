@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Net.Http.Headers;
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 class GridCoordinates
 {
@@ -94,9 +95,9 @@ class MoonCalculator
             radius = polarCoordinates.distanceFromMoonCoreInKilometers;
         }
 
-        Console.WriteLine("longitude input: " + polarCoordinates.longitude);
-        Console.WriteLine("latitude input: " + polarCoordinates.latitude);
-        Console.WriteLine(height);
+        Debug.Log("longitude input: " + polarCoordinates.longitude);
+        Debug.Log("latitude input: " + polarCoordinates.latitude);
+        Debug.Log(height);
         Console.WriteLine();
 
         double x = radius * (Cos(polarCoordinates.latitude) * Cos(polarCoordinates.longitude));
@@ -165,8 +166,8 @@ class MoonCalculator
         double y = Sin(longitudeB - longitudeA) * Cos(latitudeB);
         double x = (Cos(latitudeA) * Sin(latitudeB)) - (Sin(latitudeA) * Cos(latitudeB) * Cos(longitudeB - longitudeA));
 
-        Console.WriteLine("y = " + y);
-        Console.WriteLine("x = " + x);
+        Debug.Log("y = " + y);
+        Debug.Log("x = " + x);
 
         double azimuthAngleInRadians = Math.Atan2(y, x);
         double azimuthAngleInDegrees = RadiansToDegrees(azimuthAngleInRadians);
@@ -282,30 +283,41 @@ class MoonMapper
 
         return count;
     }
+    static T[,] To2D<T>(T[][] source)
+    {
+        // T is serialization for type. 
+        try
+        {
+            int FirstDim = source.Length;
+            int SecondDim = source.GroupBy(row => row.Length).Single().Key; // throws InvalidOperationException if source is not rectangular
+
+            var result = new T[FirstDim, SecondDim];
+            for (int i = 0; i < FirstDim; ++i)
+                for (int j = 0; j < SecondDim; ++j)
+                    result[i, j] = source[i][j];
+
+            return result;
+        }
+        catch (InvalidOperationException)
+        {
+            throw new InvalidOperationException("The given jagged array is not rectangular.");
+        }
+    }
     public static double[,] CSVToArray(string filePath)
     {
-        Debug.Log(filePath);
-        double[,] map = new double[0, 0];
-        return map;
-        /*
-        
-        string[] fileData = File.ReadAllLines(filePath);
 
-        int width = fileData[0].Split(',').Length;
-        int height = fileData.Length;
+        //I'm a piece of shit.
+        double[][] fileData = File.ReadLines(filePath)
+            .Select(x => x.Split(','))
+            .Select(line => 
+                 line
+                    .Select(x => double.Parse(x))
+                    .ToArray())
+            .ToArray();
 
-        double[,] map = new double[width, height];
+        return To2D<double>(fileData);
 
-        for (var i = 0; i < height; i++)
-        {
-            var line = fileData[i].Split(',');
-            for (var j = 0; j < line.Length; j++)
-            {
-                map[i, j] = double.Parse(line[j], CultureInfo.InvariantCulture);
-            }
-        }
-        return map;
-        */
+
     }
     /*
     public static double[,] CSVToArray(string filePath) {
@@ -431,11 +443,12 @@ class MoonMapper
             slopeWeight = 0;
         }
 
-        Console.WriteLine("Current Distance: " + GetDistanceBetweenPoints(currentPos, targetPosGrid));
-        Console.WriteLine("Current Slope: " + this.slopeMap[currentPos.xCoord, currentPos.yCoord]);
-        Console.WriteLine("Current xCoord: " + currentPos.xCoord);
-        Console.WriteLine("Current yCoord: " + currentPos.yCoord);
-        Console.WriteLine();
+        Debug.Log("Current Distance: " + GetDistanceBetweenPoints(currentPos, targetPosGrid));
+        Debug.Log(this.slopeMap[0, currentPos.yCoord]);
+        Debug.Log("Current xCoord: " + currentPos.xCoord);
+        Debug.Log("Current yCoord: " + currentPos.yCoord);
+        Debug.Log(currentPos.yCoord >= 0 && currentPos.xCoord >= 0 && currentPos.yCoord < this.slopeMap.Length && currentPos.xCoord < this.slopeMap.Length); //true
+        Debug.Log("Current Slope: " + this.slopeMap[currentPos.xCoord, currentPos.yCoord]); //Index Out Of Bounds??????
 
         /*TODO
         In order to overcome looping issues for slope optimisation, I can factor in the amount of turns
@@ -506,13 +519,13 @@ class MoonMapper
             directionSequenceReal.Add(directionToChoose);
             currentPos.xCoord += directionList[directionToChoose].xCoord;
             currentPos.yCoord += directionList[directionToChoose].yCoord;
+            /*
+            Debug.Log("Current Distance: " + GetDistanceBetweenPoints(currentPos, targetPosGrid));
 
-            Console.WriteLine("Current Distance: " + GetDistanceBetweenPoints(currentPos, targetPosGrid));
-            Console.WriteLine("Current Slope: " + this.slopeMap[currentPos.xCoord, currentPos.yCoord]);
-            Console.WriteLine("Current xCoord: " + currentPos.xCoord);
-            Console.WriteLine("Current yCoord: " + currentPos.yCoord);
-            Console.WriteLine();
-
+            Debug.Log("Current xCoord: " + currentPos.xCoord);
+            Debug.Log("Current yCoord: " + currentPos.yCoord);
+            Debug.Log("Current Slope: " + this.slopeMap[currentPos.xCoord, currentPos.yCoord]);
+            */
             sequenceIndex++;
         }
 

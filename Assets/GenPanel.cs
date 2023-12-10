@@ -40,15 +40,16 @@ public class GenPanel : MonoBehaviour
         if(mesh.isFinished == true)
         {
             p1Cam.canMove = true;
-            p2Cam.canMove = true;
+            p2Cam.canMove = false; //only 1 player can move at a time!
 
             text.text = "Loading...";
             panel.SetActive(false);
             return;
         }
-
+        /*
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        */
 
         double chunksGenerated = mesh.chunksGenerated;
         double percentage = CalculatePercentage(chunksGenerated, 1024);
