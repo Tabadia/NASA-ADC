@@ -420,7 +420,8 @@ class MoonMapper
          */
 
         List<int> directionSequenceReal = new List<int>();
-        GridCoordinates currentPos = startPosGrid;
+        //GridCoordinates currentPos = startPosGrid; IT PASSES AN OBJECT REFERENCE, NOT A DEEP COPY
+        GridCoordinates currentPos = new GridCoordinates(startPosGrid.xCoord, startPosGrid.yCoord);
         int sequenceIndex = 0;
         double initialDistance = GetDistanceBetweenPoints(currentPos, targetPosGrid);
 
@@ -442,13 +443,14 @@ class MoonMapper
             distanceWeight += 1;
             slopeWeight = 0;
         }
-
+        /*
         Debug.Log("Current Distance: " + GetDistanceBetweenPoints(currentPos, targetPosGrid));
         Debug.Log(this.slopeMap[0, currentPos.yCoord]);
         Debug.Log("Current xCoord: " + currentPos.xCoord);
         Debug.Log("Current yCoord: " + currentPos.yCoord);
         Debug.Log(currentPos.yCoord >= 0 && currentPos.xCoord >= 0 && currentPos.yCoord < this.slopeMap.Length && currentPos.xCoord < this.slopeMap.Length); //true
         Debug.Log("Current Slope: " + this.slopeMap[currentPos.xCoord, currentPos.yCoord]); //Index Out Of Bounds??????
+        */
 
         /*TODO
         In order to overcome looping issues for slope optimisation, I can factor in the amount of turns
@@ -483,7 +485,7 @@ class MoonMapper
                 }
                 else
                 {
-                    double slopeToCheck = this.slopeMap[xCoordToCheck, yCoordToCheck];
+                    double slopeToCheck = this.slopeMap[(int)(xCoordToCheck*10.24), (int)(yCoordToCheck * 10.24)];
 
                     if (slopeToCheck >= 15)
                     {
@@ -544,5 +546,16 @@ class MoonMapper
         GridCoordinates targetPosGrid = GetPolarToGridConversion(targetPos);
 
         return FindPath(startPosGrid, targetPosGrid, prioritisation);
+    }
+}
+class Constants
+{
+    static MoonMapper moonMapper;
+    public static MoonMapper getMoonMapper(string heightFilePath, string slopeFilePath, string latitudeFilePath, string longtitudeFilePath)
+    {
+        if(moonMapper == null) moonMapper = new MoonMapper(heightFilePath, slopeFilePath, latitudeFilePath, longtitudeFilePath);
+        return moonMapper;
+
+
     }
 }

@@ -24,7 +24,7 @@ public class Portal : MonoBehaviour
         Debug.Log(collision.gameObject.name);
         if(collision.gameObject.name.IndexOf("Player") != -1)
         {
-            Vector3 pos = new Vector3(0, 633, 0);
+            Vector3 pos = new Vector3(20, 300, 20);
             GameObject.Find("Player2").transform.position = pos;
             GameObject.Find("Player").transform.position = pos;
             foreach (var UIComponent in UIsToHideAndShow)

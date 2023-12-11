@@ -10,7 +10,7 @@ public class MeshGen2 : MonoBehaviour
     public float heightMultiplier = 1f; // Multiplier for height values
     public Material chunkMaterial; // Material to apply to chunks
 
-    public bool isFinished = false;
+    public bool isFinished = true;
 
     public int chunksGenerated;
 
