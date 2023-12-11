@@ -15,24 +15,19 @@ class Pathfinding : MonoBehaviour
     private GameObject player;
 
 
-
+    float heightChangeMult;
     double[,] heightMap;
     void Start()
     {
-        StartCoroutine("dontCrashPls");
+
         moonMapper = new MoonMapper(heightFilePath, slopeFilePath, latitudeFilePath, longtitudeFilePath);
-        heightMap = moonMapper.heightMap; //null??
-        Debug.Log(heightMap);
-        StopAllCoroutines();
+        heightMap = moonMapper.heightMap;
+
+        heightChangeMult = GameObject.Find("Mesh").GetComponent<MeshGen2>().heightMultiplier;
+        PathFind();
+
     }
-    async void dontCrashPls()
-    {
-        //100 seconds
-        await Task.Delay(100000);
-        //if Start() has been running for more than 100 seconds ABORT
-        Application.Quit();
-    }
-    async void Update()
+    void PathFind()
     {
         if (Camera.main.name == "playerCam")
         {
@@ -40,7 +35,8 @@ class Pathfinding : MonoBehaviour
         }
         else player = GameObject.Find("PlayerObj2");
         GridCoordinates playerPos = new GridCoordinates((int)player.transform.position.x, (int)player.transform.position.y);
-        GridCoordinates endPos = new GridCoordinates(50, 50);
+
+        GridCoordinates endPos = new GridCoordinates(100, 100);
         /*Index Mapping Notes
             0 = Bottom Left
             1 = Bottom Middle
@@ -51,36 +47,27 @@ class Pathfinding : MonoBehaviour
             6 = Top Middle
             7 = Top Right
         */
-        Vector2[] dirs = new Vector2[8];
-        dirs[0] = new Vector2(-1, -1);
-        dirs[1] = new Vector2(0, -1);
-        dirs[2] = new Vector2(1, -1);
-        dirs[3] = new Vector2(-1, 0);
-        dirs[4] = new Vector2(1, 0);
-        dirs[5] = new Vector2(-1, 1);
-        dirs[6] = new Vector2(1, 0);
-        dirs[7] = new Vector2(1, 1);
+        GridCoordinates[] dirs = moonMapper.GenerateAllEightDirections();
 
 
-        List<int> path = moonMapper.FindPath(new GridCoordinates(playerPos.xCoord, (int)playerPos.yCoord), endPos, 0);
+        List<int> path = moonMapper.FindPath(playerPos, endPos, 0);
 
         //List<int> path = new List<int>
         //{
-        //    1, 2, 5, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 3, 5, 5, 5, 5, 7, 0, 0, 0, 0, 0, 0, 0, 0
+        //    1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2
         //};
         Vector3[] lineVertexes = new Vector3[path.Count];
         int idx = 0;
 
         foreach (int dir in path)
         {
-            Vector2 direction = dirs[dir];
-            playerPos.xCoord += (int)direction.x;
-            playerPos.yCoord += (int)direction.y;
+            GridCoordinates direction = dirs[dir];
+            playerPos.xCoord += direction.xCoord;
+            playerPos.yCoord += direction.yCoord;
             //find the height value from the height CSV.
-            //Debug.Log(playerPos.xCoord);
-            //Debug.Log(heightMap);
-            double newY = heightMap[playerPos.xCoord, playerPos.yCoord] + 1;
-            lineVertexes[idx] = new Vector3(playerPos.xCoord + direction.x, (float)newY, playerPos.yCoord + direction.y);
+            double newY = heightMap[(int)(playerPos.xCoord * 10.24), (int)(playerPos.yCoord*10.24)] 
+                   * heightChangeMult + 2;
+            lineVertexes[idx] = new Vector3(playerPos.xCoord, (float)newY, playerPos.yCoord);
             idx++;
         }
 
