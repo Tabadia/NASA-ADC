@@ -30,16 +30,18 @@ public class Coordinates : MonoBehaviour
 
     string getActiveAstronaut(float number)
     {
-        if (Camera.main.name == "playerCam")
+        string statement = "";
+
+        if (Camera.main.name == "PlayerCam" && number == 1)
         {
-            if (number == 1) return " (me)";
-            else return "";
+            statement = " (me)";
         }
-        else
+        else if (Camera.main.name == "PlayerCam2" && number == 2)
         {
-            if (number == 2) return " (me)";
-            else return "";
+            statement = " (me)";
         }
+
+        return statement;
 
     }
 

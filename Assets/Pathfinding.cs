@@ -34,7 +34,7 @@ class Pathfinding : MonoBehaviour
     }
     async void Update()
     {
-        if (Camera.main.name == "playerCam")
+        if (Camera.main.name == "PlayerCam")
         {
             player = GameObject.Find("PlayerObj");
         }
