@@ -10,7 +10,8 @@ public class KeybindsWatcher : MonoBehaviour
 
     // used to remove the screen rotation
     public Transform orientation;
-    public GameObject meshOptions;
+    public GameObject settingsPanel;
+    public GameObject pathfindingPanel;
 
     // used to see mesh gen progress
     public MeshGen2 mesh;
@@ -20,7 +21,7 @@ public class KeybindsWatcher : MonoBehaviour
     {
         // have the panel off by default, since it should only show when the user wants to switch a page
         escPanel.SetActive(false);
-        meshOptions.SetActive(false);
+        settingsPanel.SetActive(false);
     }
 
     void lockMouse()
@@ -33,6 +34,13 @@ public class KeybindsWatcher : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+    }
+
+    void closeAllPanels()
+    {
+        escPanel.SetActive(false);
+        settingsPanel.SetActive(false);
+        pathfindingPanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -52,12 +60,18 @@ public class KeybindsWatcher : MonoBehaviour
 
                     escPanel.SetActive(false);
                 }
-                else if (meshOptions.activeInHierarchy == true)
+                else if (settingsPanel.activeInHierarchy == true)
                 {
                     lockMouse();
 
-                    meshOptions.SetActive(false);
-                } 
+                    settingsPanel.SetActive(false);
+                }
+                else if (pathfindingPanel.activeInHierarchy == true)
+                {
+                    lockMouse();
+
+                    pathfindingPanel.SetActive(false);
+                }
                 else
                 {
                     // remove cursor lock
@@ -68,19 +82,19 @@ public class KeybindsWatcher : MonoBehaviour
                 }
             }
 
-            if (Input.GetKeyDown(KeyCode.M))
+            if (Input.GetKeyDown(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.S))
             {
-                OpenSettings();
+                OpenPanel(settingsPanel);
             }
         }
     }
 
-    public void OpenSettings()
+    public void OpenPanel(GameObject panel)
     {
-        escPanel.SetActive(false);
+        closeAllPanels();
 
-        if (meshOptions.activeInHierarchy) lockMouse(); else unlockMouse();
+        if (panel.activeInHierarchy) lockMouse(); else unlockMouse();
 
-        meshOptions.SetActive(!meshOptions.activeInHierarchy);
+        panel.SetActive(!panel.activeInHierarchy);
     }
 }
