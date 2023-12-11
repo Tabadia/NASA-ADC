@@ -14,12 +14,12 @@ class Pathfinding : MonoBehaviour
     MoonMapper moonMapper;
     private GameObject player;
 
-    public Vector2 playerPos1;
-    public Vector2 endPos1;
+    public Vector2 playerPos1 = new Vector2(100, 100);
+    public Vector2 endPos1 = new Vector2(500, 500);
 
-    public double ratio;
+    public double ratio = 1;
 
-    public float heightChangeMult;
+    public float heightChangeMult = 0.5;
     double[,] heightMap;
     async void Start()
     {
