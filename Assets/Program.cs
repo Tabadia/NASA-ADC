@@ -486,8 +486,7 @@ class MoonMapper
                 }
                 else
                 {
-                    //double slopeToCheck = this.slopeMap[(int)(xCoordToCheck*10.24), (int)(yCoordToCheck * 10.24)];
-                    double slopeToCheck = this.slopeMap[(int)(xCoordToCheck / 10.24), (int)(yCoordToCheck / 10.24)];
+                    double slopeToCheck = this.slopeMap[(int)(xCoordToCheck), (int)(yCoordToCheck)];
                     if (slopeToCheck >= 15)
                     {
                         directionEvaluation[i] = 1048575;

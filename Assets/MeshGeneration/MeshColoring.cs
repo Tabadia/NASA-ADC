@@ -230,6 +230,8 @@ public class MeshColoring : MonoBehaviour
     }
 
     private void colorMeshBasedOnAzimuth() {
+        float min = 9999f;
+        float max = -9999f;
         /*
         Again, if you wanna Debug.Log, set area to something smaller.
         PERFORMANCE NOT DOCUMENTED
@@ -246,13 +248,15 @@ public class MeshColoring : MonoBehaviour
             {
                 for(var x = 0; x < chunkSize; x += azimuthRadius)
                 {
-
+                    
                     int idx = i + x * chunkSize;
                     Vector3 vertice = vertices[idx];
                     PolarCoordinates coords = MoonCalculator.GetCartesianToSphericalCoordinates(new CartesianCoordinates(vertice.x, vertice.y, vertice.z));
 
                     double azimuth = MoonCalculator.GetAzimuthAngleOneCartesianInput(coords, MoonCalculator.EarthCoordinates);
-                    float normalized = normalize((float)azimuth, -90, 90);
+                    min = Mathf.Min(min, azimuth);
+                    max = Mathf.Max(max, azimuth);
+                    float normalized = normalize((float)azimuth, min, max);
                     for (var y = 0; y < azimuthRadius;  y++) {
                         for(var z = 0; z < azimuthRadius; z++) {
                             int newIdx = idx + y + z*100;
