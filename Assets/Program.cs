@@ -61,7 +61,7 @@ class PolarCoordinates
 
 class MoonCalculator
 {
-    public CartesianCoordinates EarthCoordinates = new CartesianCoordinates(361000, 0, -42100);
+    public static CartesianCoordinates EarthCoordinates = new CartesianCoordinates(361000, 0, -42100);
 
     /*public static void EarthTest() {
         Console.WriteLine(EarthCoordinates.xCoord);
@@ -94,11 +94,12 @@ class MoonCalculator
         {
             radius = polarCoordinates.distanceFromMoonCoreInKilometers;
         }
-
+        /*
         Debug.Log("longitude input: " + polarCoordinates.longitude);
         Debug.Log("latitude input: " + polarCoordinates.latitude);
         Debug.Log(height);
         Console.WriteLine();
+        */
 
         double x = radius * (Cos(polarCoordinates.latitude) * Cos(polarCoordinates.longitude));
         double y = radius * (Cos(polarCoordinates.latitude) * Sin(polarCoordinates.longitude));
@@ -485,8 +486,8 @@ class MoonMapper
                 }
                 else
                 {
-                    double slopeToCheck = this.slopeMap[(int)(xCoordToCheck*10.24), (int)(yCoordToCheck * 10.24)];
-
+                    //double slopeToCheck = this.slopeMap[(int)(xCoordToCheck*10.24), (int)(yCoordToCheck * 10.24)];
+                    double slopeToCheck = this.slopeMap[(int)(xCoordToCheck / 10.24), (int)(yCoordToCheck / 10.24)];
                     if (slopeToCheck >= 15)
                     {
                         directionEvaluation[i] = 1048575;

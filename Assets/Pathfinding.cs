@@ -14,17 +14,26 @@ class Pathfinding : MonoBehaviour
     MoonMapper moonMapper;
     private GameObject player;
 
+    public Vector2 playerPos1;
+    public Vector2 endPos1;
 
-    float heightChangeMult;
+    public double ratio;
+
+    public float heightChangeMult;
     double[,] heightMap;
-    void Start()
+    async void Start()
     {
 
         moonMapper = new MoonMapper(heightFilePath, slopeFilePath, latitudeFilePath, longtitudeFilePath);
         heightMap = moonMapper.heightMap;
 
-        heightChangeMult = GameObject.Find("Mesh").GetComponent<MeshGen2>().heightMultiplier;
-        PathFind();
+        //heightChangeMult = GameObject.Find("Mesh").GetComponent<MeshGen2>().heightMultiplier;
+        while(true)
+        {
+            await Task.Delay(1000);
+
+            PathFind();
+        }
 
     }
     void PathFind()
@@ -34,9 +43,11 @@ class Pathfinding : MonoBehaviour
             player = GameObject.Find("PlayerObj");
         }
         else player = GameObject.Find("PlayerObj2");
-        GridCoordinates playerPos = new GridCoordinates((int)player.transform.position.x, (int)player.transform.position.y);
+        GridCoordinates playerPos = new GridCoordinates((int)playerPos1.x, (int)playerPos1.y);
+        GridCoordinates endPos = new GridCoordinates((int)endPos1.x, (int)endPos1.y);
+        //GridCoordinates playerPos = new GridCoordinates((int)player.transform.position.x, (int)player.transform.position.y);
 
-        GridCoordinates endPos = new GridCoordinates(100, 100);
+        //GridCoordinates endPos = new GridCoordinates(100, 100);
         /*Index Mapping Notes
             0 = Bottom Left
             1 = Bottom Middle
@@ -65,7 +76,7 @@ class Pathfinding : MonoBehaviour
             playerPos.xCoord += direction.xCoord;
             playerPos.yCoord += direction.yCoord;
             //find the height value from the height CSV.
-            double newY = heightMap[(int)(playerPos.xCoord * 10.24), (int)(playerPos.yCoord*10.24)] 
+            double newY = heightMap[(int)(playerPos.xCoord * ratio), (int)(playerPos.yCoord*ratio)] 
                    * heightChangeMult + 2;
             lineVertexes[idx] = new Vector3(playerPos.xCoord, (float)newY, playerPos.yCoord);
             idx++;

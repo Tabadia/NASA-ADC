@@ -246,26 +246,13 @@ public class MeshColoring : MonoBehaviour
             {
                 for(var x = 0; x < chunkSize; x += azimuthRadius)
                 {
-                    int idx = i + x*chunkSize;
 
-                    float xVal = -999999; 
-                    float yVal = -999999;
+                    int idx = i + x * chunkSize;
+                    Vector3 vertice = vertices[idx];
+                    PolarCoordinates coords = MoonCalculator.GetCartesianToSphericalCoordinates(new CartesianCoordinates(vertice.x, vertice.y, vertice.z));
 
-                    for(var y = 0; y < azimuthRadius;  y++) {
-                        for(var z = 0; z < azimuthRadius; z++) {
-                            int newIdx = idx + y + z*100;
-                            if (newIdx >= colors.Length) continue;
-
-                            Vector3 vertice = vertices[newIdx];
-                            xVal = Math.Max(vertice.x, xVal);
-                            yVal = Math.Max(vertice.y, yVal);
-                        }
-                    }
-
-                    double azimuth = Math.Atan((xVal - EARTH_LOCATION.x) / (yVal - EARTH_LOCATION.y)) * 180/Math.PI;
-
-                    var normalized = normalize((float)azimuth, -90, -89.8f);
-
+                    double azimuth = MoonCalculator.GetAzimuthAngleOneCartesianInput(coords, MoonCalculator.EarthCoordinates);
+                    float normalized = normalize((float)azimuth, -90, 90);
                     for (var y = 0; y < azimuthRadius;  y++) {
                         for(var z = 0; z < azimuthRadius; z++) {
                             int newIdx = idx + y + z*100;
