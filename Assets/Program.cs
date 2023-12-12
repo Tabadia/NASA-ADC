@@ -927,3 +927,13 @@ class MoonMapper {
         return FindPath(startPosGrid, targetPosGrid, prioritisation);
     }
 }
+
+class Constants {
+    static MoonMapper moonMapper;
+    public static MoonMapper getMoonMapper(string heightFilePath, string slopeFilePath, string latitudeFilePath, string longtitudeFilePath) {
+        if (moonMapper == null) moonMapper = new MoonMapper(heightFilePath, slopeFilePath, latitudeFilePath, longtitudeFilePath);
+        return moonMapper;
+
+
+    }
+}
