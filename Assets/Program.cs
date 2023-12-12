@@ -1,6 +1,5 @@
 using Microsoft.VisualBasic.FileIO;
 using System;
-using UnityEngine;
 using System.Collections;
 using System.Formats.Asn1;
 using System.Globalization;
@@ -9,8 +8,6 @@ using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
-using System.Linq;
-using System.Collections.Generic;
 
 class GridCoordinates {
     public int xCoord;
@@ -63,7 +60,7 @@ class Plane {
     public double zCoefficient;
     public double constant;
 
-    public Plane(double xCoefficient, double yCoefficient, double zCoefficient, double constant) {
+    public Plane (double xCoefficient, double yCoefficient, double zCoefficient, double constant) {
         this.xCoefficient = xCoefficient;
         this.yCoefficient = yCoefficient;
         this.zCoefficient = zCoefficient;
@@ -74,8 +71,8 @@ class Plane {
 class Line {
     public CartesianCoordinates positionVector;
     public CartesianCoordinates directionVector;
-
-    public Line(CartesianCoordinates positionVector, CartesianCoordinates directionVector) {
+    
+    public Line (CartesianCoordinates positionVector, CartesianCoordinates directionVector) {
         this.positionVector = positionVector;
         this.directionVector = directionVector;
     }
@@ -95,7 +92,7 @@ class GridCartesianPair {
     public CartesianCoordinates cartesianPosition;
     public GridCoordinates gridPosition;
 
-    public GridCartesianPair(CartesianCoordinates cartesianPosition, GridCoordinates gridPosition) {
+    public GridCartesianPair (CartesianCoordinates cartesianPosition, GridCoordinates gridPosition) {
         this.cartesianPosition = cartesianPosition;
         this.gridPosition = gridPosition;
     }
@@ -321,8 +318,8 @@ class MoonMapper {
         CartesianCoordinates[] threeArbitraryCartesianPoints = new CartesianCoordinates[3];
         GridCoordinates[] threeArbitraryGridPoints = new GridCoordinates[3];
         threeArbitraryGridPoints[0] = new GridCoordinates(1, 1);
-        threeArbitraryGridPoints[1] = new GridCoordinates(10, 4);
-        threeArbitraryGridPoints[2] = new GridCoordinates(6, 11);
+        threeArbitraryGridPoints[1] = new GridCoordinates(1000, 2200);
+        threeArbitraryGridPoints[2] = new GridCoordinates(3000, 1100);
 
         for (int i = 0; i < 3; i++) {
             threeArbitraryCartesianPoints[i] = ConvertGridToCartesian(threeArbitraryGridPoints[i], 0);
@@ -337,7 +334,7 @@ class MoonMapper {
         yDif = threeArbitraryCartesianPoints[0].yCoord - threeArbitraryCartesianPoints[2].yCoord;
         zDif = threeArbitraryCartesianPoints[0].zCoord - threeArbitraryCartesianPoints[2].zCoord;
         CartesianCoordinates vector2 = new CartesianCoordinates(xDif, yDif, zDif);
-
+        
         double planeXCoefficient = (vector1.yCoord * vector2.zCoord) - (vector1.zCoord * vector2.yCoord);
         double planeYCoefficient = (vector1.zCoord * vector2.xCoord) - (vector1.xCoord * vector2.zCoord);
         double planeZCoefficient = (vector1.xCoord * vector2.yCoord) - (vector1.yCoord * vector2.xCoord);
@@ -364,21 +361,42 @@ class MoonMapper {
 
         return plane;
     }
-    public bool IsTileTooHigh(GridCartesianPair tileToCheck, Plane landingSite, Line initPosToEarth) {
+    public bool IsTileLowEnough(GridCartesianPair tileToCheck, Plane landingSite, Line initPosToEarth, CartesianCoordinates normalVector) {
         //PolarCoordinates polarTileToCheck = new PolarCoordinates(this.longitudeMap[tileToCheck.gridPosition.xCoord, tileToCheck.gridPosition.yCoord], this.latitudeMap[tileToCheck.gridPosition.xCoord, tileToCheck.gridPosition.yCoord]);
         //CartesianCoordinates cartesianPointToCheck = MoonCalculator.GetSphericalToCartesianCoordinates(polarTileToCheck, 0);
         CartesianCoordinates planeNormalVector = new CartesianCoordinates(landingSite.xCoefficient, landingSite.yCoefficient, landingSite.zCoefficient);
         CartesianCoordinates cartesianPointToCheck = tileToCheck.cartesianPosition;
-        Line normalLine = new Line(cartesianPointToCheck, planeNormalVector);
+
+        CartesianCoordinates cartesianPointToCheckOtherMethod = ConvertGridToCartesian(tileToCheck.gridPosition, 0);
+        CartesianCoordinates cartesianPointToCheckWithHeight = ConvertGridToCartesian(tileToCheck.gridPosition, heightMap[tileToCheck.gridPosition.xCoord, tileToCheck.gridPosition.yCoord]);
+
+        double xDif = cartesianPointToCheckWithHeight.xCoord - tileToCheck.cartesianPosition.xCoord;
+        double yDif = cartesianPointToCheckWithHeight.yCoord - tileToCheck.cartesianPosition.yCoord;
+        double zDif = cartesianPointToCheckWithHeight.zCoord - tileToCheck.cartesianPosition.zCoord;
+
+        CartesianCoordinates planeNormalVectorArtificial = new CartesianCoordinates(xDif, yDif, zDif);
+
+        Line normalLine = new Line(cartesianPointToCheck, normalVector);
         CartesianCoordinates intersectionPoint = MoonCalculator.FindIntersectionOfLines(initPosToEarth, normalLine);
         double distanceToIntersection = MoonCalculator.GetDistanceBetweenCartesianPoints(cartesianPointToCheck, intersectionPoint);
-        double height = this.heightMap[tileToCheck.gridPosition.xCoord, tileToCheck.gridPosition.yCoord] / 1000;
+        double height = this.heightMap[tileToCheck.gridPosition.xCoord, tileToCheck.gridPosition.yCoord]/1000;
 
-        if (distanceToIntersection > height + 0.003) {
-            return false;
+        Debug.Log();
+        Debug.Log("calculated cartesian different from observed:");
+        Debug.Log("x " + (intersectionPoint.xCoord - tileToCheck.cartesianPosition.xCoord));
+        Debug.Log("y " + (intersectionPoint.yCoord - tileToCheck.cartesianPosition.yCoord));
+        Debug.Log("z " + (intersectionPoint.zCoord - tileToCheck.cartesianPosition.zCoord));
+
+        Debug.Log();
+        Debug.Log("Distance from flattened tile to Earth Vision Line: " + distanceToIntersection);
+        Debug.Log("Height in kilometers at that point: " + height);
+        Debug.Log();
+
+        if (distanceToIntersection + 0.003 > height) {
+            return true;
 
         } else {
-            return true;
+            return false;
 
         }
     }
@@ -387,6 +405,10 @@ class MoonMapper {
         int indexBound = 0;
         double parameter = 0;
         bool hasTileBeenFound = true;
+        StreamReader reader = new StreamReader("/Users/lightspark/Documents/Custom_Console.rtf");
+        StreamWriter writer = new StreamWriter("/Users/lightspark/Documents/Custom_Console.rtf");
+        writer.Write("This method needs more OTT");
+        writer.Close();
 
         while (hasTileBeenFound) {
             hasTileBeenFound = false;
@@ -425,6 +447,8 @@ class MoonMapper {
                 if (!hasTileBeenFound) {
                     //Debug.Log("No more");
                     //Debug.Log("Amount of tiles found: " + tilesList.Count);
+                    //writer.Close();
+
                     return tilesList;
                 }
 
@@ -433,10 +457,13 @@ class MoonMapper {
                 int previousYCoord = tilesList[tilesList.Count - 1].gridPosition.yCoord;
                 CartesianCoordinates tileCartesian = this.ConvertGridToCartesian(tilesList[tilesList.Count - 1].gridPosition, 0);
 
-                if (MoonCalculator.GetDistanceBetweenCartesianPoints(currentLocationCheck, tileCartesian) > 0.003535533906) {
+                Debug.Log("Distance between last point and line test point: " + MoonCalculator.GetDistanceBetweenCartesianPoints(currentLocationCheck, tileCartesian));
+                Debug.Log();
+
+                if (MoonCalculator.GetDistanceBetweenCartesianPoints(currentLocationCheck, tileCartesian) > 0.003655533906) {
                     GridCoordinates[] allEightDirections = this.GenerateAllEightDirections();
                     //arbitrarily large number (10 km)
-                    double shortestDistanceFound = 10;
+                    //double shortestDistanceFound = 10;
 
                     for (int i = 0; i < 8; i++) {
                         GridCoordinates directionToTest = allEightDirections[i];
@@ -462,7 +489,7 @@ class MoonMapper {
                                 shortestDistanceFound = testToLinePointDistance;
                             }*/
 
-                            if (testToLinePointDistance < 0.003535533906) {
+                            if (testToLinePointDistance < 0.0036635533906) {
                                 int iterationLimit = 3;
 
                                 if (tilesList.Count < iterationLimit) {
@@ -474,6 +501,7 @@ class MoonMapper {
                                     double coveredY = tilesList[tilesList.Count - j].gridPosition.yCoord;
 
                                     if (newXCoord == coveredX && newYCoord == coveredY) {
+                                        Debug.Log("Found tile already covered");
                                         hasTileBeenFound = true;
                                         break;
                                     }
@@ -490,13 +518,12 @@ class MoonMapper {
                                     tilesList.Add(tilePrecise);
                                     hasTileBeenFound = true;
 
-                                    /*Debug.Log("Most Recent Tile X: " + tilePrecise.gridPosition.xCoord);
+                                    Debug.Log("Most Recent Tile X: " + tilePrecise.gridPosition.xCoord);
                                     Debug.Log("Most Recent Tile Y: " + tilePrecise.gridPosition.yCoord);
                                     Debug.Log("Amount of tiles: " + tilesList.Count);
                                     Debug.Log();
-                                    */
 
-                                    break;
+                                    break;    
                                 }
                             }
                         }
@@ -511,6 +538,8 @@ class MoonMapper {
 
             parameter += 0.00003;
         }
+
+        //writer.Close();
 
         return tilesList;
     }
@@ -598,14 +627,27 @@ class MoonMapper {
             //Debug.Log("Tile #" + i + ": " + tilesTotest[i].gridPosition.xCoord + ", " + tilesTotest[i].gridPosition.yCoord);
         }
 
+        Debug.Log("Real starting test:");
+        Debug.Log("x " + (positionToEarthLine.positionVector.xCoord - currentCartesianPositionReal.xCoord));
+        Debug.Log("y " + (positionToEarthLine.positionVector.yCoord - currentCartesianPositionReal.yCoord));
+        Debug.Log("z " + (positionToEarthLine.positionVector.zCoord - currentCartesianPositionReal.zCoord));
+
+        double xDif = currentCartesianPositionReal.xCoord - tilesTotest[0].cartesianPosition.xCoord;
+        double yDif = currentCartesianPositionReal.yCoord - tilesTotest[0].cartesianPosition.yCoord;
+        double zDif = currentCartesianPositionReal.zCoord - tilesTotest[0].cartesianPosition.zCoord;
+
+        CartesianCoordinates normalVector = new CartesianCoordinates(xDif, yDif, zDif);
+
         for (int i = 0; i < tilesTotest.Count; i++) {
-            if (IsTileTooHigh(tilesTotest[i], this.landingSite, positionToEarthLine)) {
+            if (!IsTileLowEnough(tilesTotest[i], this.landingSite, positionToEarthLine, normalVector)) {
+                Debug.Log("Where we failed: [" + tilesTotest[i].gridPosition.xCoord + ", " + tilesTotest[i].gridPosition.yCoord + "]");
+
                 return false;
             }
         }
 
         return true;
-
+        
         /*
         for (int i = 0; i < heightMap.GetLength(0); i++) {
             for (int j = 0; j < heightMap.GetLength(1); j++) {
@@ -759,7 +801,7 @@ class MoonMapper {
         for (int yCoord = 1; yCoord > -2; yCoord--) {
             for (int xCoord = -1; xCoord < 2; xCoord++) {
                 if (yCoord != 0 || xCoord != 0) {
-                    EightDirectionsList[index] = new GridCoordinates(xCoord * 5, yCoord * 5);
+                    EightDirectionsList[index] = new GridCoordinates(xCoord*5, yCoord*5);
                     index++;
                 }
             }
@@ -880,7 +922,7 @@ class MoonMapper {
                                 directionEvaluation[i] += canSeeEarthWeight;
                             }
                         }
-
+                        
                     }
                 }
 
@@ -908,7 +950,7 @@ class MoonMapper {
 
             sequenceIndex++;
         }
-        
+
         Debug.Log("Amount of steps: " + directionSequenceReal.Count);
 
         return directionSequenceReal;
@@ -925,15 +967,5 @@ class MoonMapper {
         GridCoordinates targetPosGrid = GetPolarToGridConversion(targetPos);
 
         return FindPath(startPosGrid, targetPosGrid, prioritisation);
-    }
-}
-
-class Constants {
-    static MoonMapper moonMapper;
-    public static MoonMapper getMoonMapper(string heightFilePath, string slopeFilePath, string latitudeFilePath, string longtitudeFilePath) {
-        if (moonMapper == null) moonMapper = new MoonMapper(heightFilePath, slopeFilePath, latitudeFilePath, longtitudeFilePath);
-        return moonMapper;
-
-
     }
 }
