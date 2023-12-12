@@ -89,6 +89,8 @@ public class MeshGen2 : MonoBehaviour
                 meshFilter.mesh = mesh;
                 meshRenderer.material = sharedMaterial; // Apply the shared material
 
+                chunkObject.AddComponent<Touching>();
+
                 chunksGenerated++;
                 yield return new WaitForSeconds(0.001f); // Yield for a moment to prevent freezing the main thread
             }

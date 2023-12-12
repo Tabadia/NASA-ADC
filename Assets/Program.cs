@@ -370,7 +370,7 @@ class MoonMapper
         return distance;
     }
 
-    public GridCoordinates[] GenerateAllEightDirections()
+    public static GridCoordinates[] GenerateAllEightDirections()
     {
         GridCoordinates[] EightDirectionsList = new GridCoordinates[8];
         int index = 0;
@@ -381,7 +381,7 @@ class MoonMapper
             {
                 if (yCoord != 0 || xCoord != 0)
                 {
-                    EightDirectionsList[index] = new GridCoordinates(xCoord, yCoord);
+                    EightDirectionsList[index] = new GridCoordinates(xCoord*5, yCoord*5);
                     index++;
                 }
             }
@@ -493,7 +493,7 @@ class MoonMapper
                     double slopeToCheck = this.slopeMap[(int)(xCoordToCheck), (int)(yCoordToCheck)];
                     if (slopeToCheck >= 15)
                     {
-                        directionEvaluation[i] = 100;
+                        directionEvaluation[i] = 1048575;
                         
                     }
                     else
@@ -520,8 +520,10 @@ class MoonMapper
 
                 //Array.Clear(directionEvaluation, 0, directionEvaluation.Length);
             }
+            
+            if (directionToChoose <= -1) return directionSequenceReal; //no path
+            if(directionEvaluation[directionToChoose] == 1048575) return directionSequenceReal;
 
-            if (directionToChoose == -1) return directionSequenceReal;
             directionSequenceReal.Add(directionToChoose);
             visited.Add(currentPos.xCoord + "," + currentPos.yCoord);
             currentPos.xCoord += directionList[directionToChoose].xCoord;
@@ -555,6 +557,7 @@ class MoonMapper
 }
 class Constants
 {
+    public static MeshFilter meshBeingTouched;
     static MoonMapper moonMapper;
     public static MoonMapper getMoonMapper(string heightFilePath, string slopeFilePath, string latitudeFilePath, string longtitudeFilePath)
     {
