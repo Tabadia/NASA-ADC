@@ -4597,7 +4597,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1, y: 0}
+  m_AnchoredPosition: {x: -10, y: 0}
   m_SizeDelta: {x: -3.500122, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &976567452
@@ -8659,8 +8659,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Moonlins
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 07ee36b6d61c64243b27f2d7d1beac8d, type: 2}
-  m_sharedMaterial: {fileID: 5583339924650633072, guid: 07ee36b6d61c64243b27f2d7d1beac8d, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: db94f4f13895a9e42a91e0b68da9fd0e, type: 2}
+  m_sharedMaterial: {fileID: -820751989911728253, guid: db94f4f13895a9e42a91e0b68da9fd0e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8690,11 +8690,11 @@ MonoBehaviour:
   m_enableAutoSizing: 1
   m_fontSizeMin: 60
   m_fontSizeMax: 80
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 5
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
