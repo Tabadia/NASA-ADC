@@ -1,13 +1,14 @@
-using Microsoft.VisualBasic.FileIO;
+using System.Linq;
+using System.IO;
+using System.Collections.Generic;
 using System;
 using System.Collections;
-using System.Formats.Asn1;
 using System.Globalization;
 using System.Net.Http.Headers;
-using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Xml;
+using UnityEngine;
 
 class GridCoordinates {
     public int xCoord;
@@ -99,7 +100,7 @@ class GridCartesianPair {
 }
 
 class MoonCalculator {
-    public CartesianCoordinates EarthCoordinates = new CartesianCoordinates(361000, 0, -42100);
+    public static CartesianCoordinates EarthCoordinates = new CartesianCoordinates(361000, 0, -42100);
 
     /*public static void EarthTest() {
         Debug.Log(EarthCoordinates.xCoord);
@@ -130,7 +131,7 @@ class MoonCalculator {
         //Debug.Log("longitude input: " + polarCoordinates.longitude);
         //Debug.Log("latitude input: " + polarCoordinates.latitude);
         //Debug.Log(height);
-        //Debug.Log();
+        //;
 
         double x = radius * (Cos(polarCoordinates.latitude) * Cos(polarCoordinates.longitude));
         double y = radius * (Cos(polarCoordinates.latitude) * Sin(polarCoordinates.longitude));
@@ -264,7 +265,7 @@ class MoonCalculator {
         StreamReader reader = new StreamReader("C:\\Users\\alex\\Documents\\HOWWRITE.txt");
         StreamWriter writer = new StreamWriter("C:\\Users\\alex\\Documents\\todolist.txt");
 
-        Random random = new Random();
+        System.Random random = new System.Random();
 
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
@@ -381,16 +382,16 @@ class MoonMapper {
         double distanceToIntersection = MoonCalculator.GetDistanceBetweenCartesianPoints(cartesianPointToCheck, intersectionPoint);
         double height = this.heightMap[tileToCheck.gridPosition.xCoord, tileToCheck.gridPosition.yCoord]/1000;
 
-        Debug.Log();
+        
         Debug.Log("calculated cartesian different from observed:");
         Debug.Log("x " + (intersectionPoint.xCoord - tileToCheck.cartesianPosition.xCoord));
         Debug.Log("y " + (intersectionPoint.yCoord - tileToCheck.cartesianPosition.yCoord));
         Debug.Log("z " + (intersectionPoint.zCoord - tileToCheck.cartesianPosition.zCoord));
 
-        Debug.Log();
+        
         Debug.Log("Distance from flattened tile to Earth Vision Line: " + distanceToIntersection);
         Debug.Log("Height in kilometers at that point: " + height);
-        Debug.Log();
+        
 
         if (distanceToIntersection + 0.003 > height) {
             return true;
@@ -418,11 +419,11 @@ class MoonMapper {
             Debug.Log("Line update X: " + currentLocationCheck.xCoord);
             Debug.Log("Line update Y: " + currentLocationCheck.yCoord);
             Debug.Log("Line update Z: " + currentLocationCheck.zCoord);
-            Debug.Log();
+            
             Debug.Log("Direction vector X: " + projectedLine.directionVector.xCoord);
             Debug.Log("Direction vector Y: " + projectedLine.directionVector.yCoord);
             Debug.Log("Direction vector Z: " + projectedLine.directionVector.zCoord);
-            Debug.Log();
+            
             */
 
             if (tilesList.Count < 1) {
@@ -431,11 +432,11 @@ class MoonMapper {
                 /*Debug.Log("Starting X point: " + tileCartesian.xCoord);
                 Debug.Log("Starting Y point: " + tileCartesian.yCoord);
                 Debug.Log("Starting Z point: " + tileCartesian.zCoord);
-                Debug.Log();
+                
                 Debug.Log("Line X point: " + currentLocationCheck.xCoord);
                 Debug.Log("Line Y point: " + currentLocationCheck.yCoord);
                 Debug.Log("Line Z point: " + currentLocationCheck.zCoord);
-                Debug.Log();
+                
                 */
 
                 if (MoonCalculator.GetDistanceBetweenCartesianPoints(currentLocationCheck, tileCartesian) < 0.003535533906) {
@@ -458,10 +459,10 @@ class MoonMapper {
                 CartesianCoordinates tileCartesian = this.ConvertGridToCartesian(tilesList[tilesList.Count - 1].gridPosition, 0);
 
                 Debug.Log("Distance between last point and line test point: " + MoonCalculator.GetDistanceBetweenCartesianPoints(currentLocationCheck, tileCartesian));
-                Debug.Log();
+                
 
                 if (MoonCalculator.GetDistanceBetweenCartesianPoints(currentLocationCheck, tileCartesian) > 0.003655533906) {
-                    GridCoordinates[] allEightDirections = this.GenerateAllEightDirections();
+                    GridCoordinates[] allEightDirections = GenerateAllEightDirections();
                     //arbitrarily large number (10 km)
                     //double shortestDistanceFound = 10;
 
@@ -479,7 +480,7 @@ class MoonMapper {
                             /*Debug.Log("New point X: " + tileCartesian.xCoord);
                             Debug.Log("New point Y: " + tileCartesian.yCoord);
                             Debug.Log("New point Z: " + tileCartesian.zCoord);
-                            Debug.Log();
+                            
                             Debug.Log("Distance between tested point and line point: " + MoonCalculator.GetDistanceBetweenCartesianPoints(currentLocationCheck, tileCartesian));
                             */
 
@@ -508,9 +509,9 @@ class MoonMapper {
                                 }
 
                                 if (!hasTileBeenFound) {
-                                    /*Debug.Log();
+                                    /*
                                     Debug.Log("Deez");
-                                    Debug.Log();*/
+                                    */
 
                                     GridCoordinates tile = new GridCoordinates(newXCoord, newYCoord);
                                     indexBound = Math.Max(newXCoord, newYCoord);
@@ -521,7 +522,7 @@ class MoonMapper {
                                     Debug.Log("Most Recent Tile X: " + tilePrecise.gridPosition.xCoord);
                                     Debug.Log("Most Recent Tile Y: " + tilePrecise.gridPosition.yCoord);
                                     Debug.Log("Amount of tiles: " + tilesList.Count);
-                                    Debug.Log();
+                                    
 
                                     break;    
                                 }
@@ -534,7 +535,7 @@ class MoonMapper {
             }
 
             //Debug.Log("Has a tile been found? " + hasTileBeenFound);
-            //Debug.Log();
+            //
 
             parameter += 0.00003;
         }
@@ -570,7 +571,7 @@ class MoonMapper {
         /*Debug.Log("x: " + foundPointOnPlane.xCoord);
         Debug.Log("y: " + foundPointOnPlane.yCoord);
         Debug.Log("z: " + foundPointOnPlane.zCoord);
-        Debug.Log();*/
+        */
 
         CartesianCoordinates planeProjectedVector = new CartesianCoordinates(xDistance, yDistance, zDistance);
         Line projectedLine = new Line(line.positionVector, planeProjectedVector);
@@ -580,12 +581,12 @@ class MoonMapper {
         /*Debug.Log("test x: " + line.positionVector.xCoord);
         Debug.Log("test y: " + line.positionVector.yCoord);
         Debug.Log("test z: " + line.positionVector.zCoord);
-        Debug.Log();*/
+        */
 
         double please = this.landingSite.xCoefficient * testPoint.xCoord + this.landingSite.yCoefficient * testPoint.yCoord + this.landingSite.zCoefficient * testPoint.zCoord;
 
         //Debug.Log("Point Line Plane Test = " + please);
-        //Debug.Log();
+        //
 
         /*
          Projected Vector x: -3612741.526781921
@@ -656,7 +657,7 @@ class MoonMapper {
                 cartesianTileMap[i, j] = MoonCalculator.GetSphericalToCartesianCoordinates(polarTilePosition, heightMap[i, j]);
 
                 if (i < 5 && j < 5) {
-                    Debug.Log();
+                    
                     Debug.Log("Position: " + i + ", " + j);
                     Debug.Log("xCoord: " + cartesianTileMap[i, j].xCoord);
                     Debug.Log("yCoord: " + cartesianTileMap[i, j].yCoord);
@@ -696,7 +697,7 @@ class MoonMapper {
             gridLocation = (GridCoordinates)candidateLocations[0];
         }
 
-        /*Debug.Log();
+        /*
         Debug.Log("Real coordinate:");
         Debug.Log(gridLocation.xCoord + ", " + gridLocation.yCoord);
         */
@@ -719,7 +720,7 @@ class MoonMapper {
         // T is serialization for type. 
         try {
             int FirstDim = source.Length;
-            int SecondDim = source.GroupBy(row => row.Length).Single().Key; // throws InvalidOperationException if source is not rectangular
+            int SecondDim = FirstDim;
 
             var result = new T[FirstDim, SecondDim];
             for (int i = 0; i < FirstDim; ++i)
@@ -746,6 +747,7 @@ class MoonMapper {
 
 
     }
+    /*
     public static double[,] CSVToArrayOld(string filePath) {
         var path = @filePath;
 
@@ -784,6 +786,7 @@ class MoonMapper {
             return map;
         }
     }
+    */
 
     public double GetDistanceBetweenPoints(GridCoordinates point1, GridCoordinates point2) {
         int xDistance = Math.Abs(point2.xCoord - point1.xCoord);
@@ -794,7 +797,7 @@ class MoonMapper {
         return distance;
     }
 
-    public GridCoordinates[] GenerateAllEightDirections() {
+    public static GridCoordinates[] GenerateAllEightDirections() {
         GridCoordinates[] EightDirectionsList = new GridCoordinates[8];
         int index = 0;
 
@@ -863,7 +866,7 @@ class MoonMapper {
         Debug.Log("Current Slope: " + this.slopeMap[currentPos.xCoord, currentPos.yCoord]);
         Debug.Log("Current xCoord: " + currentPos.xCoord);
         Debug.Log("Current yCoord: " + currentPos.yCoord);
-        Debug.Log();
+        
 
         /*TODO
         In order to overcome looping issues for slope optimisation, I can factor in the amount of turns
@@ -946,7 +949,7 @@ class MoonMapper {
             Debug.Log("Current Slope: " + this.slopeMap[currentPos.xCoord, currentPos.yCoord]);
             Debug.Log("Current xCoord: " + currentPos.xCoord);
             Debug.Log("Current yCoord: " + currentPos.yCoord);
-            Debug.Log();
+            
 
             sequenceIndex++;
         }
