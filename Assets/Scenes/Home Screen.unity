@@ -1466,8 +1466,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278190080
-  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1523,7 +1523,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &373249260
@@ -1821,7 +1821,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1932255406}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.38154513
+  m_Size: 0.5162943
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1907,7 +1907,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: -20, y: 844.5001}
+  m_SizeDelta: {x: -20, y: 660.5001}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &472556737
 MonoBehaviour:
@@ -3666,7 +3666,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Yuh huh
+  m_text: Yes
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
   m_sharedMaterial: {fileID: 9139985933622498525, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
@@ -3732,7 +3732,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &822601149
@@ -4308,7 +4308,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 943673980}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.68977374
+  m_Size: 0.91580194
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4384,7 +4384,7 @@ RectTransform:
   m_Father: {fileID: 1619377812}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.31022626}
+  m_AnchorMin: {x: 0, y: 0.08419806}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -4794,7 +4794,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 10, y: 0}
-  m_SizeDelta: {x: -20, y: 269.50598}
+  m_SizeDelta: {x: -20, y: 69.661255}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1027020110
 MonoBehaviour:
@@ -7577,7 +7577,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Nuh uh
+  m_text: No
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
   m_sharedMaterial: {fileID: 9139985933622498525, guid: c4ccf225639172c4b91e86b20ef2c7b0, type: 2}
@@ -7643,7 +7643,7 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1407266608
@@ -9821,7 +9821,7 @@ RectTransform:
   m_Father: {fileID: 548624871}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.6184549}
+  m_AnchorMin: {x: 0, y: 0.4837057}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
