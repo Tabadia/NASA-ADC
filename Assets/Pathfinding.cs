@@ -19,7 +19,7 @@ class Pathfinding : MonoBehaviour
 
     public double ratio = 1;
 
-    public float heightChangeMult = 0.5;
+    public float heightChangeMult = 0.5f;
     double[,] heightMap;
     async void Start()
     {

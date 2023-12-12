@@ -254,8 +254,8 @@ public class MeshColoring : MonoBehaviour
                     PolarCoordinates coords = MoonCalculator.GetCartesianToSphericalCoordinates(new CartesianCoordinates(vertice.x, vertice.y, vertice.z));
 
                     double azimuth = MoonCalculator.GetAzimuthAngleOneCartesianInput(coords, MoonCalculator.EarthCoordinates);
-                    min = Mathf.Min(min, azimuth);
-                    max = Mathf.Max(max, azimuth);
+                    min = Mathf.Min(min, (float)azimuth);
+                    max = Mathf.Max(max, (float)azimuth);
                     float normalized = normalize((float)azimuth, min, max);
                     for (var y = 0; y < azimuthRadius;  y++) {
                         for(var z = 0; z < azimuthRadius; z++) {

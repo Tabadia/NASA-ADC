@@ -457,9 +457,11 @@ class MoonMapper
         In order to overcome looping issues for slope optimisation, I can factor in the amount of turns
         spent to minimise the slope weight
         */
-
+        HashSet<string> visited = new HashSet<string>();
         while (GetDistanceBetweenPoints(currentPos, targetPosGrid) != 0)
         {
+
+            if (directionSequenceReal.Count > 2000) break;
             /*Index Mapping Notes
             0 = Bottom Left
             1 = Bottom Middle
@@ -472,12 +474,14 @@ class MoonMapper
             */
             double[] directionEvaluation = new double[8];
             GridCoordinates[] directionList = GenerateAllEightDirections();
-            int directionToChoose = 0;
+            int directionToChoose = -1;
 
             for (int i = 0; i < 8; i++)
             {
+                
                 int xCoordToCheck = currentPos.xCoord + directionList[i].xCoord;
                 int yCoordToCheck = currentPos.yCoord + directionList[i].yCoord;
+                if (visited.Contains(xCoordToCheck + "," + yCoordToCheck)) continue; 
                 GridCoordinates coordToCheck = new GridCoordinates(xCoordToCheck, yCoordToCheck);
 
                 if (xCoordToCheck < 0 || yCoordToCheck < 0 || xCoordToCheck >= 3200 || yCoordToCheck >= 3200)
@@ -489,7 +493,8 @@ class MoonMapper
                     double slopeToCheck = this.slopeMap[(int)(xCoordToCheck), (int)(yCoordToCheck)];
                     if (slopeToCheck >= 15)
                     {
-                        directionEvaluation[i] = 1048575;
+                        directionEvaluation[i] = 100;
+                        
                     }
                     else
                     {
@@ -507,18 +512,18 @@ class MoonMapper
                     }
                 }
 
-                if (i > 0)
+                if (directionToChoose == -1 || directionEvaluation[i] < directionEvaluation[directionToChoose])
                 {
-                    if (directionEvaluation[i] < directionEvaluation[directionToChoose])
-                    {
-                        directionToChoose = i;
-                    }
+                    directionToChoose = i;
                 }
+                
 
                 //Array.Clear(directionEvaluation, 0, directionEvaluation.Length);
             }
 
+            if (directionToChoose == -1) return directionSequenceReal;
             directionSequenceReal.Add(directionToChoose);
+            visited.Add(currentPos.xCoord + "," + currentPos.yCoord);
             currentPos.xCoord += directionList[directionToChoose].xCoord;
             currentPos.yCoord += directionList[directionToChoose].yCoord;
             /*
