@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -14,35 +16,57 @@ class Pathfinding : MonoBehaviour
     MoonMapper moonMapper;
     private GameObject player;
 
-    public Vector2 playerPos1 = new Vector2(100, 100);
-    public Vector2 endPos1 = new Vector2(500, 500);
+    public Vector2 playerPos1 = new Vector2(5, 5);
+    public Vector2 endPos1 = new Vector2(10, 10);
 
     public double ratio = 1;
 
     public float heightChangeMult = 0.5f;
     double[,] heightMap;
+
     async void Start()
     {
 
-        moonMapper = new MoonMapper(heightFilePath, slopeFilePath, latitudeFilePath, longtitudeFilePath);
-        heightMap = moonMapper.heightMap;
 
+
+
+        moonMapper = Constants.getMoonMapper(heightFilePath, slopeFilePath, latitudeFilePath, longtitudeFilePath);
+        heightMap = moonMapper.heightMap;
         //heightChangeMult = GameObject.Find("Mesh").GetComponent<MeshGen2>().heightMultiplier;
-        while(true)
+        while (true)
         {
             await Task.Delay(1000);
-
             PathFind();
         }
 
     }
+    Vector3 rotate_point(float cx, float cy, float angle, Vector3 p)
+    {
+        float s = Mathf.Sin(angle);
+        float c = Mathf.Cos(angle);
+
+        // translate point back to origin:
+        p.x -= cx;
+        p.y -= cy;
+
+        // rotate point
+        float xnew = p.x * c - p.y * s;
+        float ynew = p.x * s + p.y * c;
+
+        // translate point back:
+        p.x = xnew + cx;
+        p.y = ynew + cy;
+        return p;
+    }
+    Vector3 FindMeshVertice(MeshFilter mesh, int x, int y)
+    {
+        //we want to round down.
+        int xIdx = x % 100;
+        int yIdx = y % 100;
+        return mesh.mesh.vertices[xIdx + yIdx * 100];
+    }
     void PathFind()
     {
-        if (Camera.main.name == "PlayerCam")
-        {
-            player = GameObject.Find("PlayerObj");
-        }
-        else player = GameObject.Find("PlayerObj2");
         GridCoordinates playerPos = new GridCoordinates((int)playerPos1.x, (int)playerPos1.y);
         GridCoordinates endPos = new GridCoordinates((int)endPos1.x, (int)endPos1.y);
         //GridCoordinates playerPos = new GridCoordinates((int)player.transform.position.x, (int)player.transform.position.y);
@@ -58,7 +82,7 @@ class Pathfinding : MonoBehaviour
             6 = Top Middle
             7 = Top Right
         */
-        GridCoordinates[] dirs = moonMapper.GenerateAllEightDirections();
+        GridCoordinates[] dirs = MoonMapper.GenerateAllEightDirections();
 
 
         List<int> path = moonMapper.FindPath(playerPos, endPos, 0);
@@ -75,9 +99,18 @@ class Pathfinding : MonoBehaviour
             GridCoordinates direction = dirs[dir];
             playerPos.xCoord += direction.xCoord;
             playerPos.yCoord += direction.yCoord;
-            //find the height value from the height CSV.
-            double newY = heightMap[(int)(playerPos.xCoord * ratio), (int)(playerPos.yCoord*ratio)] 
-                   * heightChangeMult + 2;
+            //find the height value from the height CSV
+            RaycastHit hit;
+
+            
+            if (!Physics.Raycast(new Vector3(playerPos.xCoord, 1000, playerPos.yCoord), Vector3.down, out hit, Mathf.Infinity))
+            {
+                Debug.Log("raycast failed");
+                continue;
+            }
+            MeshFilter mesh = hit.transform.gameObject.GetComponent<MeshFilter>();
+            Debug.Log(mesh.transform.name);
+            var newY = FindMeshVertice(mesh, playerPos.xCoord, playerPos.yCoord).y + 2;
             lineVertexes[idx] = new Vector3(playerPos.xCoord, (float)newY, playerPos.yCoord);
             idx++;
         }
@@ -88,6 +121,8 @@ class Pathfinding : MonoBehaviour
             Debug.LogError("GET A LIFE. And a line renderer component.");
             return;
         }
+        //Vector3 midPoint = (lineVertexes[0] + lineVertexes[lineVertexes.Length-1]) / 2;
+
         lineRenderer.positionCount = path.Count;
         lineRenderer.colorGradient = lineGradient;
         lineRenderer.SetPositions(lineVertexes);
@@ -95,3 +130,4 @@ class Pathfinding : MonoBehaviour
 
 
 }
+
