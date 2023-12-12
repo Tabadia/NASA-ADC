@@ -86,6 +86,11 @@ public class KeybindsWatcher : MonoBehaviour
             {
                 OpenPanel(settingsPanel);
             }
+
+            if (Input.GetKeyDown(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.P) || Input.GetKeyDown(KeyCode.RightControl) && Input.GetKeyDown(KeyCode.P))
+            {
+                OpenPanel(pathfindingPanel);
+            }
         }
     }
 
