@@ -20,7 +20,7 @@ public class PathfindingUI : MonoBehaviour
 
     void OnMouseDown()
     {
-          Debug.Log("CLICKED ");
+          Debug.LogError("CLICKED ");
             
         
     }

@@ -39,8 +39,6 @@ public class GenPanel : MonoBehaviour
        
         if(mesh.isFinished == true)
         {
-            p1Cam.canMove = false;
-            p2Cam.canMove = true; //only 1 player can move at a time!
 
             text.text = "Loading...";
             panel.SetActive(false);
