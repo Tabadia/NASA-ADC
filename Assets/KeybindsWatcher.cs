@@ -22,6 +22,7 @@ public class KeybindsWatcher : MonoBehaviour
         // have the panel off by default, since it should only show when the user wants to switch a page
         escPanel.SetActive(false);
         settingsPanel.SetActive(false);
+        pathfindingPanel.SetActive(false);
     }
 
     void lockMouse()

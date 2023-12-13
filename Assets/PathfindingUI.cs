@@ -1,56 +1,61 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class PathfindingUI : MonoBehaviour
 {
     public TextMeshProUGUI coordinateText; // Reference to your TextMeshPro object
-    public Transform groundPlane; // Reference to the ground plane (where the camera is looking down)
+    public GameObject imageObject; // Reference to the GameObject with the image
+
+    int imageWidth = 500;
+    int imageHeight = 500;
+
+    float originalX = 250;
+    float originalY = 250;
 
     void Update()
     {
-        UpdateCoordinatesOnMouseClick();
-        UpdateCoordinatesOnMouseMovement();
+        UpdateCoordinatesOnMouseOver();
     }
 
-    void UpdateCoordinatesOnMouseClick()
-    {
-        if (Input.GetMouseButtonDown(0)) // Check for left mouse button click
-        {
-            Vector3 cartesianCoordinates = GetCartesianCoordinates();
-            Debug.Log("Cartesian Coordinates: " + cartesianCoordinates);
-
-            // Display coordinates on TextMeshPro object
-            if (coordinateText != null)
-            {
-                coordinateText.text = "Coordinates: " + cartesianCoordinates.ToString();
-            }
-        }
-    }
-
-    void UpdateCoordinatesOnMouseMovement()
-    {
-        Vector3 cartesianCoordinates = GetCartesianCoordinates();
-
-        // Display coordinates on TextMeshPro object during mouse movement
-        if (coordinateText != null)
-        {
-            coordinateText.text = "Coordinates: " + cartesianCoordinates.ToString();
-        }
-    }
-
-    Vector3 GetCartesianCoordinates()
+    void UpdateCoordinatesOnMouseOver()
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        // Use the ground plane instead of a texture
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity, LayerMask.GetMask("Ground")))
+        // Perform raycast without layer mask
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
         {
-            return hit.point;
+            Vector2 relativeCoordinates = GetRelativeCoordinates(hit.point, new Vector3(originalX, originalY, 0));
+            Debug.Log("Relative Coordinates: " + relativeCoordinates);
+
+            // Display coordinates on TextMeshPro object
+            if (coordinateText != null)
+            {
+                coordinateText.text = "from: " + relativeCoordinates.ToString();
+            }
+        }
+    }
+
+    Vector2 GetRelativeCoordinates(Vector3 worldPoint, Vector3 imagePosition)
+    {
+        // Adjust for the image position and convert world coordinates to relative coordinates based on the image size
+        var WORLD_WIDTH = Mathf.Sqrt(1024) * 100;
+        //its a square
+        Vector2 ratio = new Vector2(WORLD_WIDTH, WORLD_WIDTH) / new Vector2(imageWidth, imageHeight);
+        //bottom left is (0,0)
+
+        //translate relative to bottom left
+        // worldPoint -= imagePosition;
+        worldPoint -= new Vector3(imageWidth / 2, imageHeight / 2);
+        Debug.Log("WORLD" + worldPoint.ToString());
+
+        //check out of bounds
+        if (worldPoint.x > imageWidth || worldPoint.y > imageHeight || worldPoint.x < 0 || worldPoint.y < 0)
+        {
+            return new Vector2(Mathf.Infinity, Mathf.Infinity);
         }
 
-        return Vector3.zero;
+        Vector2 scaled = new Vector2(worldPoint.x, worldPoint.y) * ratio;
+        return scaled;
     }
 }
