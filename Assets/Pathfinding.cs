@@ -18,10 +18,8 @@ class Pathfinding : MonoBehaviour
 
     public Vector2 playerPos1 = new Vector2(5, 5);
     public Vector2 endPos1 = new Vector2(10, 10);
+    public int optimization = 0;
 
-    public double ratio = 1;
-
-    public float heightChangeMult = 0.5f;
     double[,] heightMap;
 
     async void Start()
@@ -85,7 +83,7 @@ class Pathfinding : MonoBehaviour
         GridCoordinates[] dirs = MoonMapper.GenerateAllEightDirections();
 
 
-        List<int> path = moonMapper.FindPath(playerPos, endPos, 0);
+        List<int> path = moonMapper.FindPath(playerPos, endPos, optimization);
 
         //List<int> path = new List<int>
         //{

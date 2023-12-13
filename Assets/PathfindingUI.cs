@@ -59,4 +59,11 @@ public class PathfindingUI : MonoBehaviour
 
         return scaled;
     }
+    void changePathFinding(Vector2 playerPos, Vector2 endPos, int optimization)
+    {
+        Pathfinding pathfinder = GameObject.Find("Pathfinding").GetComponent<Pathfinding>();
+        pathfinder.playerPos1 = playerPos;
+        pathfinder.endPos1 = endPos;
+        pathfinder.optimization = optimization;
+    }
 }
