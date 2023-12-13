@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class PathfindingUI : MonoBehaviour
@@ -7,33 +8,57 @@ public class PathfindingUI : MonoBehaviour
     public TextMeshProUGUI coordinateText2; // Reference to your TextMeshPro object
     public GameObject imageObject; // Reference to the GameObject with the image
 
+    public GameObject startCircle;
+    public GameObject endCircle;
+
     int imageWidth = 500;
     int imageHeight = 500;
 
     float originalX = 10000;
     float originalY = 0;
 
+    public Vector2 start = new Vector2(0, 0);
+    public Vector2 destination = new Vector2(0, 0);
+    public int optimization = 1;
+
+    Vector2 coords;
+
+    
     void Update()
     {
         UpdateCoordinatesOnMouseOver();
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            startCircle.SetActive(true);
+            startCircle.transform.position = Input.mousePosition;
+
+            start = new Vector2(coords.x, coords.y);
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            endCircle.SetActive(true);
+            endCircle.transform.position = Input.mousePosition;
+
+            destination = new Vector2(coords.x, coords.y);
+        } 
     }
 
-    void OnMouseDown()
-    {
-          Debug.LogError("CLICKED ");
-            
-        
-    }
+    //public void OnPointerClick(PointerEventData pointerEventData)
+    //{
+    //      Debug.LogError("CLICKED "); 
+    //}
 
     void UpdateCoordinatesOnMouseOver()
     {
         Vector3 mousePos = Input.mousePosition;
 
-        Vector2 relativeCoordinates = GetRelativeCoordinates(mousePos, new Vector3(originalX, originalY, 0));
+        coords = GetRelativeCoordinates(mousePos, new Vector3(originalX, originalY, 0));
 
             // Display coordinates on TextMeshPro object
-        coordinateText.text = "from: " + relativeCoordinates.ToString();
-        coordinateText2.text = "to: " + relativeCoordinates.ToString();
+        coordinateText.text = "from: " + start.ToString();
+        coordinateText2.text = "to: " + destination.ToString();
 
 
     }
@@ -60,11 +85,5 @@ public class PathfindingUI : MonoBehaviour
 
         return scaled;
     }
-    void changePathFinding(Vector2 playerPos, Vector2 endPos, int optimization)
-    {
-        Pathfinding pathfinder = GameObject.Find("Pathfinding").GetComponent<Pathfinding>();
-        pathfinder.playerPos1 = playerPos;
-        pathfinder.endPos1 = endPos;
-        pathfinder.optimization = optimization;
-    }
+    
 }
