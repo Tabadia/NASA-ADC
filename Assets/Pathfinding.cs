@@ -103,11 +103,11 @@ class Pathfinding : MonoBehaviour
             
             if (!Physics.Raycast(new Vector3(playerPos.xCoord, 1000, playerPos.yCoord), Vector3.down, out hit, Mathf.Infinity))
             {
-                Debug.Log("raycast failed");
+                
                 continue;
             }
             MeshFilter mesh = hit.transform.gameObject.GetComponent<MeshFilter>();
-            Debug.Log(mesh.transform.name);
+            
             var newY = FindMeshVertice(mesh, playerPos.xCoord, playerPos.yCoord).y + 2;
             lineVertexes[idx] = new Vector3(playerPos.xCoord, (float)newY, playerPos.yCoord);
             idx++;
