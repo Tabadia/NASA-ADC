@@ -9,7 +9,7 @@ public class PathfindingUI : MonoBehaviour
     int imageWidth = 500;
     int imageHeight = 500;
 
-    float originalX = 250;
+    float originalX = 10000;
     float originalY = 0;
 
     void Update()
@@ -19,23 +19,15 @@ public class PathfindingUI : MonoBehaviour
 
     void UpdateCoordinatesOnMouseOver()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition + new Vector3(originalX, 0, 0));
-        RaycastHit hit;
+        Vector3 mousePos = Input.mousePosition;
 
-        // Perform raycast without layer mask
-        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-        {
-            hit.point -= new Vector3(originalX, originalY, 0);
-
-            Vector2 relativeCoordinates = GetRelativeCoordinates(hit.point, new Vector3(originalX, originalY, 0));
+            Vector2 relativeCoordinates = GetRelativeCoordinates(mousePos, new Vector3(originalX, originalY, 0));
             // Debug.Log("Relative Coordinates: " + relativeCoordinates);
 
             // Display coordinates on TextMeshPro object
-            if (coordinateText != null)
-            {
                 coordinateText.text = "from: " + relativeCoordinates.ToString();
-            }
-        }
+            
+        
     }
 
     Vector2 GetRelativeCoordinates(Vector3 worldPoint, Vector3 imagePosition)
@@ -43,7 +35,7 @@ public class PathfindingUI : MonoBehaviour
 
         // Adjust for the image position and convert world coordinates to relative coordinates based on the image size
 
-        var WORLD_WIDTH = Mathf.Sqrt(1024) * 100;
+        var WORLD_WIDTH = 3169f;
         worldPoint = imageObject.transform.InverseTransformPoint(worldPoint);
 
         //its a square 
@@ -52,18 +44,18 @@ public class PathfindingUI : MonoBehaviour
         
         //translate relative to bottom left
         // worldPoint -= imagePosition;
-        worldPoint -= new Vector3(imageWidth / 2, imageHeight / 2);
+        worldPoint += new Vector3(imageWidth / 2, imageHeight / 2);
         //worldPoint += imageObject.transform.position;
-        worldPoint *= -1;
         Debug.Log("WORLD" + worldPoint.ToString());
 
         //check out of bounds
-        if (worldPoint.x < 0 || worldPoint.y < 0)
+        
+
+        Vector2 scaled = new Vector2(worldPoint.x, worldPoint.y) * ratio;
+        if (scaled.x < 0 || scaled.y < 0 || scaled.x > WORLD_WIDTH || scaled.y > WORLD_WIDTH)
         {
             return new Vector2(Mathf.Infinity, Mathf.Infinity);
         }
-
-        Vector2 scaled = new Vector2(worldPoint.x, worldPoint.y) * ratio;
 
         return scaled;
     }
