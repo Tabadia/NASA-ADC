@@ -9,6 +9,7 @@ public class Coordinates : MonoBehaviour
     public GameObject p1;
     public GameObject p2;
     public GameObject coordinates;
+    public TextMeshProUGUI previewWindowText;
 
     public Vector3 peakNearShackletonCoords = new Vector3(0, 0, 0); //someone who knows, pls do this
 
@@ -28,21 +29,25 @@ public class Coordinates : MonoBehaviour
         return Mathf.Atan((pos.x - EARTH_COORDS.x) / (pos.y - EARTH_COORDS.y)) * 180/Mathf.PI;
     }
 
-    string getActiveAstronaut(float number)
+    string getActiveAstronaut(int number)
     {
+        CameraController cameraController = GameObject.Find("CameraController").GetComponent<CameraController>();
+
         string statement = "";
 
-        if (Camera.main.name == "PlayerCam" && number == 1)
+        if (cameraController.m_MainCamera.enabled == true && number == 1)
         {
             statement = " (me)";
+            previewWindowText.text = "Astronaut 2's View";
         }
-        else if (Camera.main.name == "PlayerCam2" && number == 2)
+        else if (cameraController.m_CameraTwo.enabled == true && number == 2)
         {
             statement = " (me)";
+            previewWindowText.text = "Astronaut 1's View";
         }
 
+        Debug.Log("OMGGGGG" + statement);
         return statement;
-
     }
 
     // Update is called once per frame
@@ -64,7 +69,8 @@ public class Coordinates : MonoBehaviour
 
         float p2Dist = getDistFromEarth(p2Pos);
         
-        string astronaut2Data = "Astronaut 2" + "\n\n"
+        string astronaut2Data = "Astronaut 2" + getActiveAstronaut(2) 
+        + "\n\n"
         + "Position: " + p2Pos.ToString() + "\n\n"
         + "Distance to Earth: " + p2Dist + "\n\n" 
         + "Elevation angle to Earth: " + getAngleFromEarth(p2Pos.y, p2Dist) + "\n\n" 

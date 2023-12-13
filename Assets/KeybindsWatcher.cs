@@ -106,11 +106,13 @@ public class KeybindsWatcher : MonoBehaviour
 
     public void ChangePathFinding(/*Vector2 playerPos, Vector2 endPos, int optimization*/)
     {
-        PathfindingUI pathfindingUI = GameObject.Find("PathfindingUI").GetComponent<PathfindingUI>();
+        PathfindingUI pathfindingUI = GameObject.Find("Pathfinding GUI").GetComponent<PathfindingUI>();
 
         Pathfinding pathfinder = GameObject.Find("Pathfinding").GetComponent<Pathfinding>();
         pathfinder.playerPos1 = pathfindingUI.start;
         pathfinder.endPos1 = pathfindingUI.destination;
         pathfinder.optimization = pathfindingUI.optimization;
+        pathfinder.PathFind();
+        pathfindingPanel.SetActive(false);
     }
 }

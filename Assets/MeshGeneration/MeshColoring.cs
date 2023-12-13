@@ -25,8 +25,6 @@ public class MeshColoring : MonoBehaviour
     {
         meshGameObject = GameObject.Find("Mesh");
         children = meshGameObject.GetComponentsInChildren<MeshFilter>();
-        await Task.Delay(10000);
-        ColorMeshBasedOnHeight();
     }
 
     public void changeMode(string mode)

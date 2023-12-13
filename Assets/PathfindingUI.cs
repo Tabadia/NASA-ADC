@@ -23,11 +23,12 @@ public class PathfindingUI : MonoBehaviour
 
     Vector2 coords;
 
+    bool isInsideImage = false;
     
     void Update()
     {
         UpdateCoordinatesOnMouseOver();
-
+        if (!isInsideImage) return;
         if (Input.GetMouseButtonDown(0))
         {
             startCircle.SetActive(true);
@@ -59,9 +60,7 @@ public class PathfindingUI : MonoBehaviour
             // Display coordinates on TextMeshPro object
         coordinateText.text = "from: " + start.ToString();
         coordinateText2.text = "to: " + destination.ToString();
-
-
-    }
+            }
 
     Vector2 GetRelativeCoordinates(Vector3 worldPoint, Vector3 imagePosition)
     {
@@ -80,8 +79,11 @@ public class PathfindingUI : MonoBehaviour
         Vector2 scaled = new Vector2(worldPoint.x, worldPoint.y) * ratio;
         if (scaled.x < 0 || scaled.y < 0 || scaled.x > WORLD_WIDTH || scaled.y > WORLD_WIDTH)
         {
+            isInsideImage = false;
             return new Vector2(Mathf.Infinity, Mathf.Infinity);
+
         }
+        isInsideImage = true;
 
         return scaled;
     }

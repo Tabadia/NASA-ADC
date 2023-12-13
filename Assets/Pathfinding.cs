@@ -26,16 +26,12 @@ class Pathfinding : MonoBehaviour
     {
 
 
-
-
         moonMapper = new MoonMapper(heightFilePath, slopeFilePath, latitudeFilePath, longtitudeFilePath);
         heightMap = moonMapper.heightMap;
+
+
+
         //heightChangeMult = GameObject.Find("Mesh").GetComponent<MeshGen2>().heightMultiplier;
-        while (true)
-        {
-            await Task.Delay(1000);
-            PathFind();
-        }
 
     }
     Vector3 rotate_point(float cx, float cy, float angle, Vector3 p)
@@ -63,7 +59,7 @@ class Pathfinding : MonoBehaviour
         int yIdx = y % 100;
         return mesh.mesh.vertices[xIdx + yIdx * 100];
     }
-    void PathFind()
+    public void PathFind()
     {
         GridCoordinates playerPos = new GridCoordinates((int)playerPos1.x, (int)playerPos1.y);
         GridCoordinates endPos = new GridCoordinates((int)endPos1.x, (int)endPos1.y);

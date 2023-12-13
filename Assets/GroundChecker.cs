@@ -48,7 +48,7 @@ public class GroundChecker : MonoBehaviour
         if (!camera.enabled) return;
         CheckGround(new Vector3(transform.position.x, transform.position.y - (controller.height / 2) + startDistanceFromBottom, transform.position.z));
         String slopeRes = groundSlopeAngle > maxSlopeAngle ? (groundSlopeAngle + "(too steep)") : ("" + groundSlopeAngle);
-        TMProSlopeEle.text = "Slope:" + slopeRes + ", \n" + "Slope Vector:" + groundSlopeDir.ToString();
+        TMProSlopeEle.text = "Slope: " + slopeRes + ", \n" + "Slope Vector: " + groundSlopeDir.ToString();
         //red
         if (groundSlopeAngle > maxSlopeAngle) TMProSlopeEle.color = new Color(r, g, b, a);
         //white
