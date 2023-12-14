@@ -6,8 +6,10 @@ public class PathfindingUI : MonoBehaviour
 {
     public TextMeshProUGUI coordinateText; // Reference to your TextMeshPro object
     public TextMeshProUGUI coordinateText2; // Reference to your TextMeshPro object
+    public TextMeshProUGUI coordinatesDisplayer;
+    public TMP_Dropdown optimizeDropdown;
+    public GameObject panel;
     public GameObject imageObject; // Reference to the GameObject with the image
-
     public GameObject startCircle;
     public GameObject endCircle;
 
@@ -25,6 +27,18 @@ public class PathfindingUI : MonoBehaviour
 
     bool isInsideImage = false;
     
+    void Start()
+    {
+        optimizeDropdown.onValueChanged.AddListener(delegate {
+            SetOptimization(optimizeDropdown);
+        });
+    }
+
+    void SetOptimization(TMP_Dropdown change)
+    {
+        optimization = change.value;
+    }
+
     void Update()
     {
         UpdateCoordinatesOnMouseOver();
@@ -44,6 +58,8 @@ public class PathfindingUI : MonoBehaviour
 
             destination = new Vector2(coords.x, coords.y);
         } 
+
+
     }
 
     //public void OnPointerClick(PointerEventData pointerEventData)
@@ -58,8 +74,10 @@ public class PathfindingUI : MonoBehaviour
         coords = GetRelativeCoordinates(mousePos, new Vector3(originalX, originalY, 0));
 
             // Display coordinates on TextMeshPro object
-        coordinateText.text = "from: " + start.ToString();
-        coordinateText2.text = "to: " + destination.ToString();
+        coordinateText.text = start.ToString();
+        coordinateText2.text = destination.ToString();
+
+        if (isInsideImage) coordinatesDisplayer.text = coords.ToString();
             }
 
     Vector2 GetRelativeCoordinates(Vector3 worldPoint, Vector3 imagePosition)
@@ -87,5 +105,5 @@ public class PathfindingUI : MonoBehaviour
 
         return scaled;
     }
-    
+
 }
