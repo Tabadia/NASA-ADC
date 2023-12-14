@@ -50,7 +50,7 @@ public class ButtonEventsManager : MonoBehaviour
 
     public void whenOpenSimulationButtonClicked()
     {
-        SceneManager.LoadScene(sceneName:"Lighting Test");
+        SceneManager.LoadScene(sceneName:"ProMesh 2");
     }
 
     public void whenQuitButtonClick()
@@ -78,7 +78,7 @@ public class ButtonEventsManager : MonoBehaviour
               
         if (value == true)
         {
-            Debug.Log("Quit");
+            Application.Quit();
         } else
         {
             quitPanel.SetActive(false);
