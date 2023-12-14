@@ -28,9 +28,14 @@ class Pathfinding : MonoBehaviour
 
         moonMapper = new MoonMapper(heightFilePath, slopeFilePath, latitudeFilePath, longtitudeFilePath);
         heightMap = moonMapper.heightMap;
-
-
-
+        MeshGen2 meshGen = GameObject.Find("Mesh").GetComponent<MeshGen2>();
+        while(true)
+        {
+            await Task.Delay(1000);
+            if(meshGen.isFinished) {
+                PathFind(); break;
+            }
+        }
         //heightChangeMult = GameObject.Find("Mesh").GetComponent<MeshGen2>().heightMultiplier;
 
     }

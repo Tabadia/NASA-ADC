@@ -46,7 +46,6 @@ public class Coordinates : MonoBehaviour
             previewWindowText.text = "Astronaut 1's View";
         }
 
-        Debug.Log("OMGGGGG" + statement);
         return statement;
     }
 
